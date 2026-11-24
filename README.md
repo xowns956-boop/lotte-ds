@@ -10,20 +10,20 @@
 
 | 페이지 | 내용 |
 |---|---|
-| [부품 미리보기](index.html) | 모든 부품을 라이트·다크, PC·Tablet으로 보는 화면 |
-| [AI로 설치하기](install/) | 설치 프롬프트를 복사해 AI 도구에 붙여 넣는 방법 |
-| [업데이트 현황](changelog/) | 버전별로 추가·바뀐 점, 업데이트 프롬프트 |
-| [llms.txt](llms.txt) | AI가 읽는 안내 파일(전체판은 llms-full.txt) |
+| [부품 미리보기](https://xowns956-boop.github.io/lotte-ds/) | 모든 부품을 라이트·다크, PC·Tablet으로 보는 화면 |
+| [AI로 설치하기](https://xowns956-boop.github.io/lotte-ds/install/) | 설치 프롬프트를 복사해 AI 도구에 붙여 넣는 방법 |
+| [업데이트 현황](https://xowns956-boop.github.io/lotte-ds/changelog/) | 버전별로 추가·바뀐 점, 업데이트 프롬프트 |
+| [llms.txt](https://xowns956-boop.github.io/lotte-ds/llms.txt) | AI가 읽는 안내 파일(전체판은 [llms-full.txt](https://xowns956-boop.github.io/lotte-ds/llms-full.txt)) |
 
 ## 설치
 
 ### AI로 설치하기 (추천)
 
-[AI로 설치하기](install/) 페이지에서 설치 프롬프트를 복사해 Claude Code·Cursor·Codex 채팅창에 붙여 넣어요. AI가 파일을 받아 화면에 연결하고 규칙까지 저장해요.
+[AI로 설치하기](https://xowns956-boop.github.io/lotte-ds/install/) 페이지에서 설치 프롬프트를 복사해 Claude Code·Cursor·Codex 채팅창에 붙여 넣어요. AI가 파일을 받아 화면에 연결하고 규칙까지 저장해요.
 
 ### 직접 설치하기
 
-1. 아래 네 파일을 받아요. 주소에 버전이 들어 있어요(`r/<버전>/`).
+1. 아래 네 파일을 받아요. 주소에 버전이 들어 있어요(`https://xowns956-boop.github.io/lotte-ds/r/<버전>/<파일>`).
 
    | 파일 | 저장 위치 | 내용 |
    |---|---|---|
@@ -80,7 +80,7 @@
 
 ## 버전
 
-설치 주소에 버전이 들어 있어서, 롯데 DS가 바뀌어도 이미 설치한 프로젝트는 자동으로 바뀌지 않아요. 버전을 올리기 전에 [업데이트 현황](changelog/)을 확인하고, 최신 버전 카드의 업데이트 프롬프트를 AI에 붙여 넣어요.
+설치 주소에 버전이 들어 있어서, 롯데 DS가 바뀌어도 이미 설치한 프로젝트는 자동으로 바뀌지 않아요. 버전을 올리기 전에 [업데이트 현황](https://xowns956-boop.github.io/lotte-ds/changelog/)을 확인하고, 최신 버전 카드의 업데이트 프롬프트를 AI에 붙여 넣어요.
 
 ## 폴더 구조
 
