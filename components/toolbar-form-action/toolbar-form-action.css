@@ -1,0 +1,28 @@
+/* Lotte Kendo DS · Toolbar / Form Action (폼 하단 고정 버튼 줄 · 조합 패턴)
+   등록·수정 화면 맨 아래에 붙는 줄. 오른쪽 정렬 [취소(outline)] [저장(solid-primary)], 간격 8
+   높이 64 · 좌우 24 · 위 1 선 · 바탕 app-surface. 화면을 내려도 아래에 붙어 있다(sticky).
+   Kendo에는 이 부품이 없어서 .ux-* 이름을 쓴다.
+
+   <div class="ux-toolbar-form-action">
+     <button type="button" class="k-button k-button-md k-button-outline-base">취소</button>
+     <button type="submit" class="k-button k-button-md k-button-solid-primary">저장</button>
+   </div>
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+.ux-toolbar-form-action {
+  box-sizing: border-box;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--kendo-spacing-2);
+  width: 100%;
+  min-height: var(--kendo-spacing-16);
+  margin: 0;
+  padding: 0 var(--kendo-spacing-6);
+  background: var(--kendo-color-app-surface);
+  box-shadow: inset 0 var(--kendo-spacing-1px) 0 var(--kendo-color-border);
+}

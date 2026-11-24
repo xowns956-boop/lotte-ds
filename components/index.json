@@ -1,0 +1,232 @@
+[
+  {
+    "name": "Button",
+    "dir": "button",
+    "group": "버튼"
+  },
+  {
+    "name": "Input",
+    "dir": "input",
+    "group": "입력"
+  },
+  {
+    "name": "TextArea",
+    "dir": "textarea",
+    "group": "입력"
+  },
+  {
+    "name": "Numeric",
+    "dir": "numeric",
+    "group": "입력"
+  },
+  {
+    "name": "Numeric Stepper",
+    "dir": "numeric-stepper",
+    "group": "입력"
+  },
+  {
+    "name": "CheckBox",
+    "dir": "checkbox",
+    "group": "선택"
+  },
+  {
+    "name": "RadioButton",
+    "dir": "radio",
+    "group": "선택"
+  },
+  {
+    "name": "Switch",
+    "dir": "switch",
+    "group": "선택"
+  },
+  {
+    "name": "Label",
+    "dir": "label",
+    "group": "입력"
+  },
+  {
+    "name": "Badge",
+    "dir": "badge",
+    "group": "표시"
+  },
+  {
+    "name": "Chip",
+    "dir": "chip",
+    "group": "표시"
+  },
+  {
+    "name": "Separator",
+    "dir": "separator",
+    "group": "표시"
+  },
+  {
+    "name": "DropDownList",
+    "dir": "dropdownlist",
+    "group": "선택"
+  },
+  {
+    "name": "Tooltip",
+    "dir": "tooltip",
+    "group": "표시"
+  },
+  {
+    "name": "Loader",
+    "dir": "loader",
+    "group": "표시"
+  },
+  {
+    "name": "Skeleton",
+    "dir": "skeleton",
+    "group": "표시"
+  },
+  {
+    "name": "Grid",
+    "dir": "grid",
+    "group": "표"
+  },
+  {
+    "name": "Tabs",
+    "dir": "tabs",
+    "group": "이동"
+  },
+  {
+    "name": "Pager",
+    "dir": "pager",
+    "group": "이동"
+  },
+  {
+    "name": "Dialog",
+    "dir": "dialog",
+    "group": "팝업"
+  },
+  {
+    "name": "Toast · Inline",
+    "dir": "notification",
+    "group": "표시"
+  },
+  {
+    "name": "Form",
+    "dir": "form",
+    "group": "폼"
+  },
+  {
+    "name": "Card",
+    "dir": "card",
+    "group": "표시"
+  },
+  {
+    "name": "Avatar",
+    "dir": "avatar",
+    "group": "표시"
+  },
+  {
+    "name": "Drawer",
+    "dir": "drawer",
+    "group": "탐색"
+  },
+  {
+    "name": "Breadcrumb",
+    "dir": "breadcrumb",
+    "group": "탐색"
+  },
+  {
+    "name": "Calendar",
+    "dir": "calendar",
+    "group": "입력"
+  },
+  {
+    "name": "DatePicker",
+    "dir": "datepicker",
+    "group": "입력"
+  },
+  {
+    "name": "Toggle",
+    "dir": "toggle",
+    "group": "버튼"
+  },
+  {
+    "name": "ButtonGroup",
+    "dir": "button-group",
+    "group": "버튼"
+  },
+  {
+    "name": "Menu",
+    "dir": "menu",
+    "group": "탐색"
+  },
+  {
+    "name": "TreeView",
+    "dir": "treeview",
+    "group": "탐색"
+  },
+  {
+    "name": "Stepper",
+    "dir": "stepper",
+    "group": "탐색"
+  },
+  {
+    "name": "ProgressBar",
+    "dir": "progressbar",
+    "group": "표시"
+  },
+  {
+    "name": "ExpansionPanel",
+    "dir": "expansionpanel",
+    "group": "표시"
+  },
+  {
+    "name": "Toolbar",
+    "dir": "toolbar",
+    "group": "버튼"
+  },
+  {
+    "name": "Kbd",
+    "dir": "kbd",
+    "group": "표시"
+  },
+  {
+    "name": "PageTab",
+    "dir": "pagetab",
+    "group": "탐색"
+  },
+  {
+    "name": "AppBar",
+    "dir": "appbar",
+    "group": "패턴"
+  },
+  {
+    "name": "PageHeading",
+    "dir": "pageheading",
+    "group": "패턴"
+  },
+  {
+    "name": "Toolbar / Filter",
+    "dir": "toolbar-filter",
+    "group": "패턴"
+  },
+  {
+    "name": "Toolbar / Form Action",
+    "dir": "toolbar-form-action",
+    "group": "패턴"
+  },
+  {
+    "name": "Form Table",
+    "dir": "form-table",
+    "group": "패턴"
+  },
+  {
+    "name": "Dialog Content",
+    "dir": "dialog-content",
+    "group": "패턴"
+  },
+  {
+    "name": "Menu Tile",
+    "dir": "menu-tile",
+    "group": "패턴"
+  },
+  {
+    "name": "SectionCards",
+    "dir": "section-cards",
+    "group": "패턴"
+  }
+]

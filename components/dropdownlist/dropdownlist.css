@@ -1,0 +1,258 @@
+/* Lotte Kendo DS · DropDownList (+ List Item · Popup / List)
+   닫힌 칸 size: md(기본) · sm / filled: 안내 글자 · 값 / state: default · focus · disabled · invalid
+   목록 줄: selected(오른쪽 체크 14) × state: default · focus(마우스·키보드로 가리킴) · disabled
+   목록 최대 높이: 화면에 남은 높이까지(열 때 lotte-ds.js가 잼). 넘치면 목록 안에서 세로로 넘김.
+   아래 자리가 모자라고 위가 더 넓으면 위로 연다(data-side="top", 칸 위 4)
+
+   이 DS의 구조 (동작은 lotte-ds.js)
+     <div class="k-dropdownlist k-picker k-picker-md">
+       <button type="button" class="k-input-inner" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="ID-list">
+         <span class="k-input-value-text" data-placeholder>선택하세요</span>
+         <span class="k-input-button" aria-hidden="true"><svg class="k-svg-icon">…chevron-down…</svg></span>
+       </button>
+       <div class="k-popup k-list-container" hidden>
+         <ul class="k-list-ul" role="listbox" id="ID-list">
+           <li class="k-list-item" role="option" aria-selected="false" data-value="1"><span class="k-list-item-text">조립 1라인</span></li>
+         </ul>
+       </div>
+       <input type="hidden" name="line">   ← 고른 값(선택)
+     </div>
+   Kendo 2021.3 위젯(.k-dropdown·.k-combobox > .k-dropdown-wrap, 목록 .k-list-container .k-item)도 같은 모양
+   상태  :focus-within .k-state-focused / [aria-invalid="true"] .k-state-invalid / :disabled .k-state-disabled
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+/* ── 1. 닫힌 칸: 변수 (상자 = 이 DS의 .k-dropdownlist, 2021.3의 .k-dropdown-wrap) ── */
+.k-dropdownlist,
+:is(.k-dropdown, .k-combobox) > .k-dropdown-wrap {
+  --_k-dd-h: var(--kendo-device-control-height);
+  --_k-dd-py: var(--kendo-spacing-2);
+  --_k-dd-bg: var(--ux4-alpha-field);
+  --_k-dd-bd: var(--kendo-color-border-alt);
+  --_k-dd-fg: var(--kendo-color-on-app-surface);
+  --_k-dd-ph: var(--kendo-color-subtle);
+  --_k-dd-icon-op: 0.5;
+  --_k-dd-box: var(--kendo-elevation-1);
+  --_k-dd-ring: calc(var(--kendo-spacing-1) - var(--kendo-spacing-1px));
+}
+:is(.k-dropdownlist.k-picker-sm, .k-dropdown.k-picker-sm > .k-dropdown-wrap) {
+  --_k-dd-h: var(--kendo-device-control-height-sm);
+  --_k-dd-py: var(--kendo-spacing-1-5);
+}
+
+/* 상태 (focus → invalid → disabled) */
+:is(.k-dropdownlist, .k-dropdown-wrap):is(:focus-within, .k-state-focused) {
+  --_k-dd-bd: var(--ux4-color-border-focus);
+  --_k-dd-box: 0 0 0 var(--_k-dd-ring) var(--kendo-color-primary-opacity-opacity-focus);
+}
+:is(.k-dropdownlist, .k-dropdown-wrap):is(.k-state-invalid, .k-invalid, :has([aria-invalid="true"])) {
+  --_k-dd-bd: var(--kendo-color-error);
+  --_k-dd-box: var(--kendo-elevation-1), 0 0 0 var(--_k-dd-ring) var(--ux4-alpha-destructive-20);
+}
+:is(.k-dropdownlist, .k-dropdown-wrap):is(.k-state-disabled, [aria-disabled="true"], :has(> :disabled)) {
+  --_k-dd-bg: var(--kendo-color-disabled);
+  --_k-dd-bd: var(--kendo-color-disabled-border);
+  --_k-dd-fg: var(--kendo-color-on-disabled);
+  --_k-dd-ph: var(--kendo-color-on-disabled);
+  --_k-dd-icon-op: 1;
+  --_k-dd-box: var(--kendo-elevation-1);
+}
+
+/* ── 2. 닫힌 칸: 모양 (Kendo 원본 최대 0,4,0 → 0,4,0 뒤에서 · 안쪽 0,5,0) ── */
+.k-dropdownlist.k-dropdownlist.k-dropdownlist.k-dropdownlist,
+.k-dropdown.k-dropdown > .k-dropdown-wrap.k-dropdown-wrap,
+.k-combobox.k-combobox > .k-dropdown-wrap.k-dropdown-wrap {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  min-width: 0;
+  min-height: calc(var(--_k-dd-h) + 2 * var(--kendo-spacing-1px));
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: var(--kendo-spacing-1px) solid var(--_k-dd-bd);
+  border-radius: var(--ux4-border-radius-control);
+  background: var(--_k-dd-bg);
+  background-image: none;
+  color: var(--_k-dd-fg);
+  box-shadow: var(--_k-dd-box);
+  font-family: var(--kendo-font-family);
+  font-size: var(--kendo-device-control-font-size);
+  font-weight: var(--kendo-font-weight-normal);
+  line-height: var(--kendo-device-control-line-height);
+  letter-spacing: var(--kendo-letter-spacing);
+  vertical-align: middle;
+}
+.k-dropdown.k-dropdown,
+.k-combobox.k-combobox {
+  display: inline-flex;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+:is(.k-dropdown, .k-combobox) > .k-dropdown-wrap { flex: 1; }
+:is(.k-dropdown, .k-combobox) > .k-dropdown-wrap.k-dropdown-wrap::before { content: none; }
+
+/* 안쪽: 이 DS의 button · 2021.3의 값 칸(.k-input) */
+.k-dropdownlist.k-dropdownlist.k-dropdownlist.k-dropdownlist > .k-input-inner,
+:is(.k-dropdown, .k-combobox) > .k-dropdown-wrap.k-dropdown-wrap.k-dropdown-wrap > .k-input {
+  box-sizing: border-box;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--kendo-spacing-2);
+  min-width: 0;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: var(--_k-dd-py) var(--kendo-spacing-3);
+  border: 0;
+  border-radius: inherit;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-align: left;
+  text-indent: 0;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+.k-dropdownlist > .k-input-inner:disabled { cursor: default; }
+.k-dropdownlist .k-input-value-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.k-dropdownlist .k-input-value-text[data-placeholder] { color: var(--_k-dd-ph); }
+
+/* 아래 화살표: 16, 선 subtle, 흐리게(비활성은 진하게) */
+.k-dropdownlist.k-dropdownlist .k-input-button,
+:is(.k-dropdown, .k-combobox) > .k-dropdown-wrap.k-dropdown-wrap.k-dropdown-wrap > .k-select {
+  box-sizing: border-box;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--kendo-icon-size);
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--kendo-color-subtle);
+  opacity: var(--_k-dd-icon-op);
+}
+:is(.k-dropdown, .k-combobox) > .k-dropdown-wrap.k-dropdown-wrap.k-dropdown-wrap > .k-select {
+  margin-right: var(--kendo-spacing-3);
+}
+.k-dropdownlist .k-input-button :is(.k-svg-icon, .k-icon),
+:is(.k-dropdown, .k-combobox) > .k-dropdown-wrap > .k-select .k-icon {
+  width: var(--kendo-icon-size);
+  height: var(--kendo-icon-size);
+  font-size: var(--kendo-icon-size);
+  color: inherit;
+}
+
+/* ── 3. 목록 상자 (Popup / List): 바탕 surface-alt · 테두리 · 모서리 control · 안쪽 4 · 그림자 2 ── */
+.k-dropdownlist > .k-popup {
+  position: absolute;
+  z-index: 10;
+  /* 칸 바깥 테두리에서 4 아래 (top 100%는 테두리 안쪽 기준이라 1을 더함) */
+  top: calc(100% + var(--kendo-spacing-1px));
+  left: calc(-1 * var(--kendo-spacing-1px));
+  min-width: calc(100% + 2 * var(--kendo-spacing-1px));
+  margin-top: var(--kendo-spacing-1);
+}
+.k-dropdownlist > .k-popup[hidden] { display: none; }
+/* 최대 높이 = 화면 아래 남은 높이(--_k-dd-max, 열 때 계산). 넘치면 세로로 넘김 */
+.k-dropdownlist > .k-popup.k-list-container {
+  max-height: var(--_k-dd-max, none);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.k-dropdownlist > .k-popup[data-side="top"] {
+  top: auto;
+  bottom: calc(100% + var(--kendo-spacing-1px));
+  margin-top: 0;
+  margin-bottom: var(--kendo-spacing-1);
+}
+.k-popup.k-popup.k-list-container.k-list-container {
+  box-sizing: border-box;
+  padding: var(--kendo-spacing-1);
+  border: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  border-radius: var(--ux4-border-radius-control);
+  background: var(--kendo-color-surface-alt);
+  color: var(--ux4-color-on-surface-alt);
+  box-shadow: var(--kendo-elevation-2);
+  font-family: var(--kendo-font-family);
+}
+.k-list-container.k-list-container :is(.k-list-ul, ul.k-list) {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ── 4. 목록 줄 (List Item): 높이 control-height-sm · 안쪽 6/8 · 간격 8 · 모서리 xl ── */
+.k-list-container.k-list-container.k-list-container :is(.k-list-item, .k-item) {
+  --_k-li-bg: var(--kendo-color-opacity-transparent);
+  --_k-li-fg: var(--ux4-color-on-surface-alt);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--kendo-spacing-2);
+  min-height: var(--kendo-device-control-height-sm);
+  margin: 0;
+  padding: var(--kendo-spacing-1-5) var(--kendo-spacing-2);
+  border: 0;
+  border-radius: var(--kendo-border-radius-xl);
+  background: var(--_k-li-bg);
+  color: var(--_k-li-fg);
+  box-shadow: none;
+  font-size: var(--kendo-device-control-font-size);
+  font-weight: var(--kendo-font-weight-normal);
+  line-height: var(--kendo-device-control-line-height);
+  cursor: pointer;
+  outline: none;
+}
+/* 가리킴(마우스·키보드) — 마우스 위치도 JS가 .k-focus로 옮겨서 한 줄만 강조 */
+.k-list-container.k-list-container.k-list-container :is(.k-list-item, .k-item):is(.k-focus, .k-hover, .k-state-focused, .k-state-hover) {
+  --_k-li-bg: var(--kendo-color-primary-subtle);
+  --_k-li-fg: var(--kendo-color-primary-on-subtle);
+}
+/* 비활성 */
+.k-list-container.k-list-container.k-list-container :is(.k-list-item, .k-item):is(.k-disabled, .k-state-disabled, [aria-disabled="true"]) {
+  --_k-li-bg: var(--kendo-color-opacity-transparent);
+  --_k-li-fg: var(--kendo-color-on-disabled);
+  cursor: default;
+}
+.k-list-container .k-list-item-text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* 고른 줄: 오른쪽 체크 14 (Kendo 2021.3은 고른 줄 바탕색만 바꾸던 것을 체크로) */
+.k-list-container.k-list-container.k-list-container :is(.k-list-item, .k-item)::after {
+  content: "";
+  flex: none;
+  width: var(--kendo-spacing-3-5);
+  height: var(--kendo-spacing-3-5);
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2857' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2857' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / contain no-repeat;
+  visibility: hidden;
+}
+.k-list-container.k-list-container.k-list-container :is(.k-list-item, .k-item):is([aria-selected="true"], .k-selected, .k-state-selected)::after {
+  visibility: visible;
+}
+/* 고른 줄이 비활성이어도 체크는 기본 글자색 (Figma 그대로) */
+.k-list-container.k-list-container.k-list-container :is(.k-list-item, .k-item):is([aria-selected="true"], .k-selected, .k-state-selected):is(.k-disabled, .k-state-disabled, [aria-disabled="true"])::after {
+  background: var(--ux4-color-on-surface-alt);
+}

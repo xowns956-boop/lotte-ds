@@ -1,0 +1,17 @@
+<!-- Lotte Kendo DS · ExpansionPanel
+     제목 줄을 눌러 내용을 접었다 폈다 하는 패널. 조회 조건 영역에 쓴다.
+     처음 펼친 상태면 k-expanded + aria-expanded="true", 접힌 상태면 둘 다 빼고 내용에 hidden.
+     누르면 상자에 change 이벤트(detail.expanded). -->
+
+<div class="k-expander k-expanded">
+  <button type="button" class="k-expander-header" aria-expanded="true" aria-controls="search-body">
+    <span class="k-expander-title">조회 조건</span>
+    <span class="k-spacer"></span>
+    <svg class="k-svg-icon k-expander-indicator" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+  </button>
+  <div class="k-expander-content-wrapper" id="search-body">
+    <div class="k-expander-content">
+      <!-- 조회 조건 Form -->
+    </div>
+  </div>
+</div>

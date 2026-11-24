@@ -1,0 +1,55 @@
+<!-- Lotte Kendo DS · Form / Item · Form
+     항목 하나 = .k-form-field (라벨 → 입력칸 → 도움말 → 오류 문구 순서, 간격 8)
+     오류: 입력칸에 aria-invalid="true" + 아래 .k-form-error. 입력칸에 aria-describedby로 도움말·오류 문구를 잇는다.
+     폼 = .k-form (항목 간격 32, 마지막에 .k-form-buttons) -->
+
+<form class="k-form" novalidate>
+  <!-- input -->
+  <div class="k-form-field">
+    <label class="k-label k-form-label" for="lot-no">LOT NO</label>
+    <input id="lot-no" type="text" class="k-textbox k-input k-input-md" placeholder="내용을 입력하세요" aria-describedby="lot-no-hint">
+    <p class="k-form-hint" id="lot-no-hint">도움말을 입력합니다.</p>
+  </div>
+
+  <!-- select (DropDownList) -->
+  <div class="k-form-field">
+    <label class="k-label k-form-label" id="line-label">라인</label>
+    <div class="k-dropdownlist k-picker k-picker-md">
+      <button type="button" class="k-input-inner" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="line-list" aria-labelledby="line-label line-value" aria-describedby="line-hint">
+        <span class="k-input-value-text" id="line-value" data-placeholder>선택하세요</span>
+        <span class="k-input-button" aria-hidden="true">
+          <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+        </span>
+      </button>
+      <div class="k-popup k-list-container" hidden>
+        <ul class="k-list-ul" role="listbox" id="line-list" aria-labelledby="line-label">
+          <li class="k-list-item" role="option" aria-selected="false" data-value="A1"><span class="k-list-item-text">조립 1라인</span></li>
+          <li class="k-list-item" role="option" aria-selected="false" data-value="A2"><span class="k-list-item-text">조립 2라인</span></li>
+        </ul>
+      </div>
+      <input type="hidden" name="line">
+    </div>
+    <p class="k-form-hint" id="line-hint">도움말을 입력합니다.</p>
+  </div>
+
+  <!-- textarea · 오류 -->
+  <div class="k-form-field">
+    <label class="k-label k-form-label" for="remark">특이사항</label>
+    <textarea id="remark" class="k-textarea" placeholder="내용을 입력하세요" aria-invalid="true" aria-describedby="remark-hint remark-error"></textarea>
+    <p class="k-form-hint" id="remark-hint">도움말을 입력합니다.</p>
+    <p class="k-form-error" id="remark-error">입력값을 확인하세요.</p>
+  </div>
+
+  <!-- checkbox: 체크박스 + 라벨 한 줄 -->
+  <div class="k-form-field">
+    <div class="ux-form-check">
+      <input type="checkbox" class="k-checkbox k-checkbox-md" id="confirm" aria-describedby="confirm-hint">
+      <label class="k-checkbox-label" for="confirm">확인</label>
+    </div>
+    <p class="k-form-hint" id="confirm-hint">도움말을 입력합니다.</p>
+  </div>
+
+  <div class="k-form-buttons">
+    <button type="submit" class="k-button k-button-md k-button-solid-primary"><span class="k-button-text">저장</span></button>
+  </div>
+</form>

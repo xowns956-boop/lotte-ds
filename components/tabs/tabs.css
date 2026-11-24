@@ -1,0 +1,177 @@
+/* Lotte Kendo DS · Tabs (TabStrip)
+   variant: line(기본 — 고른 탭 파란 글자 + 아래 2px 선, 탭 줄 아래 1px 선)
+            pill(.ux-tabstrip-pill — 회색 둘레 안 흰 탭)   (.ux-tabstrip-line은 line과 같음)
+   탭: active · state: default · focus · disabled
+   탭 줄과 내용 사이 8
+
+   이 DS의 구조 (동작은 lotte-ds.js)
+     <div class="k-tabstrip k-tabstrip-top">
+       <div class="k-tabstrip-items-wrapper">
+         <ul class="k-tabstrip-items" role="tablist" aria-label="상세 정보">
+           <li class="k-item k-state-active" role="presentation">
+             <button type="button" class="k-link" role="tab" id="t1" aria-selected="true" aria-controls="p1">기본 정보</button>
+           </li>
+           <li class="k-item" role="presentation">
+             <button type="button" class="k-link" role="tab" id="t2" aria-selected="false" aria-controls="p2" tabindex="-1">점검 이력</button>
+           </li>
+         </ul>
+       </div>
+       <div class="k-content k-tabstrip-content k-state-active" role="tabpanel" id="p1" aria-labelledby="t1" tabindex="0">…</div>
+       <div class="k-content k-tabstrip-content" role="tabpanel" id="p2" aria-labelledby="t2" tabindex="0" hidden>…</div>
+     </div>
+   Kendo 2021.3 kendoTabStrip 구조(li.k-item[role=tab] > span.k-link, .k-state-active)도 같은 모양
+   비활성 탭: li.k-state-disabled (button에는 disabled)
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. SmartUX 테마의 탭 선택자가 최대 0,5,0이라 그보다 세게 쓴다. */
+
+/* ── 1. 틀 ──────────────────────────────────────────────────── */
+.k-tabstrip.k-tabstrip.k-tabstrip.k-tabstrip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kendo-spacing-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  font-family: var(--kendo-font-family);
+}
+.k-tabstrip.k-tabstrip.k-tabstrip.k-tabstrip > .k-tabstrip-items-wrapper {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+/* ── 2. 탭 줄 ───────────────────────────────────────────────── */
+/* line (기본) */
+.k-tabstrip.k-tabstrip.k-tabstrip .k-tabstrip-items.k-tabstrip-items {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  align-items: flex-start;
+  gap: 0;
+  width: auto;
+  height: auto;  /* SmartUX factory 테마의 고정 높이(32) 풀기 */
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-bottom: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  border-radius: 0;
+  background: none;
+  list-style: none;
+}
+/* pill */
+.k-tabstrip.k-tabstrip.k-tabstrip.ux-tabstrip-pill .k-tabstrip-items.k-tabstrip-items {
+  flex: none;
+  align-items: center;
+  /* 둘레 안쪽 3 = 4 - 1 (간격 변수에 3이 없어서 두 변수로 계산) */
+  padding: calc(var(--kendo-spacing-1) - var(--kendo-spacing-1px));
+  border: 0;
+  border-radius: var(--kendo-border-radius-xxl);
+  background: var(--kendo-color-base);
+}
+
+/* ── 3. 탭 ──────────────────────────────────────────────────── */
+.k-tabstrip.k-tabstrip.k-tabstrip .k-tabstrip-items .k-item.k-item {
+  --_k-tab-fg: var(--kendo-color-on-app-surface);
+  --_k-tab-bg: var(--kendo-color-opacity-transparent);
+  --_k-tab-line: var(--kendo-color-opacity-transparent);
+  --_k-tab-box: none;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  flex: none;
+  height: auto;  /* SmartUX factory 테마의 height: 100% 풀기 */
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--kendo-border-radius-xl);
+  background: var(--_k-tab-bg);
+  box-shadow: var(--_k-tab-box);
+  color: var(--_k-tab-fg);
+  list-style: none;
+}
+/* line: 고른 탭 = 파란 글자 + 아래 2px 선 */
+.k-tabstrip.k-tabstrip.k-tabstrip .k-tabstrip-items .k-item.k-item:is(.k-state-active, .k-active) {
+  --_k-tab-fg: var(--kendo-color-primary-on-surface);
+  --_k-tab-line: var(--kendo-color-primary);
+  border-radius: 0;
+  border-bottom: var(--kendo-spacing-0-5) solid var(--_k-tab-line);
+}
+/* 포커스: 링 3 */
+.k-tabstrip.k-tabstrip.k-tabstrip .k-tabstrip-items .k-item.k-item:is(.k-state-focused, :has(> .k-link:focus-visible)) {
+  --_k-tab-box: 0 0 0 calc(var(--kendo-spacing-1) - var(--kendo-spacing-1px)) var(--kendo-color-primary-opacity-opacity-focus);
+}
+/* 비활성 */
+.k-tabstrip.k-tabstrip.k-tabstrip .k-tabstrip-items .k-item.k-item:is(.k-state-disabled, .k-disabled, :has(> .k-link:disabled)) {
+  --_k-tab-fg: var(--kendo-color-on-disabled);
+  --_k-tab-line: var(--kendo-color-disabled-border);
+}
+
+/* pill: 탭 */
+.k-tabstrip.k-tabstrip.k-tabstrip.ux-tabstrip-pill .k-tabstrip-items .k-item.k-item {
+  border-radius: var(--ux4-border-radius-control);
+  border-bottom: 0;
+}
+.k-tabstrip.k-tabstrip.k-tabstrip.ux-tabstrip-pill .k-tabstrip-items .k-item.k-item:is(.k-state-active, .k-active) {
+  --_k-tab-fg: var(--kendo-color-on-app-surface);
+  --_k-tab-bg: var(--ux4-alpha-tab-active);
+  --_k-tab-box: var(--ux4-shadow-sm);
+}
+.k-tabstrip.k-tabstrip.k-tabstrip.ux-tabstrip-pill .k-tabstrip-items .k-item.k-item:is(.k-state-focused, :has(> .k-link:focus-visible)) {
+  /* 테두리 1(border-focus)은 크기가 변하지 않게 안쪽 선으로 */
+  --_k-tab-box: inset 0 0 0 var(--kendo-spacing-1px) var(--ux4-color-border-focus), 0 0 0 calc(var(--kendo-spacing-1) - var(--kendo-spacing-1px)) var(--kendo-color-primary-opacity-opacity-focus);
+}
+.k-tabstrip.k-tabstrip.k-tabstrip.ux-tabstrip-pill .k-tabstrip-items .k-item.k-item:is(.k-state-active, .k-active):is(.k-state-disabled, .k-disabled, :has(> .k-link:disabled)) {
+  --_k-tab-bg: var(--kendo-color-disabled);
+  --_k-tab-fg: var(--kendo-color-on-disabled);
+}
+
+/* 탭 글자 칸 (SmartUX 테마 0,5,0 → 0,6,0) */
+.k-tabstrip.k-tabstrip.k-tabstrip .k-tabstrip-items .k-item.k-item > .k-link.k-link {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--kendo-spacing-1-5);
+  min-height: var(--kendo-device-control-height);
+  margin: 0;
+  padding: var(--kendo-spacing-2) var(--kendo-spacing-3);
+  border: 0;
+  border-radius: inherit;
+  background: none;
+  color: var(--_k-tab-fg);
+  font-family: inherit;
+  font-size: var(--kendo-device-control-font-size);
+  font-weight: var(--kendo-font-weight-medium);
+  line-height: var(--kendo-device-control-line-height);
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+}
+.k-tabstrip.k-tabstrip.k-tabstrip.ux-tabstrip-pill .k-tabstrip-items .k-item.k-item > .k-link.k-link {
+  min-height: var(--kendo-device-tab-pill-height);
+  padding: var(--kendo-spacing-1) var(--kendo-spacing-2);
+}
+.k-tabstrip.k-tabstrip.k-tabstrip .k-tabstrip-items .k-item.k-item:is(.k-state-disabled, .k-disabled, :has(> .k-link:disabled)) > .k-link.k-link {
+  cursor: default;
+}
+/* Kendo 2021.3이 넣는 불러오기 표시 칸은 숨김 */
+.k-tabstrip .k-tabstrip-items .k-item > .k-loading { display: none; }
+
+/* ── 4. 내용 칸 ─────────────────────────────────────────────── */
+.k-tabstrip.k-tabstrip.k-tabstrip.k-tabstrip > .k-content {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  outline: none;
+}
+.k-tabstrip.k-tabstrip.k-tabstrip.k-tabstrip > .k-content[hidden] { display: none; }
+.k-tabstrip.k-tabstrip.k-tabstrip.k-tabstrip > .k-content:focus-visible {
+  box-shadow: 0 0 0 calc(var(--kendo-spacing-1) - var(--kendo-spacing-1px)) var(--kendo-color-primary-opacity-opacity-focus);
+}

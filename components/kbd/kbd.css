@@ -1,0 +1,48 @@
+/* Lotte Kendo DS · Kbd
+   키보드 키 표시. 키 하나 = .ux-kbd, 여러 키 조합 = .ux-kbd-group
+   Kendo에는 이 부품이 없어서 .ux-* 이름을 쓴다.
+   높이 20 · 최소 폭 20 · 좌우 4 · 모서리 xl, 글자 text-xs/medium(기기 상관없이 같은 크기)
+
+   <kbd class="ux-kbd">Esc</kbd>
+   <kbd class="ux-kbd-group"><kbd class="ux-kbd">Ctrl</kbd><kbd class="ux-kbd">K</kbd></kbd>
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+.ux-kbd.ux-kbd {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--kendo-spacing-1);
+  width: fit-content;
+  min-width: var(--kendo-spacing-5);
+  height: var(--kendo-spacing-5);
+  margin: 0;
+  padding: 0 var(--kendo-spacing-1);
+  border: 0;
+  border-radius: var(--kendo-border-radius-xl);
+  background: var(--kendo-color-base);
+  color: var(--kendo-color-subtle);
+  font-family: var(--kendo-font-family);
+  font-size: var(--kendo-font-size-sm);
+  font-weight: var(--kendo-font-weight-medium);
+  line-height: var(--ux4-line-height-xs);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+.ux-kbd.ux-kbd svg {
+  width: var(--kendo-spacing-3);
+  height: var(--kendo-spacing-3);
+  flex: none;
+}
+
+.ux-kbd-group.ux-kbd-group {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kendo-spacing-1);
+  margin: 0;
+  padding: 0;
+  background: none;
+  font: inherit;
+}

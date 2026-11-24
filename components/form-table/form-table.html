@@ -1,0 +1,54 @@
+<!-- Lotte Kendo DS · Form Table (이름 + 값 입력 표)
+     모달(Dialog 내용 칸)이나 화면 본문에서 쓴다. 줄은 최대 6개, 줄마다 칸 1~2개.
+     값 칸: 읽기 글자는 <td> 그대로, 입력 부품은 <td class="ux-form-table-control">.
+     입력 부품 두 개를 쌓을 때만 .ux-form-table-stack으로 감싼다. 칸 하나가 줄 전체면 colspan="3".
+     필수 칸: 이름 앞에 <span class="k-required" aria-hidden="true"></span> -->
+
+<div class="ux-form-table">
+  <table>
+    <tbody>
+      <tr>
+        <th scope="row">LOT NO</th><td>L20261124-01</td>
+        <th scope="row">품목</th><td>빼빼로 오리지널</td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="k-required" aria-hidden="true"></span>라인</th>
+        <td class="ux-form-table-control">
+          <div class="k-dropdownlist k-picker k-picker-md">
+            <button type="button" class="k-input-inner" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="ft-line-list" aria-label="라인">
+              <span class="k-input-value-text" data-placeholder>선택하세요</span>
+              <span class="k-input-button" aria-hidden="true"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="m6 9 6 6 6-6"/></svg></span>
+            </button>
+            <div class="k-popup k-list-container" hidden>
+              <ul class="k-list-ul" role="listbox" id="ft-line-list" aria-label="라인"><li class="k-list-item" role="option" aria-selected="false" data-value="A1"><span class="k-list-item-text">조립 1라인</span></li><li class="k-list-item" role="option" aria-selected="false" data-value="A2"><span class="k-list-item-text">조립 2라인</span></li></ul>
+            </div>
+            <input type="hidden" name="ft-line">
+          </div>
+        </td>
+        <th scope="row"><span class="k-required" aria-hidden="true"></span>투입량</th>
+        <td class="ux-form-table-control"><input class="k-textbox k-input k-input-md" placeholder="입력하세요" aria-label="투입량"></td>
+      </tr>
+      <tr>
+        <th scope="row">작업자</th>
+        <td class="ux-form-table-control" colspan="3">
+          <div class="ux-form-table-stack">
+            <div class="k-dropdownlist k-picker k-picker-md">
+            <button type="button" class="k-input-inner" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="ft-worker-list" aria-label="작업자">
+              <span class="k-input-value-text" data-placeholder>선택하세요</span>
+              <span class="k-input-button" aria-hidden="true"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="m6 9 6 6 6-6"/></svg></span>
+            </button>
+            <div class="k-popup k-list-container" hidden>
+              <ul class="k-list-ul" role="listbox" id="ft-worker-list" aria-label="작업자"><li class="k-list-item" role="option" aria-selected="false" data-value="w1"><span class="k-list-item-text">김롯데</span></li><li class="k-list-item" role="option" aria-selected="false" data-value="w2"><span class="k-list-item-text">이웰푸드</span></li></ul>
+            </div>
+            <input type="hidden" name="ft-worker">
+          </div>
+            <input class="k-textbox k-input k-input-md" placeholder="메모" aria-label="작업자 메모">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">비고</th><td colspan="3">특이사항 없음</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

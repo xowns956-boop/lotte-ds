@@ -1,0 +1,49 @@
+# main에 올리면 부품 미리보기 + 설치 페이지 + 업데이트 현황 + 설치 파일(/r/<버전>/) + llms.txt를 GitHub Pages로 배포한다.
+# 현재 버전은 package.json의 version.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      LOTTE_BASE: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run tokens
+      - run: npm run build
+      - run: npm run llms
+      # 공개할 파일만 _site로 모은다
+      - run: |
+          mkdir _site
+          cp -R index.html components preview dist docs install changelog r llms.txt llms-full.txt _site/
+          touch _site/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

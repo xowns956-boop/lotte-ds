@@ -1,0 +1,122 @@
+/* Lotte Kendo DS · Input
+   state: default · focus · disabled · invalid
+   filled: 안내 글자(placeholder) / 입력값 — 글자 색만 다름
+
+   클래스 (Kendo 이름)
+   상자        .k-textbox (+ .k-input .k-input-md)
+               <input class="k-textbox">              ← Kendo 2021.3 구조
+               <span class="k-textbox"><input class="k-input-inner"></span>  ← 최신 Kendo 구조
+   InputGroup  앞 아이콘 · 뒤 Kbd 칸 (최신 Kendo 이름)
+               <span class="k-textbox">
+                 <span class="k-input-prefix"><svg class="k-svg-icon" …>search</svg></span>
+                 <input class="k-input-inner" placeholder="검색">
+                 <span class="k-input-suffix"><kbd class="ux-kbd-group">…</kbd></span>
+               </span>
+               앞 칸이 있으면 왼쪽 12, 뒤 칸이 있으면 오른쪽 8 · 칸 사이 8. 아이콘 16 subtle
+   상태        :focus .k-state-focused
+               [aria-invalid="true"] .k-invalid .k-state-invalid
+               [disabled] .k-state-disabled [aria-disabled="true"]
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+/* ── 1. 변수: 기본 상태 ─────────────────────────────────────── */
+.k-textbox {
+  --_k-in-bg: var(--ux4-alpha-field);
+  --_k-in-bd: var(--kendo-color-border-alt);
+  --_k-in-fg: var(--kendo-color-on-app-surface);
+  --_k-in-ph: var(--kendo-color-subtle);
+  --_k-in-box: var(--kendo-elevation-1);
+  /* 포커스·오류 링 두께 3 = 4 - 1 (간격 변수에 3이 없어서 두 변수로 계산) */
+  --_k-in-ring: calc(var(--kendo-spacing-1) - var(--kendo-spacing-1px));
+}
+
+/* ── 2. 상태 (뒤에 오는 것이 이김: focus → invalid → disabled) ── */
+.k-textbox:is(:focus, :focus-within, .k-state-focused) {
+  --_k-in-bd: var(--ux4-color-border-focus);
+  --_k-in-box: 0 0 0 var(--_k-in-ring) var(--kendo-color-primary-opacity-opacity-focus);
+}
+.k-textbox:is([aria-invalid="true"], .k-invalid, .k-state-invalid, :has(> .k-input-inner[aria-invalid="true"])) {
+  --_k-in-bd: var(--kendo-color-error);
+  --_k-in-box: var(--kendo-elevation-1), 0 0 0 var(--_k-in-ring) var(--ux4-alpha-destructive-20);
+}
+.k-textbox:is([disabled], .k-state-disabled, [aria-disabled="true"], :has(> .k-input-inner:disabled)) {
+  --_k-in-bg: var(--kendo-color-disabled);
+  --_k-in-bd: var(--kendo-color-disabled-border);
+  --_k-in-fg: var(--kendo-color-on-disabled);
+  --_k-in-ph: var(--kendo-color-on-disabled);
+  --_k-in-box: var(--kendo-elevation-1);
+}
+
+/* ── 3. 실제 모양
+   Kendo 2021.3과 SmartUX 공통 CSS의 입력칸 선택자가 최대 0,3,1이라 .k-textbox 네 번(0,4,0)으로 뒤에서 덮는다. ── */
+.k-textbox.k-textbox.k-textbox.k-textbox {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  height: var(--kendo-device-control-height);
+  margin: 0;
+  padding: var(--kendo-spacing-2) var(--kendo-spacing-3);
+  border: var(--kendo-spacing-1px) solid var(--_k-in-bd);
+  border-radius: var(--ux4-border-radius-control);
+  background: var(--_k-in-bg);
+  color: var(--_k-in-fg);
+  box-shadow: var(--_k-in-box);
+  font-family: var(--kendo-font-family);
+  font-size: var(--kendo-device-input-font-size);
+  font-weight: var(--kendo-font-weight-normal);
+  line-height: var(--kendo-device-input-line-height);
+  letter-spacing: var(--kendo-letter-spacing);
+  text-overflow: ellipsis;
+  outline: none;
+}
+.k-textbox.k-textbox.k-textbox.k-textbox:is([disabled], .k-state-disabled, [aria-disabled="true"], :has(> .k-input-inner:disabled)) {
+  cursor: default;
+}
+
+/* 최신 Kendo 구조: 안쪽 input은 테두리·바탕 없이 상자를 채운다 */
+.k-textbox.k-textbox > .k-input-inner {
+  flex: 1;
+  min-width: 0;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-overflow: ellipsis;
+  outline: none;
+  box-shadow: none;
+}
+
+/* InputGroup: 앞 아이콘 · 뒤 Kbd 칸 */
+.k-textbox.k-textbox.k-textbox.k-textbox:has(> :is(.k-input-prefix, .k-input-suffix)) {
+  gap: var(--kendo-spacing-2);
+}
+.k-textbox.k-textbox.k-textbox.k-textbox:has(> .k-input-suffix) {
+  padding-right: var(--kendo-spacing-2);
+}
+.k-textbox.k-textbox > :is(.k-input-prefix, .k-input-suffix) {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: var(--kendo-spacing-1);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--kendo-color-subtle);
+}
+.k-textbox.k-textbox > :is(.k-input-prefix, .k-input-suffix) > .k-svg-icon {
+  width: var(--kendo-spacing-4);
+  height: var(--kendo-spacing-4);
+}
+
+/* ── 4. 안내 글자(placeholder) ──────────────────────────────── */
+.k-textbox::placeholder,
+.k-textbox > .k-input-inner::placeholder {
+  color: var(--_k-in-ph);
+  opacity: 1;
+}

@@ -1,0 +1,57 @@
+<!-- Lotte Kendo DS · Drawer (사이드바)
+     펼침 256 ↔ 아이콘 모드 48(.k-drawer-mini). 바꾸는 버튼은 Drawer / Toggle(data-drawer-toggle="Drawer id"), 보통 머리줄 왼쪽.
+     현재 메뉴는 aria-current="page". 하위 메뉴는 최대 2단계, 여닫는 항목은 button + aria-expanded + aria-controls.
+     머리 = Drawer / Brand, 아래 = Drawer / User(선택). 동작은 lotte-ds.js -->
+
+<button type="button" class="k-button k-button-flat-base k-icon-button ux-drawer-toggle" data-drawer-toggle="app-drawer" aria-expanded="true" aria-controls="app-drawer" aria-label="메뉴 펼치기·접기">
+  <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
+</button>
+
+<aside class="k-drawer k-drawer-start" id="app-drawer">
+  <div class="k-drawer-wrapper">
+    <div class="ux-drawer-header">
+      <div class="ux-drawer-brand">
+        <span class="k-avatar k-avatar-circle" aria-hidden="true"><span class="k-avatar-text">관</span></span>
+        <div class="ux-drawer-brand-text">
+          <p class="ux-drawer-brand-name">서비스 이름 <span class="k-badge k-badge-md k-badge-outline-base">사내</span></p>
+          <p class="ux-drawer-brand-subtitle">부제</p>
+        </div>
+      </div>
+    </div>
+
+    <nav class="ux-drawer-content" aria-label="주 메뉴">
+      <div class="ux-drawer-group">
+        <p class="ux-drawer-group-label">메뉴 그룹</p>
+        <ul class="k-drawer-items">
+          <li>
+            <a class="k-drawer-item" href="#" aria-current="page">
+              <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+              <span class="k-item-text">대시보드</span>
+            </a>
+          </li>
+          <li>
+            <button type="button" class="k-drawer-item" aria-expanded="true" aria-controls="menu-prod">
+              <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+              <span class="k-item-text">생산</span>
+              <svg class="k-svg-icon ux-drawer-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <ul class="ux-drawer-sub" id="menu-prod">
+              <li><a class="ux-drawer-sub-item" href="#">작업지시</a></li>
+              <li><a class="ux-drawer-sub-item" href="#">생산 실적</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="ux-drawer-footer">
+      <div class="ux-drawer-user">
+        <span class="k-avatar k-avatar-circle" aria-hidden="true"><span class="k-avatar-text">관</span></span>
+        <div class="ux-drawer-user-text">
+          <p class="ux-drawer-user-name">사용자 이름</p>
+          <p class="ux-drawer-user-email">시스템 관리자</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>

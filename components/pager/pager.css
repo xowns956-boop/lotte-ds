@@ -1,0 +1,144 @@
+/* Lotte Kendo DS · Pager (페이지 넘기기)
+   이전 · 페이지 번호 · … · 다음, 간격 4
+   페이지 번호: control-height 정사각(PC 36 · Tablet 48) · 모서리 control · 글자 text-control/medium
+     현재 페이지 = 흰 바탕(ux4-alpha/outline) + 테두리 + 그림자 1 / 마우스 올림 = primary-subtle
+   이전·다음: Button ghost 모양(위아래 8 · 좌우 10 · 간격 4 · 아이콘 16), 못 누를 때 반투명 0.5
+
+   이 DS의 구조 (페이지 이동이라 링크)
+     <nav class="k-pager" aria-label="페이지">
+       <a class="k-link k-pager-nav" aria-disabled="true">…chevron-left… 이전</a>
+       <ul class="k-pager-numbers">
+         <li><a class="k-link" href="?page=1">1</a></li>
+         <li><a class="k-link" href="?page=2" aria-current="page">2</a></li>
+         <li><span class="ux-pager-ellipsis" aria-hidden="true">…ellipsis…</span></li>
+       </ul>
+       <a class="k-link k-pager-nav" href="?page=3">다음 …chevron-right…</a>
+     </nav>
+   Kendo 2021.3 구조(.k-pager-wrap > a.k-pager-nav · ul.k-pager-numbers > li > span.k-state-selected · a.k-link)도 같은 모양
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. Kendo 원본 최대 0,4,0 → 뿌리 0,4,0 + 안쪽으로 더 세게. */
+
+/* ── 1. 틀 ──────────────────────────────────────────────────── */
+.k-pager.k-pager.k-pager.k-pager,
+.k-pager-wrap.k-pager-wrap.k-pager-wrap.k-pager-wrap {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--kendo-spacing-1);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--kendo-color-on-app-surface);
+  font-family: var(--kendo-font-family);
+  line-height: var(--kendo-device-control-line-height);
+}
+:is(.k-pager, .k-pager-wrap) .k-pager-numbers-wrap { display: flex; margin: 0; }
+:is(.k-pager, .k-pager-wrap) .k-pager-numbers-wrap > select { display: none; }
+:is(.k-pager, .k-pager-wrap).k-pager.k-pager .k-pager-numbers,
+.k-pager-wrap.k-pager-wrap.k-pager-wrap .k-pager-numbers {
+  display: flex;
+  align-items: center;
+  gap: var(--kendo-spacing-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+:is(.k-pager, .k-pager-wrap) .k-pager-numbers > li {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ── 2. 누르는 칸 공통 (페이지 번호 · 이전 · 다음) ──────────── */
+:is(.k-pager.k-pager.k-pager.k-pager, .k-pager-wrap.k-pager-wrap.k-pager-wrap.k-pager-wrap) :is(.k-link, .k-state-selected) {
+  --_k-pg-bg: var(--kendo-color-opacity-transparent);
+  --_k-pg-fg: var(--kendo-color-on-app-surface);
+  --_k-pg-bd: var(--kendo-color-opacity-transparent);
+  --_k-pg-box: none;
+  box-sizing: border-box;
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--kendo-spacing-1);
+  width: auto;
+  min-width: var(--kendo-device-control-height);
+  height: var(--kendo-device-control-height);
+  margin: 0;
+  padding: 0;
+  border: var(--kendo-spacing-1px) solid var(--_k-pg-bd);
+  border-radius: var(--ux4-border-radius-control);
+  background: var(--_k-pg-bg);
+  color: var(--_k-pg-fg);
+  box-shadow: var(--_k-pg-box);
+  font-size: var(--kendo-device-control-font-size);
+  font-weight: var(--kendo-font-weight-medium);
+  line-height: var(--kendo-device-control-line-height);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+}
+/* 현재 페이지 */
+:is(.k-pager.k-pager.k-pager.k-pager, .k-pager-wrap.k-pager-wrap.k-pager-wrap.k-pager-wrap) :is(.k-link, .k-state-selected):is(.k-state-selected, .k-selected, [aria-current="page"]) {
+  --_k-pg-bg: var(--ux4-alpha-outline);
+  --_k-pg-bd: var(--kendo-color-border);
+  --_k-pg-box: var(--kendo-elevation-1);
+  cursor: default;
+}
+/* 마우스 올림 (현재 페이지도 바탕·글자만 바뀜) */
+:is(.k-pager.k-pager.k-pager.k-pager, .k-pager-wrap.k-pager-wrap.k-pager-wrap.k-pager-wrap) :is(.k-link, .k-state-selected):is(:hover, .k-state-hover) {
+  --_k-pg-bg: var(--kendo-color-primary-subtle);
+  --_k-pg-fg: var(--kendo-color-primary-on-subtle);
+}
+/* 키보드 포커스: Button ghost와 같은 링 2 */
+:is(.k-pager.k-pager.k-pager.k-pager, .k-pager-wrap.k-pager-wrap.k-pager-wrap.k-pager-wrap) .k-link:focus-visible {
+  --_k-pg-box: 0 0 0 var(--kendo-spacing-0-5) var(--kendo-color-primary);
+}
+
+/* ── 3. 이전 · 다음 ─────────────────────────────────────────── */
+:is(.k-pager.k-pager.k-pager.k-pager, .k-pager-wrap.k-pager-wrap.k-pager-wrap.k-pager-wrap) .k-link.k-pager-nav {
+  height: auto;
+  min-height: var(--kendo-device-control-height);
+  padding: var(--kendo-spacing-2) var(--kendo-spacing-2-5);
+  border-width: 0;
+}
+/* 못 누를 때(첫·끝 페이지): 반투명 0.5 */
+:is(.k-pager.k-pager.k-pager.k-pager, .k-pager-wrap.k-pager-wrap.k-pager-wrap.k-pager-wrap) .k-link.k-pager-nav:is(.k-state-disabled, .k-disabled, [aria-disabled="true"]) {
+  --_k-pg-bg: var(--kendo-color-opacity-transparent);
+  --_k-pg-fg: var(--kendo-color-on-app-surface);
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* 아이콘 16 */
+:is(.k-pager, .k-pager-wrap) :is(.k-link, .ux-pager-ellipsis) :is(.k-svg-icon, .k-icon) {
+  flex: none;
+  width: var(--kendo-icon-size);
+  height: var(--kendo-icon-size);
+  font-size: var(--kendo-icon-size);
+  color: inherit;
+}
+
+/* ── 4. … (생략) ────────────────────────────────────────────── */
+:is(.k-pager, .k-pager-wrap) .ux-pager-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--kendo-device-control-height);
+  height: var(--kendo-device-control-height);
+  color: var(--kendo-color-on-app-surface);
+}
+
+/* Kendo 2021.3 쪽 정보 글자(1 - 10 of 50 items)는 표 아래 줄 규칙(흐린 글자, 오른쪽)으로 */
+:is(.k-pager.k-pager.k-pager.k-pager, .k-pager-wrap.k-pager-wrap.k-pager-wrap.k-pager-wrap) .k-pager-info {
+  margin: 0 0 0 auto;
+  padding: 0;
+  color: var(--kendo-color-subtle);
+  font-size: var(--kendo-font-size-md);
+  line-height: var(--ux4-line-height-sm);
+}

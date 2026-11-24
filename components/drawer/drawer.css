@@ -1,0 +1,334 @@
+/* Lotte Kendo DS · Drawer (사이드바)
+   Drawer · Drawer Item · Drawer Item / Sub · Drawer / Group Label · Drawer / Toggle · Drawer / Brand · Drawer / User
+
+   펼침 256 · 아이콘 모드(.k-drawer-mini) 48. 높이는 놓이는 자리를 채움.
+   바탕 sidebar/surface · 오른쪽 테두리 sidebar/border
+   머리(.ux-drawer-header, 안쪽 8) → 메뉴(.ux-drawer-content, 그룹 사이 8, 넘치면 스크롤) → 아래(.ux-drawer-footer, 안쪽 8, 선택)
+   그룹(.ux-drawer-group, 안쪽 8): 그룹 제목(.ux-drawer-group-label, 높이 32, text-xs/medium 70%) + 메뉴(.k-drawer-items, 간격 4)
+   메뉴 항목(.k-drawer-item): 높이 32 · 안쪽 8 · 간격 8 · 아이콘 16 · text-sm/regular · 모서리 control
+     마우스 올림 = sidebar/accent 바탕 · 현재 메뉴(aria-current="page" 또는 .k-selected) = accent 바탕 + medium
+     하위 메뉴가 있으면 오른쪽 chevron(.ux-drawer-chevron), 열리면 90° 돎
+   하위 메뉴(.ux-drawer-sub): 좌우 14 들여, 안쪽 위아래 2 · 좌우 10, 왼쪽 선, 간격 4
+     하위 항목(.ux-drawer-sub-item): 높이 28 · 안쪽 4/8 · text-sm/regular
+   아이콘 모드: 그룹 제목·하위 메뉴·글자 숨김, 항목은 32×32 아이콘만. 이름은 말풍선(lotte-ds.js)
+
+   <aside class="k-drawer k-drawer-start" id="app-drawer">
+     <div class="k-drawer-wrapper">
+       <div class="ux-drawer-header"> …Drawer / Brand… </div>
+       <nav class="ux-drawer-content" aria-label="주 메뉴">
+         <div class="ux-drawer-group">
+           <p class="ux-drawer-group-label">메뉴 그룹</p>
+           <ul class="k-drawer-items">
+             <li><a class="k-drawer-item" href="…" aria-current="page"><svg class="k-svg-icon" aria-hidden="true">…</svg><span class="k-item-text">대시보드</span></a></li>
+             <li>
+               <button type="button" class="k-drawer-item" aria-expanded="true" aria-controls="m-prod"><svg …/><span class="k-item-text">생산</span><svg class="k-svg-icon ux-drawer-chevron" aria-hidden="true">…chevron-right…</svg></button>
+               <ul class="ux-drawer-sub" id="m-prod">
+                 <li><a class="ux-drawer-sub-item" href="…">작업지시</a></li>
+               </ul>
+             </li>
+           </ul>
+         </div>
+       </nav>
+       <div class="ux-drawer-footer"> …Drawer / User… </div>
+     </div>
+   </aside>
+   펼치기·접기 버튼(Drawer / Toggle, 28×28): <button class="k-button k-button-flat-base k-icon-button ux-drawer-toggle" data-drawer-toggle="app-drawer" aria-expanded="true" aria-label="메뉴 접기">…panel-left…</button>
+
+   Drawer / Brand (.ux-drawer-brand): 로고 Avatar 32(sidebar/primary 바탕) + 서비스 이름 text-sm/semibold · Badge(선택) · 부제 text-xs/regular 흐림
+   Drawer / User (.ux-drawer-user): Avatar 32 + 이름 text-sm/medium · 메일(역할) text-xs/regular 흐림, 간격 8. 오른쪽 chevron(선택)
+     layout=avatar: 아바타만 넣는다(이름은 aria-label로)
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+/* ── 1. 상자 ────────────────────────────────────────────────── */
+.k-drawer.k-drawer.k-drawer.k-drawer {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  width: calc(var(--kendo-spacing-16) * 4);
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-right: var(--kendo-spacing-1px) solid var(--ux4-color-sidebar-border);
+  border-radius: 0;
+  background: var(--ux4-color-sidebar-surface);
+  color: var(--ux4-color-sidebar-on-surface);
+  font-family: var(--kendo-font-family);
+  transition: none;
+}
+.k-drawer.k-drawer.k-drawer.k-drawer.k-drawer-end {
+  border-right: 0;
+  border-left: var(--kendo-spacing-1px) solid var(--ux4-color-sidebar-border);
+}
+/* 아이콘 모드: 48 (Kendo는 .k-drawer-container에 k-drawer-mini) */
+:is(.k-drawer-mini .k-drawer, .k-drawer.k-drawer-mini).k-drawer.k-drawer.k-drawer {
+  width: var(--kendo-spacing-12);
+}
+.k-drawer.k-drawer.k-drawer .k-drawer-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  transition: none;
+}
+
+/* ── 2. 머리 · 메뉴 · 아래 ───────────────────────────────────── */
+.k-drawer.k-drawer .ux-drawer-header,
+.k-drawer.k-drawer .ux-drawer-footer {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: var(--kendo-spacing-2);
+}
+.k-drawer.k-drawer .ux-drawer-content {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--kendo-spacing-2);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.k-drawer.k-drawer .ux-drawer-group {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: var(--kendo-spacing-2);
+}
+.k-drawer.k-drawer .ux-drawer-group-label {
+  display: flex;
+  align-items: center;
+  height: var(--kendo-spacing-8);
+  margin: 0;
+  padding: 0 var(--kendo-spacing-2);
+  border-radius: var(--ux4-border-radius-control);
+  color: var(--ux4-alpha-sidebar-on-surface-70);
+  font-size: var(--kendo-font-size-sm);
+  font-weight: var(--kendo-font-weight-medium);
+  line-height: var(--ux4-line-height-xs);
+  letter-spacing: var(--kendo-letter-spacing);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── 3. 메뉴 항목 ───────────────────────────────────────────── */
+.k-drawer.k-drawer.k-drawer :is(.k-drawer-items, .ux-drawer-sub) {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--kendo-spacing-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* Kendo는 li 자체가 항목(li.k-drawer-item)이라 그건 빼고 */
+.k-drawer.k-drawer.k-drawer :is(.k-drawer-items, .ux-drawer-sub) > li:not(.k-drawer-item) { margin: 0; padding: 0; }
+
+.k-drawer.k-drawer.k-drawer :is(.k-drawer-item, .ux-drawer-sub-item) {
+  --_k-dw-bg: var(--kendo-color-opacity-transparent);
+  --_k-dw-fg: var(--ux4-color-sidebar-on-surface);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--kendo-spacing-2);
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  border: 0;
+  border-radius: var(--ux4-border-radius-control);
+  background: var(--_k-dw-bg);
+  color: var(--_k-dw-fg);
+  box-shadow: none;
+  font-family: inherit;
+  font-size: var(--kendo-font-size-md);
+  font-weight: var(--kendo-font-weight-normal);
+  line-height: var(--ux4-line-height-sm);
+  letter-spacing: var(--kendo-letter-spacing);
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+}
+.k-drawer.k-drawer.k-drawer .k-drawer-item {
+  height: var(--kendo-spacing-8);
+  padding: var(--kendo-spacing-2);
+}
+.k-drawer.k-drawer.k-drawer .ux-drawer-sub-item {
+  height: var(--kendo-spacing-7);
+  padding: var(--kendo-spacing-1) var(--kendo-spacing-2);
+}
+/* 상태: 마우스 올림 → 현재 메뉴 */
+.k-drawer.k-drawer.k-drawer :is(.k-drawer-item, .ux-drawer-sub-item):is(:hover, .k-state-hover, .k-hover) {
+  --_k-dw-bg: var(--ux4-color-sidebar-accent);
+  --_k-dw-fg: var(--ux4-color-sidebar-on-accent);
+}
+.k-drawer.k-drawer.k-drawer :is(.k-drawer-item, .ux-drawer-sub-item):is([aria-current="page"], .k-selected, .k-state-selected) {
+  --_k-dw-bg: var(--ux4-color-sidebar-accent);
+  --_k-dw-fg: var(--ux4-color-sidebar-on-accent);
+}
+.k-drawer.k-drawer.k-drawer .k-drawer-item:is([aria-current="page"], .k-selected, .k-state-selected) {
+  font-weight: var(--kendo-font-weight-medium);
+}
+.k-drawer.k-drawer.k-drawer :is(.k-drawer-item, .ux-drawer-sub-item):focus-visible {
+  box-shadow: inset 0 0 0 var(--kendo-spacing-0-5) var(--ux4-color-sidebar-focus);
+}
+/* 아이콘 16 */
+.k-drawer.k-drawer.k-drawer .k-drawer-item > :is(.k-svg-icon, .k-icon) {
+  flex: none;
+  width: var(--kendo-spacing-4);
+  height: var(--kendo-spacing-4);
+  margin: 0;
+  font-size: var(--kendo-spacing-4);
+  color: inherit;
+}
+.k-drawer.k-drawer.k-drawer .k-drawer-item .k-item-text {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.k-drawer.k-drawer.k-drawer .ux-drawer-sub-item { overflow: hidden; text-overflow: ellipsis; }
+/* 하위 메뉴 열림 표시: chevron 90° */
+.k-drawer.k-drawer.k-drawer .k-drawer-item[aria-expanded="true"] > .ux-drawer-chevron { transform: rotate(90deg); }
+
+/* 하위 메뉴: 좌우 14 들여 · 안쪽 2/10 · 왼쪽 선 */
+.k-drawer.k-drawer.k-drawer .ux-drawer-sub {
+  margin: 0 var(--kendo-spacing-3-5);
+  padding: var(--kendo-spacing-0-5) calc(var(--kendo-spacing-2) + var(--kendo-spacing-0-5));
+  border-left: var(--kendo-spacing-1px) solid var(--ux4-color-sidebar-border);
+}
+.k-drawer.k-drawer.k-drawer .ux-drawer-sub[hidden] { display: none; }
+
+/* ── 4. 아이콘 모드 ─────────────────────────────────────────── */
+:is(.k-drawer-mini .k-drawer, .k-drawer.k-drawer-mini).k-drawer.k-drawer :is(.ux-drawer-group-label, .ux-drawer-sub, .ux-drawer-chevron, .ux-drawer-brand-text, .ux-drawer-user-text, .ux-drawer-user > .ux-drawer-chevron) {
+  display: none;
+}
+:is(.k-drawer-mini .k-drawer, .k-drawer.k-drawer-mini).k-drawer.k-drawer.k-drawer .k-drawer-item {
+  justify-content: center;
+  width: var(--kendo-spacing-8);
+}
+/* 글자는 화면에서만 숨김(화면 읽기 프로그램은 이름을 읽음) */
+:is(.k-drawer-mini .k-drawer, .k-drawer.k-drawer-mini).k-drawer.k-drawer.k-drawer .k-drawer-item .k-item-text {
+  position: absolute;
+  flex: none;
+  width: var(--kendo-spacing-1px);
+  height: var(--kendo-spacing-1px);
+  margin: calc(-1 * var(--kendo-spacing-1px));
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ── 5. Drawer / Toggle (28×28) ─────────────────────────────── */
+.k-button.k-button.k-button.k-button.k-button.ux-drawer-toggle {
+  width: var(--kendo-spacing-7);
+  height: var(--kendo-spacing-7);
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border-radius: var(--ux4-border-radius-control);
+}
+.k-button.k-button.k-button.ux-drawer-toggle :is(.k-svg-icon, .k-icon) {
+  width: var(--kendo-spacing-4);
+  height: var(--kendo-spacing-4);
+  font-size: var(--kendo-spacing-4);
+}
+
+/* ── 6. Drawer / Brand ──────────────────────────────────────── */
+.ux-drawer-brand {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--kendo-spacing-2);
+  height: var(--kendo-spacing-12);
+  min-width: 0;
+  margin: 0;
+  padding: var(--kendo-spacing-2);
+  font-family: var(--kendo-font-family);
+}
+.ux-drawer-brand .k-avatar.k-avatar.k-avatar.k-avatar {
+  background: var(--ux4-color-sidebar-primary);
+  color: var(--ux4-color-sidebar-on-primary);
+}
+.ux-drawer-brand .ux-drawer-brand-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+.ux-drawer-brand .ux-drawer-brand-name {
+  display: flex;
+  align-items: center;
+  gap: var(--kendo-spacing-1-5);
+  min-width: 0;
+  margin: 0;
+  color: var(--ux4-color-sidebar-on-surface);
+  font-size: var(--kendo-font-size-md);
+  font-weight: var(--kendo-font-weight-semibold);
+  line-height: var(--ux4-line-height-sm);
+  letter-spacing: var(--kendo-letter-spacing);
+  white-space: nowrap;
+}
+.ux-drawer-brand .ux-drawer-brand-subtitle,
+.ux-drawer-user .ux-drawer-user-email {
+  margin: 0;
+  color: var(--kendo-color-subtle);
+  font-size: var(--kendo-font-size-sm);
+  font-weight: var(--kendo-font-weight-normal);
+  line-height: var(--ux4-line-height-xs);
+  letter-spacing: var(--kendo-letter-spacing);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+:is(.k-drawer-mini .k-drawer, .k-drawer.k-drawer-mini) .ux-drawer-brand {
+  justify-content: center;
+  padding-inline: 0;
+}
+
+/* ── 7. Drawer / User ───────────────────────────────────────── */
+.ux-drawer-user {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--kendo-spacing-2);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  font-family: var(--kendo-font-family);
+}
+.ux-drawer-user .ux-drawer-user-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.ux-drawer-user .ux-drawer-user-name {
+  margin: 0;
+  color: var(--kendo-color-on-app-surface);
+  font-size: var(--kendo-font-size-md);
+  font-weight: var(--kendo-font-weight-medium);
+  line-height: var(--ux4-line-height-sm);
+  letter-spacing: var(--kendo-letter-spacing);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ux-drawer-user > .ux-drawer-chevron {
+  flex: none;
+  width: var(--kendo-spacing-4);
+  height: var(--kendo-spacing-4);
+  color: var(--kendo-color-subtle);
+}
+:is(.k-drawer-mini .k-drawer, .k-drawer.k-drawer-mini) .ux-drawer-user { justify-content: center; }

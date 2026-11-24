@@ -1,0 +1,76 @@
+/* Lotte Kendo DS · ButtonGroup · ButtonGroup / Toggle
+
+   ButtonGroup (.k-button-group — outline 버튼을 붙인 묶음, 누르면 바로 실행)
+     버튼 사이 간격 0 · 안쪽 모서리 0 · 두 번째부터 왼쪽 테두리 없음 · 그림자는 묶음 전체에 1
+     <div class="k-button-group" role="group" aria-label="날짜 이동">
+       <button type="button" class="k-button k-button-md k-button-outline-base">이전</button>
+       <button type="button" class="k-button k-button-md k-button-outline-base">오늘</button>
+       <button type="button" class="k-button k-button-md k-button-outline-base">다음</button>
+     </div>
+
+   ButtonGroup / Toggle (.k-button-group.ux-toggle-group — 붙은 Toggle 묶음, 고른 칸이 켜진 채로 남음)
+     variant: default(배경 없음) · outline(칸마다 .ux-toggle-outline — 테두리, 묶음 그림자 1)
+     켜진 칸 = aria-pressed="true" (primary-subtle)
+     data-ux-toggle-group="single"(기본, 하나만) | "multiple"(여러 개)
+     <div class="k-button-group ux-toggle-group" role="group" aria-label="기간" data-ux-toggle-group="single">
+       <button type="button" class="k-toggle-button ux-toggle-outline" aria-pressed="true">일</button>
+       <button type="button" class="k-toggle-button ux-toggle-outline" aria-pressed="false">주</button>
+       <button type="button" class="k-toggle-button ux-toggle-outline" aria-pressed="false">월</button>
+     </div>
+   Kendo 2021.3 kendoButtonGroup(.k-button-group > .k-button, 고른 칸 .k-state-active)은 고른 칸이 남는 묶음이라
+   ButtonGroup / Toggle(outline)처럼 보인다.
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+/* ── 1. 묶음 ────────────────────────────────────────────────── */
+.k-button-group.k-button-group.k-button-group {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 0;
+  width: fit-content;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ux4-border-radius-control);
+  background: none;
+  box-shadow: var(--kendo-elevation-1);
+  vertical-align: middle;
+}
+/* 배경 없는 Toggle 묶음은 그림자 없음 */
+.k-button-group.k-button-group.k-button-group.ux-toggle-group:not(:has(> .ux-toggle-outline)) {
+  box-shadow: none;
+}
+
+/* ── 2. 칸: 그림자는 묶음이 맡고, 안쪽 모서리 0 ─────────────── */
+.k-button-group.k-button-group.k-button-group > :is(.k-button, .k-toggle-button).k-button.k-button.k-button,
+.k-button-group.k-button-group.k-button-group > .k-toggle-button.k-toggle-button.k-toggle-button.k-toggle-button {
+  position: relative;
+  margin: 0;
+  box-shadow: none;
+}
+.k-button-group.k-button-group.k-button-group > :is(.k-button, .k-toggle-button):not(:first-child):is(.k-button, .k-toggle-button):is(.k-button, .k-toggle-button):is(.k-button, .k-toggle-button) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.k-button-group.k-button-group.k-button-group > :is(.k-button, .k-toggle-button):not(:last-child):is(.k-button, .k-toggle-button):is(.k-button, .k-toggle-button):is(.k-button, .k-toggle-button) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+/* 테두리 있는 칸: 두 번째부터 왼쪽 테두리 없음 */
+.k-button-group.k-button-group.k-button-group > :is(.k-button:not(.k-flat, .k-button-flat-base, .k-button-link-primary), .ux-toggle-outline) + :is(.k-button, .ux-toggle-outline):is(.k-button, .k-toggle-button):is(.k-button, .k-toggle-button):is(.k-button, .k-toggle-button) {
+  border-left-width: 0;
+}
+/* 키보드 포커스 링이 옆 칸에 가리지 않게 */
+.k-button-group > :focus-visible { z-index: 1; }
+
+/* ── 3. Kendo 2021.3 kendoButtonGroup: 고른 칸 = Toggle 켜짐 색 ── */
+.k-button-group > .k-button:is(.k-state-active, .k-selected) {
+  --_k-btn-bg-rest: var(--kendo-color-primary-subtle);
+  --_k-btn-bg-hover: var(--kendo-color-primary-subtle);
+  --_k-btn-fg-rest: var(--kendo-color-primary-on-subtle);
+  --_k-btn-fg-hover: var(--kendo-color-primary-on-subtle);
+  /* Kendo가 고른 칸에 붙이는 .k-state-active는 Button에서 '눌림' 색이라 같이 덮음 */
+  --_k-btn-bg-active: var(--kendo-color-primary-subtle);
+  --_k-btn-fg-active: var(--kendo-color-primary-on-subtle);
+  --_k-btn-bd-rest: var(--kendo-color-border-alt);
+}

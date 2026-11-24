@@ -1,0 +1,16 @@
+<!-- Lotte Kendo DS · Breadcrumb
+     지금 화면의 위치를 보여 주는 경로 줄. 마지막 항목 = 현재 화면(aria-current="page", 링크 아님).
+     단계가 많으면 중간을 생략(…)으로 줄인다. -->
+
+<nav class="k-breadcrumb" aria-label="현재 위치">
+  <ol class="k-breadcrumb-container">
+    <li class="k-breadcrumb-item"><a class="k-breadcrumb-link" href="#">홈</a></li>
+    <li class="ux-breadcrumb-separator" aria-hidden="true"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="m9 18 6-6-6-6"/></svg></li>
+    <li class="k-breadcrumb-item"><a class="k-breadcrumb-link" href="#">생산관리</a></li>
+    <li class="ux-breadcrumb-separator" aria-hidden="true"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="m9 18 6-6-6-6"/></svg></li>
+    <li class="k-breadcrumb-item"><span class="k-breadcrumb-link" aria-current="page">작업 지시</span></li>
+  </ol>
+</nav>
+
+<!-- 중간 생략: 생략할 자리에 아래 항목을 넣는다 -->
+<li class="k-breadcrumb-item"><span class="ux-breadcrumb-ellipsis" aria-hidden="true"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></span></li>

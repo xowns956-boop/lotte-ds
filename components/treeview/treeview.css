@@ -1,0 +1,128 @@
+/* Lotte Kendo DS · TreeView · TreeView Item
+
+   TreeView (.k-treeview — 펼치고 접는 계층 목록. 공정·설비·분류 고르기)
+     상자: 안쪽 4 · 줄 간격 2 · 테두리 · 모서리 xxl · 바탕 app-surface
+   TreeView Item (한 줄 .k-treeview-mid): 높이 32 · 안쪽 6/8 · 간격 6 · 모서리 control
+     단계(aria-level 1·2·3)마다 왼쪽 들여쓰기 16 (8 → 24 → 40)
+     펼침 표시 16(▾ 펼침 · ▸ 접힘 · 하위 없으면 빈칸, 흐림) · 아이콘 16(흐림, 선택) · 이름 text-sm · 개수 text-xs/medium 흐림(선택)
+     선택: 바탕 primary-subtle · 글자 on-subtle medium · 개수 primary
+
+     <div class="k-treeview">
+       <ul class="k-treeview-lines" role="tree" aria-label="공정">
+         <li class="k-treeview-item" role="treeitem" aria-level="1" aria-expanded="true" aria-selected="false" data-id="mix">
+           <span class="k-treeview-mid">
+             <span class="k-treeview-toggle" aria-hidden="true"><svg class="k-svg-icon">…chevron-down…</svg></span>
+             <svg class="k-svg-icon ux-tree-icon" aria-hidden="true">…</svg>
+             <span class="k-treeview-leaf-text">배합</span>
+             <span class="ux-tree-count">3</span>
+           </span>
+           <ul class="k-treeview-group" role="group"> …aria-level="2" 항목… </ul>
+         </li>
+       </ul>
+     </div>
+     펼침 아이콘은 lotte-ds.js가 그린다(▾ ▸). 하위 없는 항목은 aria-expanded를 빼고 .k-treeview-toggle을 비워 둔다.
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+/* ── 1. 상자 ────────────────────────────────────────────────── */
+.k-treeview.k-treeview.k-treeview {
+  box-sizing: border-box;
+  margin: 0;
+  padding: var(--kendo-spacing-1);
+  border: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  border-radius: var(--kendo-border-radius-xxl);
+  background: var(--kendo-color-app-surface);
+  color: var(--kendo-color-on-app-surface);
+  font-family: var(--kendo-font-family);
+  overflow: auto;
+}
+.k-treeview.k-treeview :is(.k-treeview-lines, .k-treeview-group) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kendo-spacing-0-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.k-treeview.k-treeview .k-treeview-group { margin-top: var(--kendo-spacing-0-5); }
+.k-treeview.k-treeview .k-treeview-item {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+  outline: none;
+}
+/* 접힌 항목의 하위 목록은 숨김 */
+.k-treeview .k-treeview-item[aria-expanded="false"] > .k-treeview-group { display: none; }
+
+/* ── 2. 한 줄 ───────────────────────────────────────────────── */
+.k-treeview .k-treeview-mid {
+  --_k-tv-level: 0;
+  --_k-tv-bg: var(--kendo-color-opacity-transparent);
+  --_k-tv-fg: var(--kendo-color-on-app-surface);
+  --_k-tv-icon: var(--kendo-color-subtle);
+  --_k-tv-count: var(--kendo-color-subtle);
+  --_k-tv-weight: var(--kendo-font-weight-normal);
+}
+.k-treeview [aria-level="2"] > .k-treeview-mid { --_k-tv-level: 1; }
+.k-treeview [aria-level="3"] > .k-treeview-mid { --_k-tv-level: 2; }
+.k-treeview [aria-level="4"] > .k-treeview-mid { --_k-tv-level: 3; }
+.k-treeview :is([aria-selected="true"], .k-selected, .k-state-selected) > .k-treeview-mid {
+  --_k-tv-bg: var(--kendo-color-primary-subtle);
+  --_k-tv-fg: var(--kendo-color-primary-on-subtle);
+  --_k-tv-icon: var(--kendo-color-primary-on-subtle);
+  --_k-tv-count: var(--kendo-color-primary);
+  --_k-tv-weight: var(--kendo-font-weight-medium);
+}
+.k-treeview.k-treeview .k-treeview-mid {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--kendo-spacing-1-5);
+  margin: 0;
+  padding: var(--kendo-spacing-1-5) var(--kendo-spacing-2) var(--kendo-spacing-1-5) calc(var(--kendo-spacing-2) + var(--_k-tv-level) * var(--kendo-spacing-4));
+  border: 0;
+  border-radius: var(--ux4-border-radius-control);
+  background: var(--_k-tv-bg);
+  color: var(--_k-tv-fg);
+  font-size: var(--kendo-font-size-md);
+  font-weight: var(--_k-tv-weight);
+  line-height: var(--ux4-line-height-sm);
+  letter-spacing: var(--kendo-letter-spacing);
+  cursor: pointer;
+  user-select: none;
+}
+/* 키보드로 옮긴 줄(Figma에 없음 · 접근성용): 안쪽 테두리 */
+.k-treeview .k-treeview-item:focus-visible > .k-treeview-mid {
+  box-shadow: inset 0 0 0 var(--kendo-spacing-0-5) var(--kendo-color-primary);
+}
+.k-treeview .k-treeview-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--kendo-spacing-4);
+  height: var(--kendo-spacing-4);
+  color: var(--kendo-color-subtle);
+}
+.k-treeview .k-treeview-mid :is(.k-svg-icon, .k-icon) {
+  flex: none;
+  width: var(--kendo-spacing-4);
+  height: var(--kendo-spacing-4);
+  font-size: var(--kendo-spacing-4);
+}
+.k-treeview .k-treeview-mid > :is(.ux-tree-icon) { color: var(--_k-tv-icon); }
+.k-treeview .k-treeview-leaf-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.k-treeview .ux-tree-count {
+  flex: none;
+  color: var(--_k-tv-count);
+  font-size: var(--kendo-font-size-sm);
+  font-weight: var(--kendo-font-weight-medium);
+  line-height: var(--ux4-line-height-xs);
+}

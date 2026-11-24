@@ -1,0 +1,36 @@
+/* Lotte Kendo DS · Loader (불러오는 중)
+   아이콘 loader-circle 16 · 선 = 둘레 글자색(기본 kendo-color/on-app-surface) · 1초에 한 바퀴
+   움직임 줄이기 설정을 켠 사람에게는 돌지 않는다.
+
+   <span class="k-loader" role="status" aria-label="불러오는 중">
+     <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+   </span>
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+.k-loader.k-loader.k-loader.k-loader {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--kendo-spacing-4);
+  height: var(--kendo-spacing-4);
+  margin: 0;
+  padding: 0;
+  color: inherit; /* 둘레 글자색을 따름 — 화면 기본 글자색이면 kendo-color/on-app-surface */
+  vertical-align: middle;
+}
+.k-loader.k-loader .k-svg-icon {
+  width: var(--kendo-spacing-4);
+  height: var(--kendo-spacing-4);
+  animation: k-lotte-spin 1s linear infinite;
+}
+
+@keyframes k-lotte-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .k-loader.k-loader .k-svg-icon { animation: none; }
+}

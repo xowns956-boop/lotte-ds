@@ -1,0 +1,31 @@
+/* Lotte Kendo DS · Numeric Stepper (.ux-numeric-stepper — Kendo에 없는 부품)
+   태블릿용 숫자 입력 = 빼기 버튼 + 값 + 더하기 버튼.
+   손가락으로 누르기 쉽게 증감 버튼을 양옆에 크게 둔다(Numeric의 작은 위아래 칸 대신).
+   버튼은 Button(outline · icon), 값 칸은 Input을 그대로 쓰고, 값 글자만 크게·가운데로.
+   기기 모드(PC / Tablet)를 따른다.
+
+   <div class="ux-numeric-stepper" role="group" aria-label="검사값">
+     <button class="k-button k-icon-button k-button-outline-base" data-step="down" aria-label="값 내리기">…minus…</button>
+     <input class="k-textbox k-input k-input-md" inputmode="decimal" value="0" aria-label="검사값">
+     <button class="k-button k-icon-button k-button-outline-base" data-step="up" aria-label="값 올리기">…plus…</button>
+   </div>
+   동작: numeric.js (단계·최소·최대 = 입력칸의 data-increment · data-min · data-max) */
+
+.ux-numeric-stepper {
+  display: flex;
+  align-items: center;
+  gap: var(--kendo-spacing-2);
+  min-width: 0;
+}
+
+/* 값 칸: 남은 폭을 채우고, 글자는 text-value-lg/semibold · 가운데 */
+.ux-numeric-stepper > .k-textbox.k-textbox.k-textbox.k-textbox.k-textbox {
+  flex: 1;
+  min-width: 0;
+  width: auto;
+  font-size: var(--kendo-device-value-lg-font-size);
+  font-weight: var(--kendo-font-weight-semibold);
+  line-height: var(--kendo-device-value-lg-line-height);
+  text-align: center;
+}
+.ux-numeric-stepper > .k-button { flex: none; }

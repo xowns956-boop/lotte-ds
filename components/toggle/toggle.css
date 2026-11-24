@@ -1,0 +1,143 @@
+/* Lotte Kendo DS · Toggle (Button / Toggle)
+
+   Toggle (.k-toggle-button — 누를 때마다 켜짐·꺼짐이 바뀌는 버튼, 켜짐 = aria-pressed="true")
+     variant: default(배경 없음) · outline(.ux-toggle-outline, 테두리) · solid(.ux-toggle-solid, 회색 알약)
+              · pill(.ux-toggle-pill, 테두리 알약 — 필터 조건 고르기)
+     size: default · sm(.ux-toggle-sm)
+     글자 text-control/medium · 아이콘 16 · 높이는 안쪽 여백 + 글자 줄(테두리 있으면 +2)
+     <button type="button" class="k-toggle-button" aria-pressed="false">굵게</button>
+     <button type="button" class="k-toggle-button ux-toggle-pill" aria-pressed="true">진행중</button>
+     켜짐 표시: aria-pressed="true" (Kendo 이름 .k-selected · .k-state-selected도 같음)
+     누르면 lotte-ds.js가 aria-pressed를 바꾸고 change 이벤트(detail.pressed)를 보낸다.
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+/* ── 1. 변수: default ───────────────────────────────────────── */
+.k-toggle-button {
+  --_k-tg-py: var(--kendo-spacing-2);
+  --_k-tg-px: var(--kendo-spacing-2);
+  --_k-tg-gap: var(--kendo-spacing-2);
+  --_k-tg-radius: var(--ux4-border-radius-control);
+  --_k-tg-bw: var(--kendo-spacing-0);
+  --_k-tg-shadow: none;
+  --_k-tg-bg: var(--kendo-color-opacity-transparent);
+  --_k-tg-fg: var(--kendo-color-on-app-surface);
+  --_k-tg-bd-rest: var(--kendo-color-opacity-transparent);
+  --_k-tg-bg-hover: var(--kendo-color-base);
+  --_k-tg-fg-hover: var(--kendo-color-subtle);
+  --_k-tg-bd-hover: var(--_k-tg-bd-rest);
+  --_k-tg-bg-on: var(--kendo-color-primary-subtle);
+  --_k-tg-fg-on: var(--kendo-color-primary-on-subtle);
+  --_k-tg-bd-on: var(--_k-tg-bd-rest);
+  --_k-tg-bg-on-hover: var(--_k-tg-bg-on);
+  --_k-tg-bg-off-disabled: var(--kendo-color-opacity-transparent);
+  --_k-tg-bd-disabled: var(--_k-tg-bd-rest);
+}
+.k-toggle-button.ux-toggle-outline {
+  --_k-tg-bw: var(--kendo-spacing-1px);
+  --_k-tg-shadow: var(--kendo-elevation-1);
+  --_k-tg-bd-rest: var(--kendo-color-border-alt);
+  --_k-tg-bg-hover: var(--kendo-color-primary-subtle);
+  --_k-tg-fg-hover: var(--kendo-color-primary-on-subtle);
+  --_k-tg-bd-disabled: var(--kendo-color-disabled-border);
+}
+.k-toggle-button.ux-toggle-solid {
+  --_k-tg-px: var(--kendo-spacing-3);
+  --_k-tg-gap: var(--kendo-spacing-1-5);
+  --_k-tg-radius: var(--kendo-border-radius-full);
+  --_k-tg-bg: var(--kendo-color-base-subtle);
+  --_k-tg-fg: var(--kendo-color-base-on-subtle);
+  --_k-tg-bg-hover: var(--kendo-color-primary-subtle);
+  --_k-tg-fg-hover: var(--kendo-color-primary-on-subtle);
+  --_k-tg-bg-on: var(--kendo-color-primary);
+  --_k-tg-fg-on: var(--kendo-color-on-primary);
+  --_k-tg-bg-on-hover: var(--ux4-alpha-primary-90);
+  --_k-tg-bg-off-disabled: var(--kendo-color-disabled);
+}
+.k-toggle-button.ux-toggle-pill {
+  --_k-tg-px: var(--kendo-spacing-3);
+  --_k-tg-gap: var(--kendo-spacing-1-5);
+  --_k-tg-radius: var(--kendo-border-radius-full);
+  --_k-tg-bw: var(--kendo-spacing-1px);
+  --_k-tg-bg: var(--kendo-color-app-surface);
+  --_k-tg-bd-rest: var(--kendo-color-border);
+  --_k-tg-bg-hover: var(--kendo-color-primary-subtle);
+  --_k-tg-fg-hover: var(--kendo-color-primary-on-subtle);
+  --_k-tg-bd-on: var(--kendo-color-primary);
+  --_k-tg-bg-off-disabled: var(--kendo-color-disabled);
+  --_k-tg-bd-disabled: var(--kendo-color-disabled-border);
+}
+.k-toggle-button.ux-toggle-sm {
+  --_k-tg-py: var(--kendo-spacing-1-5);
+  --_k-tg-px: var(--kendo-spacing-1-5);
+}
+.k-toggle-button.ux-toggle-sm:is(.ux-toggle-solid, .ux-toggle-pill) {
+  --_k-tg-px: var(--kendo-spacing-2-5);
+}
+
+/* ── 2. 상태 (뒤에 오는 것이 이김: hover → 켜짐 → 켜짐+hover → 비활성) ── */
+.k-toggle-button:is(:hover, .k-state-hover, .k-hover) {
+  --_k-tg-bg: var(--_k-tg-bg-hover);
+  --_k-tg-fg: var(--_k-tg-fg-hover);
+  --_k-tg-bd: var(--_k-tg-bd-hover);
+}
+.k-toggle-button:is([aria-pressed="true"], .k-selected, .k-state-selected) {
+  --_k-tg-bg: var(--_k-tg-bg-on);
+  --_k-tg-fg: var(--_k-tg-fg-on);
+  --_k-tg-bd: var(--_k-tg-bd-on);
+}
+.k-toggle-button:is([aria-pressed="true"], .k-selected, .k-state-selected):is(:hover, .k-state-hover, .k-hover) {
+  --_k-tg-bg: var(--_k-tg-bg-on-hover);
+}
+.k-toggle-button:is([disabled], .k-disabled, .k-state-disabled, [aria-disabled="true"]) {
+  --_k-tg-bg: var(--_k-tg-bg-off-disabled);
+  --_k-tg-fg: var(--kendo-color-on-disabled);
+  --_k-tg-bd: var(--_k-tg-bd-disabled);
+}
+.k-toggle-button:is([aria-pressed="true"], .k-selected, .k-state-selected):is([disabled], .k-disabled, .k-state-disabled, [aria-disabled="true"]) {
+  --_k-tg-bg: var(--kendo-color-disabled);
+}
+
+/* ── 3. 실제 모양 ───────────────────────────────────────────── */
+.k-toggle-button.k-toggle-button.k-toggle-button.k-toggle-button {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--_k-tg-gap);
+  min-width: 0;
+  margin: 0;
+  padding: var(--_k-tg-py) var(--_k-tg-px);
+  border: var(--_k-tg-bw) solid var(--_k-tg-bd, var(--_k-tg-bd-rest));
+  border-radius: var(--_k-tg-radius);
+  background: var(--_k-tg-bg);
+  color: var(--_k-tg-fg);
+  box-shadow: var(--_k-tg-shadow);
+  font-family: var(--kendo-font-family);
+  font-size: var(--kendo-device-control-font-size);
+  font-weight: var(--kendo-font-weight-medium);
+  line-height: var(--kendo-device-control-line-height);
+  letter-spacing: var(--kendo-letter-spacing);
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+.k-toggle-button.k-toggle-button:is([disabled], .k-disabled, .k-state-disabled, [aria-disabled="true"]) {
+  cursor: default;
+}
+/* 키보드로 왔을 때만 링(Figma에 없음 · Button ghost와 같게) */
+.k-toggle-button.k-toggle-button.k-toggle-button.ux-toggle-outline:focus-visible {
+  box-shadow: var(--kendo-elevation-1), 0 0 0 var(--kendo-spacing-0-5) var(--kendo-color-primary);
+}
+.k-toggle-button.k-toggle-button.k-toggle-button.k-toggle-button:not(.ux-toggle-outline):focus-visible {
+  box-shadow: 0 0 0 var(--kendo-spacing-0-5) var(--kendo-color-primary);
+}
+.k-toggle-button :is(.k-svg-icon, .k-icon) {
+  flex: none;
+  width: var(--kendo-icon-size);
+  height: var(--kendo-icon-size);
+  font-size: var(--kendo-icon-size);
+  color: inherit;
+}

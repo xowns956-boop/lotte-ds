@@ -1,0 +1,40 @@
+<!-- Lotte Kendo DS · Dialog Content 6종
+     Dialog 내용 칸(.k-dialog-content) 안에 하나를 넣는다. 폭은 Dialog 내용 칸을 채운다.
+     안 쓰는 줄은 지운다(Table 최대 4줄 · Info 최대 6줄). -->
+
+<!-- 1. Table: 조회 표(4칸 · 줄 최대 4개) -->
+<div class="k-grid ux-dialog-table">
+  <table class="k-grid-table">
+    <thead class="k-grid-header"><tr><th class="k-header" scope="col">LOT NO</th><th class="k-header" scope="col">품목</th><th class="k-header" scope="col">입고일</th><th class="k-header" scope="col">수량</th></tr></thead>
+    <tbody><tr><td>L20261124-01</td><td>빼빼로 오리지널</td><td>2026-11-24</td><td>10</td></tr><tr><td>L20261124-02</td><td>빼빼로 오리지널</td><td>2026-11-24</td><td>20</td></tr><tr><td>L20261124-03</td><td>빼빼로 오리지널</td><td>2026-11-24</td><td>30</td></tr><tr><td>L20261124-04</td><td>빼빼로 오리지널</td><td>2026-11-24</td><td>40</td></tr></tbody>
+  </table>
+</div>
+
+<!-- 2. Info: 읽기 정보 줄(최대 6줄) -->
+<div class="ux-dialog-info">
+  <table><tbody><tr><th scope="row">LOT NO</th><td>L20261124-01</td></tr><tr><th scope="row">품목</th><td>빼빼로 오리지널</td></tr><tr><th scope="row">라인</th><td>조립 1라인</td></tr><tr><th scope="row">작업자</th><td>김롯데</td></tr><tr><th scope="row">수량</th><td>120 EA</td></tr><tr><th scope="row">비고</th><td>특이사항 없음</td></tr></tbody></table>
+</div>
+
+<!-- 3. LOT Input: 이름 + 입력칸 한 줄 -->
+<div class="ux-dialog-info">
+  <table><tbody>
+    <tr><th scope="row"><label for="dlg-lot">LOT NO</label></th><td class="ux-dialog-info-control"><input id="dlg-lot" class="k-textbox k-input k-input-md" placeholder="LOT NO 입력"></td></tr>
+  </tbody></table>
+</div>
+
+<!-- 4. TextArea: 여러 줄 입력칸(높이 168) -->
+<textarea class="k-textarea ux-dialog-textarea" placeholder="내용을 입력하세요" aria-label="특이사항"></textarea>
+
+<!-- 5. Option List: 하나 고르기 목록 -->
+<div class="ux-dialog-options" role="radiogroup" aria-label="프린터 선택">
+  <div class="ux-dialog-option"><input type="radio" class="k-radio k-radio-md" name="dlg-printer" id="dlg-p1" checked><label class="k-radio-label" for="dlg-p1">선택 항목 1</label></div>
+  <div class="ux-dialog-option"><input type="radio" class="k-radio k-radio-md" name="dlg-printer" id="dlg-p2"><label class="k-radio-label" for="dlg-p2">선택 항목 2</label></div>
+  <div class="ux-dialog-option"><input type="radio" class="k-radio k-radio-md" name="dlg-printer" id="dlg-p3"><label class="k-radio-label" for="dlg-p3">선택 항목 3</label></div>
+</div>
+
+<!-- 6. Option Buttons: 큰 선택 버튼 — 이때 Dialog 아래 버튼 줄은 뺀다 -->
+<div class="ux-dialog-option-buttons">
+  <button type="button" class="k-button k-button-lg k-button-outline-base">방식 1</button>
+  <button type="button" class="k-button k-button-lg k-button-outline-base">방식 2</button>
+  <button type="button" class="k-button k-button-lg k-button-outline-base">방식 3</button>
+</div>

@@ -1,0 +1,64 @@
+/* Lotte Kendo DS · Menu Tile (태블릿 메인 메뉴 타일)
+   아이콘 위 · 메뉴명 아래(가운데, 길면 두 줄). 색은 Button secondary와 같음.
+   state: default(secondary) · pressed(secondary-active, 누르는 동안)
+   높이 148 · 안쪽 16 · 간격 12 · 모서리 xxxl(16) · 그림자 elevation-1
+   아이콘 = 제목 아이콘 크기(PC 24 · Tablet 28) · 글자 text-title/semibold
+   폭은 놓이는 자리(타일 격자)에서 정한다.
+   Kendo에는 이 부품이 없어서 .ux-* 이름을 쓴다.
+
+   <a class="ux-menu-tile" href="…">
+     <svg class="k-svg-icon" …>…</svg>
+     <span class="ux-menu-tile-text">소분 계량</span>
+   </a>
+   (화면 이동이 아니라 동작이면 <button type="button" class="ux-menu-tile">)
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+.ux-menu-tile {
+  --_k-mt-bg: var(--kendo-color-secondary);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--kendo-spacing-3);
+  width: 100%;
+  height: calc(var(--kendo-spacing-1) * 37);
+  margin: 0;
+  padding: var(--kendo-spacing-4);
+  border: 0;
+  border-radius: var(--kendo-border-radius-xxxl);
+  background: var(--_k-mt-bg);
+  color: var(--kendo-color-on-secondary);
+  box-shadow: var(--kendo-elevation-1);
+  font-family: var(--kendo-font-family);
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.ux-menu-tile:is(:active, .k-state-active, [aria-pressed="true"]) {
+  --_k-mt-bg: var(--kendo-color-secondary-active);
+}
+/* 키보드 포커스: Button과 같은 바깥 링(Figma에는 없음 — 접근성) */
+.ux-menu-tile:focus-visible {
+  outline: none;
+  box-shadow: var(--kendo-elevation-1), 0 0 0 var(--kendo-spacing-0-5) var(--kendo-color-app-surface), 0 0 0 var(--kendo-spacing-1) var(--kendo-color-primary);
+}
+.ux-menu-tile > .k-svg-icon {
+  flex: none;
+  width: var(--kendo-device-title-icon-size);
+  height: var(--kendo-device-title-icon-size);
+}
+.ux-menu-tile > .ux-menu-tile-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  width: 100%;
+  overflow: hidden;
+  font-size: var(--kendo-device-title-font-size);
+  font-weight: var(--kendo-font-weight-semibold);
+  line-height: var(--kendo-device-title-line-height);
+  letter-spacing: var(--kendo-letter-spacing);
+  text-align: center;
+  overflow-wrap: anywhere;
+}

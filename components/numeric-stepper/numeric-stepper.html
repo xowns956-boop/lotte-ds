@@ -1,0 +1,14 @@
+<!-- Lotte Kendo DS · Numeric Stepper
+     태블릿용 숫자 입력. 빼기 · 값 · 더하기. 값 칸은 남은 폭을 채운다.
+     단계·최소·최대: 입력칸의 data-increment · data-min · data-max (동작은 lotte-ds.js)
+     묶음에 role="group" + 무엇의 값인지 aria-label. -->
+
+<div class="ux-numeric-stepper" role="group" aria-label="검사값">
+  <button type="button" class="k-button k-icon-button k-button-outline-base" data-step="down" aria-label="값 내리기">
+    <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/></svg>
+  </button>
+  <input type="text" class="k-textbox k-input k-input-md" inputmode="decimal" value="35.4" data-increment="0.1" aria-label="검사값">
+  <button type="button" class="k-button k-icon-button k-button-outline-base" data-step="up" aria-label="값 올리기">
+    <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+  </button>
+</div>

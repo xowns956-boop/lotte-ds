@@ -1,0 +1,18 @@
+<!-- Lotte Kendo DS · Input
+     입력칸은 항상 label과 연결한다(for ↔ id). label을 화면에 안 보이게 할 때도 aria-label을 넣는다.
+     폭은 부품이 정하지 않는다. 놓이는 자리(폼·표·필터)에서 정한다. -->
+
+<!-- 기본: Kendo 2021.3 구조 -->
+<label for="lot-no" class="text-control-medium">LOT NO</label>
+<input id="lot-no" type="text" class="k-textbox k-input k-input-md" placeholder="내용을 입력하세요">
+
+<!-- 같은 모양, 최신 Kendo 구조 -->
+<span class="k-textbox k-input k-input-md">
+  <input id="item-name" type="text" class="k-input-inner" placeholder="내용을 입력하세요" aria-label="품명">
+</span>
+
+<!-- 오류: aria-invalid (오류 문구는 Form / Item 부품이 붙인다) -->
+<input id="qty" type="text" class="k-textbox k-input k-input-md" aria-invalid="true" value="abc">
+
+<!-- 비활성 -->
+<input id="wc" type="text" class="k-textbox k-input k-input-md" value="냉동면4호" disabled>

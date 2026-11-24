@@ -1,0 +1,33 @@
+<!-- Lotte Kendo DS · Dialog · Dialog / Alert
+     브라우저 <dialog>를 쓴다. 여는 버튼에 data-dialog-open="ID", 닫는 버튼에 data-dialog-close.
+     제목 h2 · 설명 p를 aria-labelledby · aria-describedby로 잇는다.
+     내용 칸(.k-dialog-content)에는 다른 부품을 넣는다(입력칸·표 등). 주 버튼은 하나, 오른쪽 끝. -->
+
+<button type="button" class="k-button k-button-md k-button-outline-base" data-dialog-open="save-dialog">팝업 열기</button>
+
+<dialog class="k-window k-dialog" id="save-dialog" aria-labelledby="save-title" aria-describedby="save-desc">
+  <div class="k-window-titlebar k-dialog-titlebar">
+    <h2 class="k-window-title" id="save-title">검사 실적 등록</h2>
+    <p class="k-dialog-description" id="save-desc">검사 항목별 값을 입력합니다.</p>
+  </div>
+  <div class="k-window-content k-dialog-content">…</div>
+  <div class="k-dialog-actions">
+    <button type="button" class="k-button k-button-md k-button-outline-base" data-dialog-close="cancel">취소</button>
+    <button type="button" class="k-button k-button-md k-button-solid-primary">저장</button>
+  </div>
+  <button type="button" class="k-window-action k-dialog-close" data-dialog-close="close" aria-label="닫기">
+    <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+  </button>
+</dialog>
+
+<!-- Alert: 되돌릴 수 없는 동작 확인. 닫기 × 없음, 뒤를 눌러도 안 닫힘. 위험 동작이면 주 버튼을 solid-error로 -->
+<dialog class="k-window k-dialog k-alert" id="delete-alert" role="alertdialog" aria-labelledby="del-title" aria-describedby="del-desc">
+  <div class="k-window-titlebar k-dialog-titlebar">
+    <h2 class="k-window-title" id="del-title">설비를 삭제할까요?</h2>
+    <p class="k-dialog-description" id="del-desc">삭제한 설비는 되돌릴 수 없습니다.</p>
+  </div>
+  <div class="k-dialog-actions">
+    <button type="button" class="k-button k-button-md k-button-outline-base" data-dialog-close="cancel">취소</button>
+    <button type="button" class="k-button k-button-md k-button-solid-error" data-dialog-close="delete">삭제</button>
+  </div>
+</dialog>

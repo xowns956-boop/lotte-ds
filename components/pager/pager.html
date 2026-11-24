@@ -1,0 +1,19 @@
+<!-- Lotte Kendo DS · Pager
+     페이지 이동이라 링크(a). 현재 페이지는 aria-current="page", 못 가는 이전·다음은 href 없이 aria-disabled="true".
+     … 는 장식(aria-hidden). 묶음에 nav + aria-label. -->
+
+<nav class="k-pager" aria-label="페이지">
+  <a class="k-link k-pager-nav" aria-disabled="true">
+    <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m15 18-6-6 6-6"/></svg>이전
+  </a>
+  <ul class="k-pager-numbers">
+    <li><a class="k-link" href="?page=1" aria-current="page">1</a></li>
+    <li><a class="k-link" href="?page=2">2</a></li>
+    <li><a class="k-link" href="?page=3">3</a></li>
+    <li><span class="ux-pager-ellipsis" aria-hidden="true"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></span></li>
+    <li><a class="k-link" href="?page=10">10</a></li>
+  </ul>
+  <a class="k-link k-pager-nav" href="?page=2">다음
+    <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"/></svg>
+  </a>
+</nav>

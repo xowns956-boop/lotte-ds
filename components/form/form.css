@@ -1,0 +1,126 @@
+/* Lotte Kendo DS · Form / Item · Form
+
+   Form / Item (.k-form-field — 라벨 · 입력칸 · 도움말 · 오류 문구 한 묶음)
+     control: input · textarea · select(DropDownList) · checkbox / state: default · error
+     세로로 쌓고 간격 8. 입력칸은 폭을 꽉 채움.
+     도움말(.k-form-hint) = text-control/regular 흐린 글자
+     오류 문구(.k-form-error) = text-control/regular 오류 글자, 도움말 아래. 입력칸에는 aria-invalid="true"
+     <div class="k-form-field">
+       <label class="k-label k-form-label" for="lot-no">LOT NO</label>
+       <input id="lot-no" class="k-textbox k-input k-input-md" aria-describedby="lot-no-hint lot-no-error" aria-invalid="true">
+       <p class="k-form-hint" id="lot-no-hint">도움말</p>
+       <p class="k-form-error" id="lot-no-error">입력값을 확인하세요.</p>
+     </div>
+     checkbox: 체크박스 + 라벨 한 줄(.ux-form-check, 간격 8) — 라벨은 체크박스 오른쪽
+       <div class="k-form-field">
+         <div class="ux-form-check">
+           <input type="checkbox" class="k-checkbox k-checkbox-md" id="agree">
+           <label class="k-checkbox-label" for="agree">동의</label>
+         </div>
+         <p class="k-form-hint">도움말</p>
+       </div>
+
+   Form (.k-form — Form / Item을 쌓고 마지막에 버튼)
+     항목 간격 32. 버튼 줄(.k-form-buttons)은 왼쪽 정렬, 버튼은 글자 폭대로.
+     <form class="k-form">  …k-form-field…  <div class="k-form-buttons"><button class="k-button k-button-md k-button-solid-primary">저장</button></div></form>
+
+   Kendo 2021.3 kendoForm 구조(.k-form-fieldset · .k-form-legend · .k-form-field > .k-form-field-wrap)도 같은 모양
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+/* ── 1. Form (항목 간격 32) ──────────────────────────────────── */
+.k-form.k-form.k-form.k-form {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--kendo-spacing-8);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--kendo-color-on-app-surface);
+  font-family: var(--kendo-font-family);
+  font-size: var(--kendo-device-control-font-size);
+  line-height: var(--kendo-device-control-line-height);
+}
+/* Kendo 묶음 칸: 안쪽도 같은 간격으로 쌓음 */
+.k-form.k-form.k-form .k-form-fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kendo-spacing-8);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* ── 2. Form / Item (간격 8) ─────────────────────────────────── */
+.k-form-field.k-form-field.k-form-field.k-form-field,
+.k-form-field.k-form-field.k-form-field .k-form-field-wrap {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--kendo-spacing-2);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+/* 라벨은 글자 폭대로(왼쪽) */
+.k-form-field.k-form-field.k-form-field > :is(.k-form-label, .k-label) {
+  align-self: flex-start;
+  margin: 0;
+}
+/* 입력칸은 폭을 꽉 채움 */
+.k-form-field.k-form-field.k-form-field :is(.k-textbox, .k-textarea, .k-numerictextbox, .k-dropdownlist, .k-dropdown, .k-combobox) {
+  width: 100%;
+}
+
+/* 도움말 · 오류 문구 */
+.k-form-field.k-form-field.k-form-field :is(.k-form-hint, .k-form-error) {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-family: var(--kendo-font-family);
+  font-size: var(--kendo-device-control-font-size);
+  font-weight: var(--kendo-font-weight-normal);
+  line-height: var(--kendo-device-control-line-height);
+  letter-spacing: var(--kendo-letter-spacing);
+  font-style: normal;
+}
+.k-form-field.k-form-field.k-form-field .k-form-hint { color: var(--kendo-color-subtle); }
+.k-form-field.k-form-field.k-form-field .k-form-error { color: var(--kendo-color-error-on-surface); }
+/* 오류 문구가 비어 있으면 자리를 차지하지 않음 */
+.k-form-field.k-form-field.k-form-field .k-form-error:empty { display: none; }
+
+/* checkbox: 체크박스 + 라벨 한 줄, 간격 8 */
+.k-form-field.k-form-field .ux-form-check,
+.k-form-field.k-form-field.k-form-field .k-form-field-wrap:has(> .k-checkbox) {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--kendo-spacing-2);
+  margin: 0;
+  padding: 0;
+}
+/* 라벨 간격은 위 gap이 맡음 */
+.k-form-field.k-form-field :is(.ux-form-check, .k-form-field-wrap) > .k-checkbox + .k-checkbox-label.k-checkbox-label.k-checkbox-label.k-checkbox-label {
+  margin: 0;
+}
+/* Kendo가 같은 칸에 넣는 도움말·오류는 다음 줄로 */
+.k-form-field.k-form-field.k-form-field .k-form-field-wrap:has(> .k-checkbox) > :is(.k-form-hint, .k-form-error) {
+  flex-basis: 100%;
+}
+
+/* ── 3. 버튼 줄 ─────────────────────────────────────────────── */
+.k-form.k-form.k-form .k-form-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--kendo-device-action-gap);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.k-form.k-form.k-form .k-form-buttons > * { margin: 0; }

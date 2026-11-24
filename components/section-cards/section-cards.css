@@ -1,0 +1,24 @@
+/* Lotte Kendo DS · SectionCards (지표 카드 한 줄 · 조합 패턴)
+   Card / Stat을 한 줄에 같은 폭으로 놓는다(기본 4개), 간격 16. 개수는 카드를 빼서 조절한다.
+   폭이 좁으면 카드가 같이 좁아지고, 카드 안 글자가 줄바꿈된다.
+   Kendo에는 이 부품이 없어서 .ux-* 이름을 쓴다.
+
+   <section class="ux-section-cards" aria-label="오늘 현황">
+     <article class="k-card ux-card-stat">…</article> × 4
+   </section>
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+.ux-section-cards {
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+  gap: var(--kendo-spacing-4);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.ux-section-cards > .k-card {
+  flex: 1 1 0;
+  margin: 0;
+}

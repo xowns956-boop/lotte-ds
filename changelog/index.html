@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko" data-theme="light" data-device="pc">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>업데이트 현황 · Lotte Kendo DS</title>
+  <link rel="stylesheet" href="../dist/lotte-tokens.css">
+  <link rel="stylesheet" href="../dist/lotte-ds.css">
+  <link rel="stylesheet" href="../install/install.css">
+  <link rel="stylesheet" href="changelog.css">
+</head>
+<body class="ins-body">
+  <main class="ins-main">
+    <nav class="ins-nav" aria-label="페이지 이동">
+      <div class="ins-row">
+        <a class="k-button k-button-sm k-button-flat-base" href="../">
+          <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+          <span class="k-button-text">부품 미리보기</span>
+        </a>
+        <a class="k-button k-button-sm k-button-flat-base" href="../install/">
+          <span class="k-button-text">AI로 설치하기</span>
+        </a>
+      </div>
+      <button type="button" class="k-button k-icon-button k-button-outline-base" id="ins-theme" aria-label="테마 전환">
+        <svg class="k-svg-icon ins-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="k-svg-icon ins-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      </button>
+    </nav>
+
+    <header class="ins-hero">
+      <p class="ins-tag text-caption-medium" id="cl-version">Lotte Kendo DS</p>
+      <h1 class="ins-hero__title text-3xl-semibold">업데이트 현황</h1>
+      <p class="ins-hero__desc text-base-regular">
+        버전마다 새로 추가된 부품과 바뀐 점을 정리해요. 설치 주소에 버전이 들어 있어서, 롯데 DS가 바뀌어도 이미 설치한 프로젝트는 자동으로 바뀌지 않아요. 버전을 올리기 전에 여기서 확인하고, 최신 버전 카드의 버튼으로 업데이트 프롬프트를 복사해 설치한 프로젝트의 AI 채팅창에 붙여넣어요.
+      </p>
+      <p class="ins-error text-sm-medium" id="ins-error" role="alert" hidden></p>
+      <div class="ins-manual" id="ins-manual-copy" hidden>
+        <label class="text-sm-medium" for="ins-manual-text">복사가 막혀 있어요. 아래 글을 전부 선택해서(⌘A 또는 Ctrl+A) 복사해 주세요.</label>
+        <textarea class="ins-manual__text" id="ins-manual-text" readonly rows="10"></textarea>
+      </div>
+    </header>
+
+    <ol class="cl-list" id="cl-list" aria-label="버전별 업데이트"></ol>
+  </main>
+
+  <p class="ins-sr-only" aria-live="polite" id="ins-live"></p>
+
+  <script src="../install/content.js"></script>
+  <script src="changelog.js"></script>
+</body>
+</html>

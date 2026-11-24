@@ -1,0 +1,189 @@
+/* Lotte Kendo DS · Card · Card / Stat
+
+   Card (.k-card — 제목 · 내용 · 아래 버튼을 한 상자로 묶음)
+     위아래 안쪽 24 · 좌우 안쪽 24(각 줄) · 줄 간격 24 · 바탕 surface · 테두리 · 모서리 16(xxxl) · 그림자 sm
+     머리: 제목 text-base/semibold + 설명 text-sm/regular 흐림, 간격 6. 오른쪽 위 실행(.ux-card-action, 선택)
+     아래: 버튼 한 줄, 간격 8
+     <article class="k-card">
+       <div class="k-card-header">
+         <h3 class="k-card-title">카드 제목</h3>
+         <p class="k-card-subtitle">카드 설명</p>
+         <button class="k-button k-button-sm k-button-link-primary ux-card-action">보기</button>   ← 선택
+       </div>
+       <div class="k-card-body">…</div>
+       <div class="k-card-footer"><button class="k-button k-button-md k-button-solid-primary">저장</button></div>
+     </article>
+     폭은 부품이 정하지 않는다(놓이는 자리에서).
+
+   Card / Stat (.k-card.ux-card-stat — 지표 하나를 크게 보여 주는 카드)
+     trend: up · down (아이콘만 다름) / tone: default · emphasis(.ux-card-stat-emphasis — 핵심 지표, 바탕 secondary)
+     머리: 이름 text-value/regular 흐림 → 수치 text-stat/semibold, 간격 6. 오른쪽 위 증감 Badge(outline)
+     아래: 추이 문구 text-value/medium + 아이콘 16(간격 8) → 보조 설명 text-value/regular 흐림, 간격 6
+     <article class="k-card ux-card-stat">
+       <div class="k-card-header">
+         <p class="k-card-subtitle">오늘 생산량</p>
+         <p class="k-card-title">1,250</p>
+         <span class="k-badge k-badge-md k-badge-outline-base ux-card-action"><svg class="k-svg-icon" aria-hidden="true">…trending-up…</svg>+12.5%</span>
+       </div>
+       <div class="k-card-footer">
+         <p class="ux-card-stat-summary">지난주 대비 증가<svg class="k-svg-icon" aria-hidden="true">…</svg></p>
+         <p class="ux-card-stat-detail">최근 6개월 기준</p>
+       </div>
+     </article>
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+/* ── 1. 상자 ────────────────────────────────────────────────── */
+.k-card {
+  --_k-cd-title: var(--kendo-color-base-on-surface);
+  --_k-cd-sub: var(--kendo-color-subtle);
+}
+.k-card.k-card.k-card.k-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--kendo-spacing-6);
+  min-width: 0;
+  margin: 0;
+  padding: var(--kendo-spacing-6) 0;
+  border: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  border-radius: var(--kendo-border-radius-xxxl);
+  background: var(--kendo-color-surface);
+  color: var(--kendo-color-on-app-surface);
+  box-shadow: var(--ux4-shadow-sm);
+  font-family: var(--kendo-font-family);
+  /* 안에서 여는 목록·말풍선이 잘리지 않게(Kendo는 hidden) */
+  overflow: visible;
+}
+
+/* ── 2. 머리 (제목 · 설명 · 오른쪽 실행) ───────────────────────── */
+.k-card.k-card.k-card .k-card-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  column-gap: var(--kendo-spacing-2);
+  row-gap: var(--kendo-spacing-1-5);
+  margin: 0;
+  padding: 0 var(--kendo-spacing-6);
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  overflow: visible;
+}
+.k-card.k-card.k-card .k-card-header:has(> .ux-card-action) {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+.k-card.k-card.k-card .k-card-header > :not(.ux-card-action) { grid-column: 1; }
+.k-card.k-card.k-card .k-card-header > .ux-card-action {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: start;
+  justify-self: end;
+}
+.k-card.k-card.k-card .k-card-title {
+  margin: 0;
+  padding: 0;
+  color: var(--_k-cd-title);
+  font-size: var(--kendo-font-size-lg);
+  font-weight: var(--kendo-font-weight-semibold);
+  line-height: var(--ux4-line-height-base);
+  letter-spacing: var(--kendo-letter-spacing);
+}
+.k-card.k-card.k-card .k-card-subtitle {
+  margin: 0;
+  padding: 0;
+  color: var(--_k-cd-sub);
+  font-size: var(--kendo-font-size-md);
+  font-weight: var(--kendo-font-weight-normal);
+  line-height: var(--ux4-line-height-sm);
+  letter-spacing: var(--kendo-letter-spacing);
+}
+
+/* ── 3. 내용 ────────────────────────────────────────────────── */
+.k-card.k-card.k-card .k-card-body {
+  min-width: 0;
+  margin: 0;
+  padding: 0 var(--kendo-spacing-6);
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+.k-card.k-card.k-card .k-card-body p { margin: 0; }
+
+/* ── 4. 아래 버튼 ───────────────────────────────────────────── */
+.k-card.k-card.k-card :is(.k-card-footer, .k-card-actions) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--kendo-spacing-2);
+  margin: 0;
+  padding: 0 var(--kendo-spacing-6);
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+}
+
+/* ── 5. Card / Stat ─────────────────────────────────────────── */
+.k-card.ux-card-stat {
+  --_k-cd-title: var(--kendo-color-base-on-surface);
+  --_k-cd-sub: var(--kendo-color-subtle);
+  --_k-cd-text: var(--kendo-color-base-on-surface);
+}
+.k-card.ux-card-stat.ux-card-stat-emphasis {
+  --_k-cd-title: var(--kendo-color-on-secondary);
+  --_k-cd-sub: var(--kendo-color-on-secondary);
+  --_k-cd-text: var(--kendo-color-on-secondary);
+}
+.k-card.k-card.k-card.k-card.ux-card-stat { box-shadow: var(--kendo-elevation-1); }
+.k-card.k-card.k-card.k-card.ux-card-stat-emphasis {
+  border-color: var(--kendo-color-secondary);
+  background: var(--kendo-color-secondary);
+  color: var(--kendo-color-on-secondary);
+}
+.k-card.k-card.k-card.ux-card-stat .k-card-subtitle {
+  font-size: var(--kendo-device-value-font-size);
+  line-height: var(--kendo-device-value-line-height);
+}
+.k-card.k-card.k-card.ux-card-stat .k-card-title {
+  font-size: var(--kendo-device-stat-font-size);
+  font-weight: var(--kendo-font-weight-semibold);
+  line-height: var(--kendo-device-stat-line-height);
+}
+.k-card.k-card.k-card.ux-card-stat :is(.k-card-footer, .k-card-actions) {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: var(--kendo-spacing-1-5);
+}
+.k-card.k-card.k-card.ux-card-stat :is(.ux-card-stat-summary, .ux-card-stat-detail) {
+  margin: 0;
+  padding: 0;
+  font-size: var(--kendo-device-value-font-size);
+  line-height: var(--kendo-device-value-line-height);
+  letter-spacing: var(--kendo-letter-spacing);
+}
+.k-card.k-card.k-card.ux-card-stat .ux-card-stat-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kendo-spacing-2);
+  color: var(--_k-cd-text);
+  font-weight: var(--kendo-font-weight-medium);
+}
+.k-card.k-card.k-card.ux-card-stat .ux-card-stat-summary > :is(.k-svg-icon, .k-icon) {
+  flex: none;
+  width: var(--kendo-spacing-4);
+  height: var(--kendo-spacing-4);
+  font-size: var(--kendo-spacing-4);
+  color: inherit;
+}
+.k-card.k-card.k-card.ux-card-stat .ux-card-stat-detail {
+  color: var(--_k-cd-sub);
+  font-weight: var(--kendo-font-weight-normal);
+}
+/* 강조 카드 안 증감 Badge: 테두리·아이콘·글자 on-secondary */
+.k-card.ux-card-stat-emphasis .k-badge.ux-card-action {
+  --_k-bd-fg: var(--kendo-color-on-secondary);
+  --_k-bd-line: var(--kendo-color-on-secondary);
+}

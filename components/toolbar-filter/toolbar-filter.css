@@ -1,0 +1,30 @@
+/* Lotte Kendo DS · Toolbar / Filter (필터바 · 조합 패턴)
+   표(Grid) 바로 위에 붙이는 조회 조건 한 줄.
+   검색 Input 250 · DropDownList 필터(글자 폭) · DatePicker 280 · 초기화(Button ghost + X), 간격 8 · 세로 가운데
+   칸은 전부 기존 부품을 그대로 쓰고, 이 파일은 줄 배치와 검색 칸 폭만 정한다. 빼도 되는 칸은 그냥 뺀다.
+   Kendo에는 이 부품이 없어서 .ux-* 이름을 쓴다.
+
+   <div class="ux-toolbar-filter" role="search" aria-label="조회 조건">
+     <input type="search" class="k-textbox k-input k-input-md ux-toolbar-filter-search" placeholder="검색" aria-label="검색">
+     <div class="k-dropdownlist k-picker k-picker-md">…</div>
+     <div class="ux-datepicker" data-ux-datepicker>…</div>
+     <button type="button" class="k-button k-button-md k-button-flat-base"><span class="k-button-text">초기화</span><svg …x…/></button>
+   </div>
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+.ux-toolbar-filter {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--kendo-spacing-2);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+/* 검색 칸 폭 250 */
+.ux-toolbar-filter > .k-textbox.ux-toolbar-filter-search {
+  width: calc(var(--kendo-spacing-16) * 4 - var(--kendo-spacing-1-5));
+  max-width: 100%;
+}

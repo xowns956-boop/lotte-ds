@@ -1,0 +1,15 @@
+<!-- Lotte Kendo DS · Toggle
+     누를 때마다 켜짐·꺼짐이 바뀌는 버튼. 켜짐 = aria-pressed="true".
+     variant: (없음)=default · ux-toggle-outline · ux-toggle-solid · ux-toggle-pill / size: ux-toggle-sm
+     누르면 lotte-ds.js가 aria-pressed를 바꾸고 change 이벤트(detail.pressed)를 보낸다. -->
+
+<button type="button" class="k-toggle-button" aria-pressed="false">
+  <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 12h9a4 4 0 0 1 0 8H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h7a4 4 0 0 1 0 8"/></svg>
+  굵게
+</button>
+
+<button type="button" class="k-toggle-button ux-toggle-outline" aria-pressed="true">굵게</button>
+
+<!-- 필터 조건 고르기 -->
+<button type="button" class="k-toggle-button ux-toggle-pill" aria-pressed="true">진행중</button>
+<button type="button" class="k-toggle-button ux-toggle-solid ux-toggle-sm" aria-pressed="false">완료</button>

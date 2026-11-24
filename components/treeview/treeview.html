@@ -1,0 +1,27 @@
+<!-- Lotte Kendo DS · TreeView
+     펼치고 접는 계층 목록. 줄을 누르면 고르고, 하위가 있으면 펼침·접힘도 바뀐다.
+     단계는 aria-level(1·2·3), 하위가 있으면 aria-expanded, 고른 줄은 aria-selected="true".
+     고르면 트리([role="tree"])에 select 이벤트(detail = { id, text }). 펼침 아이콘은 lotte-ds.js가 그린다. -->
+
+<div class="k-treeview">
+  <ul class="k-treeview-lines" role="tree" aria-label="공정">
+    <li class="k-treeview-item" role="treeitem" aria-level="1" aria-expanded="true" aria-selected="false" data-id="mix">
+      <span class="k-treeview-mid">
+        <span class="k-treeview-toggle" aria-hidden="true"></span>
+        <span class="k-treeview-leaf-text">배합</span>
+        <span class="ux-tree-count">2</span>
+      </span>
+      <ul class="k-treeview-group" role="group">
+        <li class="k-treeview-item" role="treeitem" aria-level="2" aria-selected="true" data-id="weigh">
+          <span class="k-treeview-mid"><span class="k-treeview-toggle" aria-hidden="true"></span><span class="k-treeview-leaf-text">원료 계량</span></span>
+        </li>
+        <li class="k-treeview-item" role="treeitem" aria-level="2" aria-selected="false" data-id="blend">
+          <span class="k-treeview-mid"><span class="k-treeview-toggle" aria-hidden="true"></span><span class="k-treeview-leaf-text">혼합</span></span>
+        </li>
+      </ul>
+    </li>
+    <li class="k-treeview-item" role="treeitem" aria-level="1" aria-selected="false" data-id="pack">
+      <span class="k-treeview-mid"><span class="k-treeview-toggle" aria-hidden="true"></span><span class="k-treeview-leaf-text">포장</span></span>
+    </li>
+  </ul>
+</div>

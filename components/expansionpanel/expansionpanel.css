@@ -1,0 +1,83 @@
+/* Lotte Kendo DS · ExpansionPanel
+
+   ExpansionPanel (.k-expander — 제목 줄을 눌러 내용을 접었다 폈다 하는 패널. 조회 조건 영역에 씀)
+     상자: 테두리 · 모서리 control · 바탕 app-surface · 폭은 놓이는 자리를 채움
+     제목 줄(.k-expander-header): 안쪽 12/16 · 높이 44 · 제목 text-sm/semibold · 오른쪽 화살표 16(펼치면 위로)
+     내용(.k-expander-content): 안쪽 16 · 위 구분선
+     state: collapsed · expanded(.k-expanded, 제목 줄 aria-expanded="true")
+     <div class="k-expander k-expanded">
+       <button type="button" class="k-expander-header" aria-expanded="true" aria-controls="search-body">
+         <span class="k-expander-title">조회 조건</span>
+         <span class="k-spacer"></span>
+         <svg class="k-svg-icon k-expander-indicator" aria-hidden="true">…chevron-down…</svg>
+       </button>
+       <div class="k-expander-content-wrapper" id="search-body">
+         <div class="k-expander-content">…</div>
+       </div>
+     </div>
+     누르면 lotte-ds.js가 접고 펴고, 상자에 change 이벤트(detail.expanded)를 보낸다.
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+.k-expander.k-expander.k-expander {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  border-radius: var(--ux4-border-radius-control);
+  background: var(--kendo-color-app-surface);
+  color: var(--kendo-color-on-app-surface);
+  box-shadow: none;
+  font-family: var(--kendo-font-family);
+  overflow: hidden;
+}
+.k-expander.k-expander.k-expander .k-expander-header {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--kendo-spacing-2);
+  width: 100%;
+  margin: 0;
+  padding: var(--kendo-spacing-3) var(--kendo-spacing-4);
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--kendo-color-on-app-surface);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+/* 키보드로 왔을 때만 안쪽 테두리(Figma에 없음 · 접근성용) */
+.k-expander.k-expander .k-expander-header:focus-visible {
+  box-shadow: inset 0 0 0 var(--kendo-spacing-0-5) var(--kendo-color-primary);
+}
+.k-expander .k-expander-title {
+  color: inherit;
+  font-size: var(--kendo-font-size-md);
+  font-weight: var(--kendo-font-weight-semibold);
+  line-height: var(--ux4-line-height-sm);
+  letter-spacing: var(--kendo-letter-spacing);
+  text-transform: none;
+}
+.k-expander .k-expander-header > .k-spacer { flex: 1; }
+.k-expander .k-expander-indicator,
+.k-expander .k-expander-indicator > :is(.k-svg-icon, .k-icon) {
+  flex: none;
+  width: var(--kendo-spacing-4);
+  height: var(--kendo-spacing-4);
+  font-size: var(--kendo-spacing-4);
+  color: var(--kendo-color-on-app-surface);
+}
+.k-expander:is(.k-expanded, :has(> .k-expander-header[aria-expanded="true"])) .k-expander-header .k-expander-indicator {
+  transform: rotate(180deg);
+}
+.k-expander .k-expander-content-wrapper[hidden] { display: none; }
+.k-expander.k-expander .k-expander-content {
+  margin: 0;
+  padding: var(--kendo-spacing-4);
+  border-top: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+}

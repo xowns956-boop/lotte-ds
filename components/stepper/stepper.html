@@ -1,0 +1,23 @@
+<!-- Lotte Kendo DS · Stepper
+     여러 단계로 나뉜 흐름에서 지금 어느 단계인지 보여 준다(누를 수 없음).
+     단계 사이에 연결선(ux-step-connector)을 넣고, 지나온 구간은 ux-step-connector-done.
+     세로형은 k-step-list-vertical. -->
+
+<div class="k-stepper">
+  <ol class="k-step-list k-step-list-horizontal" aria-label="등록 단계">
+    <li class="k-step k-step-done">
+      <span class="k-step-indicator"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+      <span class="k-step-label"><span class="k-step-text">기본 정보</span></span>
+    </li>
+    <li class="ux-step-connector ux-step-connector-done" aria-hidden="true"></li>
+    <li class="k-step k-step-current" aria-current="step">
+      <span class="k-step-indicator">2</span>
+      <span class="k-step-label"><span class="k-step-text">상세 입력</span></span>
+    </li>
+    <li class="ux-step-connector" aria-hidden="true"></li>
+    <li class="k-step">
+      <span class="k-step-indicator">3</span>
+      <span class="k-step-label"><span class="k-step-text">확인</span></span>
+    </li>
+  </ol>
+</div>

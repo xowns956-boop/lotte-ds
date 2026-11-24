@@ -1,0 +1,173 @@
+/* Lotte Kendo DS · Dialog · Dialog / Alert · Dialog / Overlay
+   상자: 폭 512 · 안쪽 24 · 간격 16 · 바탕 app-surface · 테두리 · 모서리 12(xxl) · 그림자 4
+   머리: 제목 text-lg/semibold + 설명 text-sm/regular(흐린 글자), 간격 8
+   아래 버튼: 오른쪽 정렬, 간격 kendo-device-action-gap(PC 8 · Tablet 16)
+   닫기 ×: 오른쪽 위 48×48, 아이콘 16 (Alert에는 없음)
+   뒤 가림: kendo-color/opacity/overlay-dark
+
+   이 DS의 구조 (브라우저 <dialog>가 열기·포커스 가두기·Esc를 함, 열고 닫기 버튼은 lotte-ds.js)
+     <button data-dialog-open="save-dialog">…</button>
+     <dialog class="k-window k-dialog" id="save-dialog" aria-labelledby="save-title" aria-describedby="save-desc">
+       <div class="k-window-titlebar k-dialog-titlebar">
+         <h2 class="k-window-title" id="save-title">팝업 제목</h2>
+         <p class="k-dialog-description" id="save-desc">팝업 설명</p>
+       </div>
+       <div class="k-window-content k-dialog-content">…</div>
+       <div class="k-dialog-actions">
+         <button class="k-button k-button-md k-button-outline-base" data-dialog-close>취소</button>
+         <button class="k-button k-button-md k-button-solid-primary">저장</button>
+       </div>
+       <button class="k-window-action k-dialog-close" data-dialog-close aria-label="닫기">…x…</button>
+     </dialog>
+   Alert: <dialog class="k-window k-dialog k-alert" role="alertdialog" …> (닫기 × 없음, 뒤 가림을 눌러도 안 닫힘)
+   Kendo 2021.3 kendoWindow · kendoDialog · kendo.alert/confirm(SmartUX $ux.message) 구조(.k-overlay · .k-window-titlebar
+   · .k-window-actions · .k-dialog-buttongroup)도 같은 모양
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+/* ── 1. 상자 ────────────────────────────────────────────────── */
+.k-window.k-window.k-window.k-window {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--kendo-spacing-4);
+  /* 폭 512 = 64 × 8 (Kendo 위젯은 인라인 폭이 이김) */
+  width: calc(var(--kendo-spacing-16) * 8);
+  max-width: calc(100% - 2 * var(--kendo-spacing-4));
+  margin: auto;
+  padding: var(--kendo-spacing-6);
+  border: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  border-radius: var(--kendo-border-radius-xxl);
+  background: var(--kendo-color-app-surface);
+  color: var(--kendo-color-on-app-surface);
+  box-shadow: var(--kendo-elevation-4);
+  font-family: var(--kendo-font-family);
+}
+/* 브라우저 <dialog>: 닫혀 있을 때는 숨김 */
+dialog.k-window.k-window.k-window.k-window:not([open]) { display: none; }
+dialog.k-window::backdrop { background: var(--kendo-color-opacity-overlay-dark); }
+
+/* ── 2. 머리 (제목 · 설명) ───────────────────────────────────── */
+.k-window.k-window.k-window .k-window-titlebar {
+  position: static;  /* 닫기 ×가 창 모서리를 기준으로 붙게 (Kendo는 제목 줄을 기준으로 둠) */
+  flex-direction: column;
+  gap: var(--kendo-spacing-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+}
+/* 제목 줄 보이기: 이 DS의 <dialog>와 일반 Kendo 창. Kendo 알림·확인창(k-alert/confirm/prompt)은
+   SmartUX가 제목 줄을 숨기므로 보임 여부를 건드리지 않는다 */
+:is(dialog.k-window, .k-window:not(.k-alert, .k-confirm, .k-prompt)).k-window.k-window .k-window-titlebar {
+  display: flex;
+}
+/* 닫기 ×가 있으면 그 자리만큼(바깥 48 − 안쪽 24) 제목 오른쪽을 비움 */
+.k-window.k-window.k-window:has(.k-dialog-close, .k-window-action) .k-window-titlebar {
+  padding-right: var(--kendo-spacing-6);
+}
+.k-window.k-window.k-window .k-window-title {
+  margin: 0;
+  padding: 0;
+  color: var(--kendo-color-on-app-surface);
+  font-size: var(--ux4-font-size-lg);
+  font-weight: var(--kendo-font-weight-semibold);
+  line-height: var(--ux4-line-height-lg);
+  text-overflow: clip;
+  white-space: normal;
+  overflow: visible;
+}
+.k-window.k-window.k-window .k-dialog-description {
+  margin: 0;
+  color: var(--kendo-color-subtle);
+  font-size: var(--kendo-font-size-md);
+  font-weight: var(--kendo-font-weight-normal);
+  line-height: var(--ux4-line-height-sm);
+}
+
+/* ── 3. 내용 ────────────────────────────────────────────────── */
+.k-window.k-window.k-window .k-window-content {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  overflow: visible;
+}
+/* SmartUX 알림·확인창(제목 줄은 SmartUX가 숨김): 내용 문구가 질문 → 제목 모양 */
+.k-window.k-window.k-window:not(dialog):is(.k-alert, .k-confirm, .k-prompt) .k-window-content {
+  padding: 0;
+  font-size: var(--ux4-font-size-lg);
+  font-weight: var(--kendo-font-weight-semibold);
+  line-height: var(--ux4-line-height-lg);
+}
+
+/* ── 4. 아래 버튼 ───────────────────────────────────────────── */
+.k-window.k-window.k-window :is(.k-dialog-actions, .k-dialog-buttongroup, .k-actions) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--kendo-device-action-gap);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+/* Kendo 버튼 묶음은 버튼을 같은 폭으로 늘림 → 글자 폭대로 */
+.k-window.k-window.k-window .k-dialog-buttongroup > .k-button { flex: none; width: auto; margin: 0; }
+/* kendo.confirm은 [확인][취소] 순서로 만들어서, 보이는 순서를 [취소][확인](주 버튼 오른쪽)으로 */
+.k-window.k-window.k-window:is(.k-confirm, .k-prompt) .k-dialog-buttongroup {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+
+/* ── 5. 닫기 × (오른쪽 위 48×48) ─────────────────────────────── */
+.k-window.k-window.k-window .k-window-actions {
+  position: absolute;
+  top: calc(-1 * var(--kendo-spacing-1px));
+  right: calc(-1 * var(--kendo-spacing-1px));
+  margin: 0;
+  padding: 0;
+}
+.k-window.k-window.k-window :is(.k-dialog-close, .k-window-action) {
+  box-sizing: border-box;
+  position: absolute;
+  /* 상자 바깥 모서리에 딱 붙임(테두리 두께만큼 바깥으로) */
+  top: calc(-1 * var(--kendo-spacing-1px));
+  right: calc(-1 * var(--kendo-spacing-1px));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--kendo-spacing-12);
+  height: var(--kendo-spacing-12);
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--kendo-border-radius-xxl);
+  background: none;
+  color: var(--kendo-color-on-app-surface);
+  box-shadow: none;
+  opacity: 1;
+  cursor: pointer;
+  outline: none;
+}
+.k-window.k-window.k-window .k-window-actions :is(.k-window-action, .k-dialog-close) { position: static; }
+.k-window.k-window.k-window :is(.k-dialog-close, .k-window-action):focus-visible {
+  box-shadow: inset 0 0 0 var(--kendo-spacing-0-5) var(--kendo-color-primary);
+}
+.k-window.k-window :is(.k-dialog-close, .k-window-action) :is(.k-svg-icon, .k-icon) {
+  width: var(--kendo-icon-size);
+  height: var(--kendo-icon-size);
+  font-size: var(--kendo-icon-size);
+  color: inherit;
+}
+
+/* ── 6. 뒤 가림 (Kendo) ─────────────────────────────────────── */
+.k-overlay.k-overlay {
+  background: var(--kendo-color-opacity-overlay-dark);
+  opacity: 1;
+}

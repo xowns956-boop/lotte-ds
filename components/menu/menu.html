@@ -1,0 +1,33 @@
+<!-- Lotte Kendo DS · Menu
+     버튼을 누르면 아래에 뜨는 동작 목록. 항목을 누르면 닫고 .ux-menu에 select 이벤트(detail = { value, text, checked }).
+     항목 종류: 기본 · 위험(ux-menu-error) · 체크(role="menuitemcheckbox") · 하위 메뉴(aria-haspopup="menu") · 라벨 · 구분선 -->
+
+<div class="ux-menu">
+  <button type="button" class="k-button k-button-md k-button-outline-base ux-menu-trigger" aria-haspopup="menu" aria-expanded="false">더보기</button>
+  <div class="k-menu-popup k-popup" hidden>
+    <ul class="k-menu-group" role="menu" aria-label="더보기">
+      <li class="ux-menu-label" role="presentation">작업</li>
+      <li class="k-separator" role="separator"></li>
+      <li class="k-item k-menu-item" role="none"><button type="button" class="k-link k-menu-link" role="menuitem" value="copy"><span class="k-menu-link-text">복사</span><span class="ux-menu-shortcut">⌘C</span></button></li>
+      <li class="k-item k-menu-item" role="none">
+        <button type="button" class="k-link k-menu-link" role="menuitemcheckbox" aria-checked="true">
+          <span class="ux-menu-check" aria-hidden="true"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <span class="k-menu-link-text">완료 항목 보기</span>
+        </button>
+      </li>
+      <li class="k-item k-menu-item" role="none">
+        <button type="button" class="k-link k-menu-link" role="menuitem" aria-haspopup="menu" aria-expanded="false">
+          <span class="k-menu-link-text">내보내기</span>
+          <svg class="k-svg-icon k-menu-expand-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+        <div class="k-menu-popup k-popup" hidden>
+          <ul class="k-menu-group" role="menu" aria-label="내보내기">
+            <li class="k-item k-menu-item" role="none"><button type="button" class="k-link k-menu-link" role="menuitem" value="excel"><span class="k-menu-link-text">엑셀</span></button></li>
+          </ul>
+        </div>
+      </li>
+      <li class="k-separator" role="separator"></li>
+      <li class="k-item k-menu-item" role="none"><button type="button" class="k-link k-menu-link ux-menu-error" role="menuitem" value="delete"><span class="k-menu-link-text">삭제</span></button></li>
+    </ul>
+  </div>
+</div>

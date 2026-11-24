@@ -1,0 +1,105 @@
+/* Lotte Kendo DS · TextArea
+   state: default · focus · disabled · invalid
+   filled: 안내 글자(placeholder) / 입력값 — 글자 색만 다름
+   높이 64(기기 모드와 상관없음, 더 크게 쓸 때는 놓이는 자리에서 height를 정함), 글자는 기기 모드를 따름, 줄바꿈
+   크기 조절 손잡이: 세로만 (가로는 놓이는 자리의 폭을 따름)
+
+   클래스 (Kendo 이름)
+   상자        .k-textarea (+ .k-input)
+               <textarea class="k-textarea">                                ← Kendo 2021.3 구조
+               <span class="k-textarea"><textarea class="k-input"></span>   ← Kendo 2021.3 감싼 구조
+               <span class="k-textarea k-input"><textarea class="k-input-inner"></span>  ← 최신 Kendo 구조
+   상태        :focus .k-state-focused
+               [aria-invalid="true"] .k-invalid .k-state-invalid
+               [disabled] .k-state-disabled [aria-disabled="true"]
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+/* ── 1. 변수: 기본 상태 ─────────────────────────────────────── */
+.k-textarea {
+  --_k-ta-bg: var(--ux4-alpha-field);
+  --_k-ta-bd: var(--kendo-color-border-alt);
+  --_k-ta-fg: var(--kendo-color-on-app-surface);
+  --_k-ta-ph: var(--kendo-color-subtle);
+  --_k-ta-box: var(--kendo-elevation-1);
+  /* 포커스·오류 링 두께 3 = 4 - 1 (간격 변수에 3이 없어서 두 변수로 계산) */
+  --_k-ta-ring: calc(var(--kendo-spacing-1) - var(--kendo-spacing-1px));
+}
+
+/* ── 2. 상태 (뒤에 오는 것이 이김: focus → invalid → disabled) ── */
+.k-textarea:is(:focus, :focus-within, .k-state-focused) {
+  --_k-ta-bd: var(--ux4-color-border-focus);
+  --_k-ta-box: 0 0 0 var(--_k-ta-ring) var(--kendo-color-primary-opacity-opacity-focus);
+}
+.k-textarea:is([aria-invalid="true"], .k-invalid, .k-state-invalid, :has(> :is(.k-input, .k-input-inner)[aria-invalid="true"])) {
+  --_k-ta-bd: var(--kendo-color-error);
+  --_k-ta-box: var(--kendo-elevation-1), 0 0 0 var(--_k-ta-ring) var(--ux4-alpha-destructive-20);
+}
+.k-textarea:is([disabled], .k-state-disabled, [aria-disabled="true"], :has(> :is(.k-input, .k-input-inner):disabled)) {
+  --_k-ta-bg: var(--kendo-color-disabled);
+  --_k-ta-bd: var(--kendo-color-disabled-border);
+  --_k-ta-fg: var(--kendo-color-on-disabled);
+  --_k-ta-ph: var(--kendo-color-on-disabled);
+  --_k-ta-box: var(--kendo-elevation-1);
+}
+
+/* ── 3. 실제 모양
+   Kendo 2021.3 원본 선택자보다 세게(.k-textarea 네 번 = 0,4,0) 뒤에서 덮는다. ── */
+.k-textarea.k-textarea.k-textarea.k-textarea {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 0;
+  height: var(--kendo-spacing-16);
+  min-height: var(--kendo-spacing-16);
+  margin: 0;
+  padding: var(--kendo-spacing-2) var(--kendo-spacing-3);
+  border: var(--kendo-spacing-1px) solid var(--_k-ta-bd);
+  border-radius: var(--ux4-border-radius-control);
+  background: var(--_k-ta-bg);
+  color: var(--_k-ta-fg);
+  box-shadow: var(--_k-ta-box);
+  font-family: var(--kendo-font-family);
+  font-size: var(--kendo-device-input-font-size);
+  font-weight: var(--kendo-font-weight-normal);
+  line-height: var(--kendo-device-input-line-height);
+  letter-spacing: var(--kendo-letter-spacing);
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  outline: none;
+  /* 크기 조절은 세로만 (감싼 구조도 바깥 상자가 늘어나게 overflow를 둠) */
+  resize: vertical;
+  overflow: auto;
+}
+.k-textarea.k-textarea.k-textarea.k-textarea:is([disabled], .k-state-disabled, [aria-disabled="true"], :has(> :is(.k-input, .k-input-inner):disabled)) {
+  cursor: default;
+}
+
+/* 감싼 구조: 안쪽 textarea는 테두리·바탕 없이 상자를 채운다 */
+.k-textarea.k-textarea > :is(.k-input, .k-input-inner) {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  white-space: inherit;
+  overflow-wrap: inherit;
+  outline: none;
+  box-shadow: none;
+  resize: none;
+}
+
+/* ── 4. 안내 글자(placeholder) ──────────────────────────────── */
+.k-textarea::placeholder,
+.k-textarea > :is(.k-input, .k-input-inner)::placeholder {
+  color: var(--_k-ta-ph);
+  opacity: 1;
+}

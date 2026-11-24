@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="ko" data-theme="light" data-device="pc">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lotte Kendo DS 미리보기</title>
+  <link rel="stylesheet" href="dist/lotte-tokens.css">
+  <link rel="stylesheet" href="components/button/button.css">
+  <link rel="stylesheet" href="components/input/input.css">
+  <link rel="stylesheet" href="components/textarea/textarea.css">
+  <link rel="stylesheet" href="components/numeric/numeric.css">
+  <link rel="stylesheet" href="components/numeric-stepper/numeric-stepper.css">
+  <link rel="stylesheet" href="components/checkbox/checkbox.css">
+  <link rel="stylesheet" href="components/radio/radio.css">
+  <link rel="stylesheet" href="components/switch/switch.css">
+  <link rel="stylesheet" href="components/label/label.css">
+  <link rel="stylesheet" href="components/badge/badge.css">
+  <link rel="stylesheet" href="components/chip/chip.css">
+  <link rel="stylesheet" href="components/separator/separator.css">
+  <link rel="stylesheet" href="components/dropdownlist/dropdownlist.css">
+  <link rel="stylesheet" href="components/tooltip/tooltip.css">
+  <link rel="stylesheet" href="components/loader/loader.css">
+  <link rel="stylesheet" href="components/skeleton/skeleton.css">
+  <link rel="stylesheet" href="components/grid/grid.css">
+  <link rel="stylesheet" href="components/tabs/tabs.css">
+  <link rel="stylesheet" href="components/pager/pager.css">
+  <link rel="stylesheet" href="components/dialog/dialog.css">
+  <link rel="stylesheet" href="components/notification/notification.css">
+  <link rel="stylesheet" href="components/form/form.css">
+  <link rel="stylesheet" href="components/card/card.css">
+  <link rel="stylesheet" href="components/avatar/avatar.css">
+  <link rel="stylesheet" href="components/drawer/drawer.css">
+  <link rel="stylesheet" href="components/breadcrumb/breadcrumb.css">
+  <link rel="stylesheet" href="components/calendar/calendar.css">
+  <link rel="stylesheet" href="components/datepicker/datepicker.css">
+  <link rel="stylesheet" href="components/toggle/toggle.css">
+  <link rel="stylesheet" href="components/button-group/button-group.css">
+  <link rel="stylesheet" href="components/menu/menu.css">
+  <link rel="stylesheet" href="components/treeview/treeview.css">
+  <link rel="stylesheet" href="components/stepper/stepper.css">
+  <link rel="stylesheet" href="components/progressbar/progressbar.css">
+  <link rel="stylesheet" href="components/expansionpanel/expansionpanel.css">
+  <link rel="stylesheet" href="components/toolbar/toolbar.css">
+  <link rel="stylesheet" href="components/kbd/kbd.css">
+  <link rel="stylesheet" href="components/pagetab/pagetab.css">
+  <link rel="stylesheet" href="components/appbar/appbar.css">
+  <link rel="stylesheet" href="components/pageheading/pageheading.css">
+  <link rel="stylesheet" href="components/toolbar-filter/toolbar-filter.css">
+  <link rel="stylesheet" href="components/toolbar-form-action/toolbar-form-action.css">
+  <link rel="stylesheet" href="components/form-table/form-table.css">
+  <link rel="stylesheet" href="components/dialog-content/dialog-content.css">
+  <link rel="stylesheet" href="components/menu-tile/menu-tile.css">
+  <link rel="stylesheet" href="components/section-cards/section-cards.css">
+  <link rel="stylesheet" href="preview/preview.css">
+</head>
+<body class="pv-body">
+  <header class="pv-header">
+    <h1 class="pv-header__title text-title-semibold">Lotte Kendo DS</h1>
+    <div class="pv-header__controls">
+      <a class="k-button k-button-sm k-button-flat-base" href="install/">
+        <span class="k-button-text">AI로 설치하기</span>
+      </a>
+      <a class="k-button k-button-sm k-button-flat-base" href="changelog/">
+        <span class="k-button-text">업데이트 현황</span>
+      </a>
+      <div class="pv-toggle" role="group" aria-label="색 모드">
+        <button type="button" class="pv-toggle__btn text-control-medium" data-set="theme" data-value="light" aria-pressed="true">라이트</button>
+        <button type="button" class="pv-toggle__btn text-control-medium" data-set="theme" data-value="dark" aria-pressed="false">다크</button>
+      </div>
+      <div class="pv-toggle" role="group" aria-label="기기 모드">
+        <button type="button" class="pv-toggle__btn text-control-medium" data-set="device" data-value="pc" aria-pressed="true">PC</button>
+        <button type="button" class="pv-toggle__btn text-control-medium" data-set="device" data-value="tablet" aria-pressed="false">Tablet</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="pv-layout">
+    <nav class="pv-nav" aria-label="목차">
+      <ul class="pv-nav__list" id="pv-nav"></ul>
+    </nav>
+
+    <main class="pv-main" id="pv-main">
+      <section class="pv-section" id="button" aria-labelledby="button-title">
+        <h2 class="pv-section__title text-xl-semibold" id="button-title">Button</h2>
+        <p class="pv-section__desc text-sm-regular">hover·focus·pressed 칸은 상태 클래스(.k-state-*)로 고정해서 보여 준다. 실제 버튼은 마우스·키보드로 눌러 봐도 된다.</p>
+        <div id="pv-button"></div>
+      </section>
+
+      <section class="pv-section" id="input" aria-labelledby="input-title">
+        <h2 class="pv-section__title text-xl-semibold" id="input-title">Input</h2>
+        <p class="pv-section__desc text-sm-regular">focus 칸은 상태 클래스(.k-state-focused)로 고정해서 보여 준다. 실제 칸을 눌러 입력해 봐도 된다. 폭은 미리보기에서만 정한 값이다.</p>
+        <div id="pv-input"></div>
+      </section>
+
+      <section class="pv-section" id="textarea" aria-labelledby="textarea-title">
+        <h2 class="pv-section__title text-xl-semibold" id="textarea-title">TextArea</h2>
+        <p class="pv-section__desc text-sm-regular">focus 칸은 상태 클래스(.k-state-focused)로 고정해서 보여 준다. 실제 칸을 눌러 여러 줄 입력해 봐도 된다. 폭은 미리보기에서만 정한 값이다.</p>
+        <div id="pv-textarea"></div>
+      </section>
+
+      <section class="pv-section" id="numeric" aria-labelledby="numeric-title">
+        <h2 class="pv-section__title text-xl-semibold" id="numeric-title">Numeric</h2>
+        <p class="pv-section__desc text-sm-regular">PC 숫자 입력. 상자 모양·상태는 Input과 같다. 오른쪽 위·아래 칸을 눌러 값을 바꿔 볼 수 있다.</p>
+        <div id="pv-numeric"></div>
+      </section>
+
+      <section class="pv-section" id="numeric-stepper" aria-labelledby="numeric-stepper-title">
+        <h2 class="pv-section__title text-xl-semibold" id="numeric-stepper-title">Numeric Stepper</h2>
+        <p class="pv-section__desc text-sm-regular">태블릿 숫자 입력. 빼기·더하기 버튼을 눌러 값을 바꿔 볼 수 있다(단계 0.1).</p>
+        <div id="pv-numeric-stepper"></div>
+      </section>
+
+      <section class="pv-section" id="checkbox" aria-labelledby="checkbox-title">
+        <h2 class="pv-section__title text-xl-semibold" id="checkbox-title">CheckBox</h2>
+        <p class="pv-section__desc text-sm-regular">focus 칸은 상태 클래스로 고정. 실제 상자를 눌러 봐도 된다. 크기 PC 16 · Tablet 24.</p>
+        <div id="pv-checkbox"></div>
+      </section>
+
+      <section class="pv-section" id="radio" aria-labelledby="radio-title">
+        <h2 class="pv-section__title text-xl-semibold" id="radio-title">RadioButton</h2>
+        <p class="pv-section__desc text-sm-regular">focus 칸은 상태 클래스로 고정. 고르면 가운데 점 8. 크기 PC 16 · Tablet 24.</p>
+        <div id="pv-radio"></div>
+      </section>
+
+      <section class="pv-section" id="switch" aria-labelledby="switch-title">
+        <h2 class="pv-section__title text-xl-semibold" id="switch-title">Switch</h2>
+        <p class="pv-section__desc text-sm-regular">눌러서 켜고 끌 수 있다. 트랙 PC 32×18 · Tablet 52×26.</p>
+        <div id="pv-switch"></div>
+      </section>
+
+      <section class="pv-section" id="label" aria-labelledby="label-title">
+        <h2 class="pv-section__title text-xl-semibold" id="label-title">Label</h2>
+        <p class="pv-section__desc text-sm-regular">입력칸 이름. 필수 항목은 앞에 빨간 점.</p>
+        <div id="pv-label"></div>
+      </section>
+
+      <section class="pv-section" id="badge" aria-labelledby="badge-title">
+        <h2 class="pv-section__title text-xl-semibold" id="badge-title">Badge</h2>
+        <p class="pv-section__desc text-sm-regular">상태·종류 표시. 글자 PC 12 · Tablet 14.</p>
+        <div id="pv-badge"></div>
+      </section>
+
+      <section class="pv-section" id="chip" aria-labelledby="chip-title">
+        <h2 class="pv-section__title text-xl-semibold" id="chip-title">Chip</h2>
+        <p class="pv-section__desc text-sm-regular">적용된 조회 조건. X는 조건 해제 버튼(지우는 동작은 화면 몫).</p>
+        <div id="pv-chip"></div>
+      </section>
+
+      <section class="pv-section" id="separator" aria-labelledby="separator-title">
+        <h2 class="pv-section__title text-xl-semibold" id="separator-title">Separator</h2>
+        <p class="pv-section__desc text-sm-regular">구역을 나누는 선. 가로는 폭을, 세로는 줄 높이를 채운다.</p>
+        <div id="pv-separator"></div>
+      </section>
+
+      <section class="pv-section" id="dropdownlist" aria-labelledby="dropdownlist-title">
+        <h2 class="pv-section__title text-xl-semibold" id="dropdownlist-title">DropDownList</h2>
+        <p class="pv-section__desc text-sm-regular">눌러서 목록을 열고 고를 수 있다(키보드: ↓↑ Enter Esc). focus·invalid 칸은 상태로 고정.</p>
+        <div id="pv-dropdownlist"></div>
+      </section>
+
+      <section class="pv-section" id="tooltip" aria-labelledby="tooltip-title">
+        <h2 class="pv-section__title text-xl-semibold" id="tooltip-title">Tooltip</h2>
+        <p class="pv-section__desc text-sm-regular">버튼에 마우스를 올리거나 Tab으로 가 보면 말풍선이 나온다. 아래 표는 모양만 고정해 보여 준 것.</p>
+        <div id="pv-tooltip"></div>
+      </section>
+
+      <section class="pv-section" id="loader" aria-labelledby="loader-title">
+        <h2 class="pv-section__title text-xl-semibold" id="loader-title">Loader</h2>
+        <p class="pv-section__desc text-sm-regular">불러오는 중. 1초에 한 바퀴. 색은 둘레 글자색.</p>
+        <div id="pv-loader"></div>
+      </section>
+
+      <section class="pv-section" id="skeleton" aria-labelledby="skeleton-title">
+        <h2 class="pv-section__title text-xl-semibold" id="skeleton-title">Skeleton</h2>
+        <p class="pv-section__desc text-sm-regular">불러오는 동안의 자리. 2초 주기로 흐려졌다 진해짐.</p>
+        <div id="pv-skeleton"></div>
+      </section>
+
+      <section class="pv-section" id="grid" aria-labelledby="grid-title">
+        <h2 class="pv-section__title text-xl-semibold" id="grid-title">Grid</h2>
+        <p class="pv-section__desc text-sm-regular">표 상자 · 머리줄 · 줄. 두 번째 줄은 마우스 올림, 세 번째 줄은 고른 줄로 고정. 줄 높이 PC 36 · Tablet 56.</p>
+        <div id="pv-grid"></div>
+      </section>
+
+      <section class="pv-section" id="tabs" aria-labelledby="tabs-title">
+        <h2 class="pv-section__title text-xl-semibold" id="tabs-title">Tabs</h2>
+        <p class="pv-section__desc text-sm-regular">기본 = 밑줄형, 알약형 = ux-tabstrip-pill. 위 두 줄은 눌러서 바꿔 볼 수 있다(키보드 ← →). 아래 표는 상태를 고정해 보여 준다.</p>
+        <div id="pv-tabs"></div>
+      </section>
+
+      <section class="pv-section" id="pager" aria-labelledby="pager-title">
+        <h2 class="pv-section__title text-xl-semibold" id="pager-title">Pager</h2>
+        <p class="pv-section__desc text-sm-regular">이전 · 페이지 번호 · … · 다음. 현재 페이지는 테두리. 아래 줄은 마우스 올림을 고정해 보여 준다.</p>
+        <div id="pv-pager"></div>
+      </section>
+
+      <section class="pv-section" id="dialog" aria-labelledby="dialog-title">
+        <h2 class="pv-section__title text-xl-semibold" id="dialog-title">Dialog</h2>
+        <p class="pv-section__desc text-sm-regular">버튼을 누르면 실제 팝업이 열린다(Esc · 취소 · × · 뒤 가림으로 닫기, Alert는 뒤 가림으로 안 닫힘). 아래는 모양만 펼쳐 보인 것.</p>
+        <div id="pv-dialog"></div>
+      </section>
+
+      <section class="pv-section" id="notification" aria-labelledby="notification-title">
+        <h2 class="pv-section__title text-xl-semibold" id="notification-title">Toast · Inline</h2>
+        <p class="pv-section__desc text-sm-regular">버튼을 누르면 실제 Toast가 오른쪽 아래에 4초 동안 뜬다. 아래는 모양만 펼쳐 보인 것.</p>
+        <div id="pv-notification"></div>
+      </section>
+
+      <section class="pv-section" id="form" aria-labelledby="form-title">
+        <h2 class="pv-section__title text-xl-semibold" id="form-title">Form</h2>
+        <p class="pv-section__desc text-sm-regular">항목 = 라벨 · 입력칸 · 도움말 · 오류 문구(간격 8). 폼은 항목을 32 간격으로 쌓고 마지막에 버튼. 아래 표는 입력칸 종류 4 × 기본·오류.</p>
+        <div id="pv-form"></div>
+      </section>
+
+      <section class="pv-section" id="card" aria-labelledby="card-title-h">
+        <h2 class="pv-section__title text-xl-semibold" id="card-title-h">Card</h2>
+        <p class="pv-section__desc text-sm-regular">Card = 머리 · 내용 · 아래 버튼(필요 없는 줄은 뺌). Card / Stat = 지표 카드, trend 오름·내림 × tone 기본·강조.</p>
+        <div id="pv-card"></div>
+      </section>
+
+      <section class="pv-section" id="avatar" aria-labelledby="avatar-title">
+        <h2 class="pv-section__title text-xl-semibold" id="avatar-title">Avatar</h2>
+        <p class="pv-section__desc text-sm-regular">사람·서비스 표시. 이니셜(fallback) · 사진(image), 32 동그라미.</p>
+        <div id="pv-avatar"></div>
+      </section>
+
+      <section class="pv-section" id="drawer" aria-labelledby="drawer-title">
+        <h2 class="pv-section__title text-xl-semibold" id="drawer-title">Drawer</h2>
+        <p class="pv-section__desc text-sm-regular">사이드바. 왼쪽 위 버튼으로 펼침 256 ↔ 아이콘 모드 48(아이콘 모드에서는 마우스를 올리면 이름 말풍선). "생산"을 누르면 하위 메뉴가 닫히고 열린다. 아래 표는 상태를 고정해 보여 준다.</p>
+        <div id="pv-drawer"></div>
+      </section>
+
+      <section class="pv-section" id="breadcrumb" aria-labelledby="breadcrumb-title">
+        <h2 class="pv-section__title text-xl-semibold" id="breadcrumb-title">Breadcrumb</h2>
+        <p class="pv-section__desc text-sm-regular">지금 화면의 위치를 보여 주는 경로 줄. 상위 단계는 흐린 링크(마우스를 올리면 진하게), 마지막은 현재 화면. 단계가 많으면 중간을 …으로 줄인다.</p>
+        <div id="pv-breadcrumb"></div>
+      </section>
+
+      <section class="pv-section" id="calendar" aria-labelledby="calendar-title">
+        <h2 class="pv-section__title text-xl-semibold" id="calendar-title">Calendar · DatePicker</h2>
+        <p class="pv-section__desc text-sm-regular">날짜 고르기. 달력은 ‹ ›로 달을 넘기고, 날짜를 누르거나 키보드 화살표·Enter로 고른다. DatePicker는 칸을 누르면 달력이 뜨고, 고르면 닫힌다. 미리보기의 오늘은 2026-09-18로 고정.</p>
+        <div id="pv-calendar"></div>
+      </section>
+
+      <section class="pv-section" id="toggle" aria-labelledby="toggle-title">
+        <h2 class="pv-section__title text-xl-semibold" id="toggle-title">Toggle</h2>
+        <p class="pv-section__desc text-sm-regular">누를 때마다 켜짐·꺼짐이 바뀌는 버튼. 줄마다 꺼짐 · 마우스 올림 · 켜짐 · 켜짐+마우스 올림 · 비활성 · 켜짐+비활성. 첫 칸은 눌러서 바꿔 볼 수 있다.</p>
+        <div id="pv-toggle"></div>
+      </section>
+
+      <section class="pv-section" id="button-group" aria-labelledby="button-group-title">
+        <h2 class="pv-section__title text-xl-semibold" id="button-group-title">ButtonGroup · ButtonGroup / Toggle</h2>
+        <p class="pv-section__desc text-sm-regular">ButtonGroup은 붙어 있는 실행 버튼 묶음(누르면 바로 실행). ButtonGroup / Toggle은 고른 칸이 켜진 채로 남는 묶음 — 눌러서 바꿔 볼 수 있다(위 두 줄은 하나만, 마지막 줄은 여러 개).</p>
+        <div id="pv-button-group"></div>
+      </section>
+
+      <section class="pv-section" id="menu" aria-labelledby="menu-title">
+        <h2 class="pv-section__title text-xl-semibold" id="menu-title">Menu</h2>
+        <p class="pv-section__desc text-sm-regular">버튼을 누르면 뜨는 동작 목록. "더보기"를 눌러 마우스·키보드(↓ ↑ → ← Enter Esc)로 써 볼 수 있다. 아래는 상태를 고정해 펼쳐 둔 것.</p>
+        <div id="pv-menu"></div>
+      </section>
+
+      <section class="pv-section" id="treeview" aria-labelledby="treeview-title">
+        <h2 class="pv-section__title text-xl-semibold" id="treeview-title">TreeView</h2>
+        <p class="pv-section__desc text-sm-regular">펼치고 접는 계층 목록. 왼쪽 트리는 눌러서·키보드(↓ ↑ → ← Enter)로 써 볼 수 있다. 오른쪽은 단계 × 펼침 × 선택 상태를 고정해 둔 것.</p>
+        <div id="pv-treeview"></div>
+      </section>
+
+      <section class="pv-section" id="stepper" aria-labelledby="stepper-title">
+        <h2 class="pv-section__title text-xl-semibold" id="stepper-title">Stepper</h2>
+        <p class="pv-section__desc text-sm-regular">여러 단계로 나뉜 등록·설정 흐름에서 지금 어느 단계인지 보여 준다(누를 수 없음). horizontal = 폼 위, vertical = 왼쪽 목록형.</p>
+        <div id="pv-stepper"></div>
+      </section>
+
+      <section class="pv-section" id="progressbar" aria-labelledby="progressbar-title">
+        <h2 class="pv-section__title text-xl-semibold" id="progressbar-title">ProgressBar</h2>
+        <p class="pv-section__desc text-sm-regular">얼마나 진행됐는지 보여 주는 막대. 값 0 · 25 · 50 · 75 · 100 (폭 320 예시, 실제로는 놓이는 자리를 채움).</p>
+        <div id="pv-progressbar"></div>
+      </section>
+
+      <section class="pv-section" id="expansionpanel" aria-labelledby="expansionpanel-title">
+        <h2 class="pv-section__title text-xl-semibold" id="expansionpanel-title">ExpansionPanel</h2>
+        <p class="pv-section__desc text-sm-regular">제목 줄을 눌러 내용을 접었다 폈다 하는 패널. 조회 조건 영역에 쓴다. 눌러서 바꿔 볼 수 있다(폭 480 예시).</p>
+        <div id="pv-expansionpanel"></div>
+      </section>
+
+      <section class="pv-section" id="toolbar" aria-labelledby="toolbar-title">
+        <h2 class="pv-section__title text-xl-semibold" id="toolbar-title">Toolbar</h2>
+        <p class="pv-section__desc text-sm-regular">버튼·구분선을 한 줄로 묶는 도구 모음. 안의 버튼은 sm, 주 동작 1개만 primary.</p>
+        <div id="pv-toolbar"></div>
+      </section>
+
+      <section class="pv-section" id="kbd" aria-labelledby="kbd-title">
+        <h2 class="pv-section__title text-xl-semibold" id="kbd-title">Kbd</h2>
+        <p class="pv-section__desc text-sm-regular">단축키 안내용 키 표시. 키 하나는 Kbd, 여러 키 조합은 KbdGroup. 눌리는 단추가 아니다.</p>
+        <div id="pv-kbd"></div>
+      </section>
+
+      <section class="pv-section" id="pagetab" aria-labelledby="pagetab-title">
+        <h2 class="pv-section__title text-xl-semibold" id="pagetab-title">PageTab</h2>
+        <p class="pv-section__desc text-sm-regular">화면 맨 아래에 열린 화면을 탭으로 보여 주는 줄. 위 줄은 상태 3개(default · hover · active), 아래 줄은 눌러서 바꿔 볼 수 있다. X는 close 이벤트만 보낸다.</p>
+        <div id="pv-pagetab"></div>
+      </section>
+
+      <section class="pv-section" id="appbar" aria-labelledby="appbar-title">
+        <h2 class="pv-section__title text-xl-semibold" id="appbar-title">AppBar</h2>
+        <p class="pv-section__desc text-sm-regular">화면 맨 위 머리줄(패턴). 메뉴 토글 · 경로 줄 · 검색(InputGroup) · 사용자를 기존 부품으로 묶는다. 아래 줄은 빼도 되는 칸을 뺀 모양.</p>
+        <div id="pv-appbar"></div>
+      </section>
+
+      <section class="pv-section" id="pageheading" aria-labelledby="pageheading-title">
+        <h2 class="pv-section__title text-xl-semibold" id="pageheading-title">PageHeading</h2>
+        <p class="pv-section__desc text-sm-regular">본문 맨 위 제목 영역(패턴). 제목 · 설명 · 오른쪽 버튼 최대 2개(보조 outline · 주요 primary). 아래 줄은 설명·버튼을 뺀 모양.</p>
+        <div id="pv-pageheading"></div>
+      </section>
+
+      <section class="pv-section" id="toolbar-filter" aria-labelledby="toolbar-filter-title">
+        <h2 class="pv-section__title text-xl-semibold" id="toolbar-filter-title">Toolbar / Filter</h2>
+        <p class="pv-section__desc text-sm-regular">표 위에 붙이는 조회 조건 한 줄(패턴). 검색 · 필터 2개 · 날짜 · 초기화. 필터·날짜는 눌러서 써 볼 수 있다.</p>
+        <div id="pv-toolbar-filter"></div>
+      </section>
+
+      <section class="pv-section" id="toolbar-form-action" aria-labelledby="toolbar-form-action-title">
+        <h2 class="pv-section__title text-xl-semibold" id="toolbar-form-action-title">Toolbar / Form Action</h2>
+        <p class="pv-section__desc text-sm-regular">등록·수정 화면 맨 아래에 붙는 버튼 줄(패턴). 오른쪽 [취소] [저장]. 실제 화면에서는 아래에 붙어 있고, 여기서는 자리에 둔다.</p>
+        <div id="pv-toolbar-form-action"></div>
+      </section>
+
+      <section class="pv-section" id="form-table" aria-labelledby="form-table-title">
+        <h2 class="pv-section__title text-xl-semibold" id="form-table-title">Form Table</h2>
+        <p class="pv-section__desc text-sm-regular">이름 + 값 입력 표(패턴). 모달이나 본문에서 쓴다. 위 표는 Figma 기본(4줄 × 읽기 칸 2개), 아래 표는 입력 부품·쌓기·한 칸 줄 예시(폭 552).</p>
+        <div id="pv-form-table"></div>
+      </section>
+
+      <section class="pv-section" id="dialog-content" aria-labelledby="dialog-content-title">
+        <h2 class="pv-section__title text-xl-semibold" id="dialog-content-title">Dialog Content</h2>
+        <p class="pv-section__desc text-sm-regular">팝업 내용 칸에 끼우는 6가지(패턴). 폭 550 예시. Option Buttons를 쓸 때는 팝업 아래 버튼 줄을 뺀다.</p>
+        <div id="pv-dialog-content"></div>
+      </section>
+
+      <section class="pv-section" id="menu-tile" aria-labelledby="menu-tile-title">
+        <h2 class="pv-section__title text-xl-semibold" id="menu-tile-title">Menu Tile</h2>
+        <p class="pv-section__desc text-sm-regular">태블릿 메인 메뉴 타일. 상태 default · pressed(누르는 동안), 긴 이름은 두 줄, 아이콘은 빼도 된다(폭 324 예시).</p>
+        <div id="pv-menu-tile"></div>
+      </section>
+
+      <section class="pv-section" id="section-cards" aria-labelledby="section-cards-title">
+        <h2 class="pv-section__title text-xl-semibold" id="section-cards-title">SectionCards</h2>
+        <p class="pv-section__desc text-sm-regular">지표 카드(Card / Stat) 한 줄(패턴). 같은 폭 · 간격 16, 기본 4개. 폭이 좁으면 카드가 같이 좁아진다(Figma 본문 1440 = 카드 348).</p>
+        <div id="pv-section-cards"></div>
+      </section>
+
+      <section class="pv-section" id="colors" aria-labelledby="colors-title">
+        <h2 class="pv-section__title text-xl-semibold" id="colors-title">색</h2>
+        <p class="pv-section__desc text-sm-regular">라이트·다크 버튼으로 바꿔 보면 같은 이름의 값이 바뀐다.</p>
+        <div id="pv-colors"></div>
+      </section>
+
+      <section class="pv-section" id="device" aria-labelledby="device-title">
+        <h2 class="pv-section__title text-xl-semibold" id="device-title">기기 (PC · Tablet)</h2>
+        <p class="pv-section__desc text-sm-regular">PC·Tablet 버튼으로 바꿔 보면 높이·글자 크기가 바뀐다.</p>
+        <div class="pv-table-wrap"><table class="pv-table" id="pv-device"></table></div>
+      </section>
+
+      <section class="pv-section" id="text" aria-labelledby="text-title">
+        <h2 class="pv-section__title text-xl-semibold" id="text-title">글자 스타일</h2>
+        <div id="pv-text"></div>
+      </section>
+
+      <section class="pv-section" id="spacing" aria-labelledby="spacing-title">
+        <h2 class="pv-section__title text-xl-semibold" id="spacing-title">간격</h2>
+        <div id="pv-spacing"></div>
+      </section>
+
+      <section class="pv-section" id="radius" aria-labelledby="radius-title">
+        <h2 class="pv-section__title text-xl-semibold" id="radius-title">모서리</h2>
+        <div class="pv-grid" id="pv-radius"></div>
+      </section>
+
+      <section class="pv-section" id="shadow" aria-labelledby="shadow-title">
+        <h2 class="pv-section__title text-xl-semibold" id="shadow-title">그림자</h2>
+        <div class="pv-grid" id="pv-shadow"></div>
+      </section>
+
+      <section class="pv-section" id="icon" aria-labelledby="icon-title">
+        <h2 class="pv-section__title text-xl-semibold" id="icon-title">아이콘 크기</h2>
+        <div class="pv-grid" id="pv-icon"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="components/numeric/numeric.js" defer></script>
+  <script src="components/switch/switch.js" defer></script>
+  <script src="components/dropdownlist/dropdownlist.js" defer></script>
+  <script src="components/tooltip/tooltip.js" defer></script>
+  <script src="components/tabs/tabs.js" defer></script>
+  <script src="components/dialog/dialog.js" defer></script>
+  <script src="components/notification/notification.js" defer></script>
+  <script src="components/drawer/drawer.js" defer></script>
+  <script src="components/calendar/calendar.js" defer></script>
+  <script src="components/datepicker/datepicker.js" defer></script>
+  <script src="components/toggle/toggle.js" defer></script>
+  <script src="components/menu/menu.js" defer></script>
+  <script src="components/treeview/treeview.js" defer></script>
+  <script src="components/expansionpanel/expansionpanel.js" defer></script>
+  <script src="components/pagetab/pagetab.js" defer></script>
+  <script src="preview/preview.js"></script>
+</body>
+</html>

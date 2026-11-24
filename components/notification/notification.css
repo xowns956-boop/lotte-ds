@@ -1,0 +1,199 @@
+/* Lotte Kendo DS · Notification / Toast · Notification / Inline
+
+   Toast (.k-notification — 화면 오른쪽 아래에 잠깐 뜨는 알림, 4초 뒤 사라짐)
+     type: default · success · info · warning · error (아이콘 16 색만 다름, default는 아이콘 없음)
+     폭 356 · 안쪽 16 · 바탕 surface-alt · 테두리 · 모서리 control · 그림자 4
+     제목 text-sm/medium · 설명 text-sm/regular 흐림, 간격 2 / 실행 버튼(선택): 진한 바탕 · text-xs/medium · 모서리 4
+     <div class="k-notification k-notification-success" role="status">
+       <div class="k-notification-wrap">
+         <svg class="k-svg-icon" aria-hidden="true">…circle-check…</svg>
+         <div class="k-notification-content">
+           <p class="k-notification-title">저장되었습니다</p>
+           <p class="k-notification-description">2026-09-23 14:30</p>
+         </div>
+         <button type="button" class="k-notification-action">실행 취소</button>
+       </div>
+     </div>
+     띄우기: LotteDS.toast({ type, title, description, action, onAction }) (lotte-ds.js)
+     Kendo 2021.3 kendoNotification(.k-notification-wrap > .k-icon + .k-notification-content + .k-i-close)도 같은 틀
+
+   Inline (.ux-alert — 화면 안에 붙박이로 두는 안내 상자, Kendo에 없는 부품)
+     variant: default · destructive(.ux-alert-error)
+     안쪽 위아래 12 · 좌우 16 · 간격 12 · 바탕 surface · 테두리 · 모서리 xxl · 아이콘 16(위 2 내림)
+     <div class="ux-alert" role="note">
+       <svg class="k-svg-icon" aria-hidden="true">…circle-alert…</svg>
+       <div class="ux-alert-text">
+         <p class="ux-alert-title">알림</p>
+         <p class="ux-alert-description">확인이 필요한 내용이 있습니다.</p>
+       </div>
+     </div>
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+/* ── 1. Toast 상자 ──────────────────────────────────────────── */
+/* 아이콘 색 변수: 기본(낮은 세기) → 종류별이 덮음 */
+.k-notification { --_k-nt-icon: var(--ux4-color-on-surface-alt); }
+.k-notification.k-notification.k-notification.k-notification {
+  box-sizing: border-box;
+  display: block;
+  /* 폭 356 = 89 × 4 (간격 변수 4의 배수로 계산) */
+  width: calc(var(--kendo-spacing-1) * 89);
+  max-width: calc(100vw - 2 * var(--kendo-spacing-4));
+  margin: 0;
+  padding: var(--kendo-spacing-4);
+  border: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  border-radius: var(--ux4-border-radius-control);
+  background: var(--kendo-color-surface-alt);
+  color: var(--ux4-color-on-surface-alt);
+  box-shadow: var(--kendo-elevation-4);
+  font-family: var(--kendo-font-family);
+}
+.k-notification.k-notification-success { --_k-nt-icon: var(--kendo-color-success-on-surface); }
+.k-notification.k-notification-info { --_k-nt-icon: var(--ux4-color-ees-maintenance); }
+.k-notification.k-notification-warning { --_k-nt-icon: var(--kendo-color-warning-on-surface); }
+.k-notification.k-notification-error { --_k-nt-icon: var(--kendo-color-error); }
+
+.k-notification.k-notification .k-notification-wrap {
+  display: flex;
+  align-items: center;
+  /* 아이콘이 있으면 12, 없으면(default) 6 */
+  gap: var(--kendo-spacing-3);
+  margin: 0;
+  padding: 0;
+}
+.k-notification.k-notification:not(:has(.k-notification-wrap > :is(.k-svg-icon, .k-icon:not(.k-i-close)))) .k-notification-wrap {
+  gap: var(--kendo-spacing-1-5);
+}
+.k-notification.k-notification .k-notification-wrap > :is(.k-svg-icon, .k-icon:not(.k-i-close)) {
+  flex: none;
+  width: var(--kendo-spacing-4);
+  height: var(--kendo-spacing-4);
+  margin: 0;
+  font-size: var(--kendo-spacing-4);
+  color: var(--_k-nt-icon);
+}
+.k-notification.k-notification .k-notification-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kendo-spacing-0-5);
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  color: var(--ux4-color-on-surface-alt);
+  font-size: var(--kendo-font-size-md);
+  font-weight: var(--kendo-font-weight-medium);
+  line-height: var(--ux4-line-height-sm);
+}
+.k-notification .k-notification-title {
+  margin: 0;
+  color: var(--ux4-color-on-surface-alt);
+  font-size: var(--kendo-font-size-md);
+  font-weight: var(--kendo-font-weight-medium);
+  line-height: var(--ux4-line-height-sm);
+}
+.k-notification .k-notification-description {
+  margin: 0;
+  color: var(--kendo-color-subtle);
+  font-size: var(--kendo-font-size-md);
+  font-weight: var(--kendo-font-weight-normal);
+  line-height: var(--ux4-line-height-sm);
+}
+/* 실행 버튼(되돌리기 등) */
+.k-notification.k-notification .k-notification-action {
+  flex: none;
+  margin: 0;
+  padding: var(--kendo-spacing-1) var(--kendo-spacing-2);
+  border: 0;
+  border-radius: var(--kendo-border-radius-md);
+  background: var(--ux4-color-on-surface-alt);
+  color: var(--kendo-color-surface-alt);
+  font-family: inherit;
+  font-size: var(--kendo-font-size-sm);
+  font-weight: var(--kendo-font-weight-medium);
+  line-height: var(--ux4-line-height-xs);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.k-notification.k-notification .k-notification-action:focus-visible {
+  outline: var(--kendo-spacing-0-5) solid var(--kendo-color-primary);
+  outline-offset: var(--kendo-spacing-0-5);
+}
+/* Kendo 2021.3 닫기 ×(Figma에 없음) — 흐리게 작게 */
+.k-notification.k-notification .k-notification-wrap > .k-i-close {
+  flex: none;
+  color: var(--kendo-color-subtle);
+  font-size: var(--kendo-spacing-4);
+  cursor: pointer;
+}
+
+/* 띄우는 자리: 화면 오른쪽 아래, 32 떨어짐, 알림끼리 14 */
+.ux-toaster {
+  position: fixed;
+  z-index: 30;
+  right: var(--kendo-spacing-8);
+  bottom: var(--kendo-spacing-8);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--kendo-spacing-3-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+.ux-toaster > * { pointer-events: auto; }
+
+/* ── 2. Inline ──────────────────────────────────────────────── */
+.ux-alert {
+  --_ux-al-title: var(--kendo-color-base-on-surface);
+  --_ux-al-desc: var(--kendo-color-subtle);
+  --_ux-al-icon: var(--kendo-color-base-on-surface);
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--kendo-spacing-3);
+  width: 100%;
+  margin: 0;
+  padding: var(--kendo-spacing-3) var(--kendo-spacing-4);
+  border: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  border-radius: var(--kendo-border-radius-xxl);
+  background: var(--kendo-color-surface);
+  font-family: var(--kendo-font-family);
+}
+.ux-alert.ux-alert-error {
+  --_ux-al-title: var(--kendo-color-error-on-surface);
+  --_ux-al-desc: var(--ux4-alpha-destructive-90);
+  --_ux-al-icon: var(--kendo-color-error-on-surface);
+}
+.ux-alert > :is(.k-svg-icon, .k-icon) {
+  flex: none;
+  width: var(--kendo-spacing-4);
+  height: var(--kendo-spacing-4);
+  /* 제목 첫 줄과 가운데 맞춤: 위로 2 내림 */
+  margin-top: var(--kendo-spacing-0-5);
+  color: var(--_ux-al-icon);
+}
+.ux-alert .ux-alert-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kendo-spacing-0-5);
+  flex: 1;
+  min-width: 0;
+}
+.ux-alert .ux-alert-title {
+  margin: 0;
+  color: var(--_ux-al-title);
+  font-size: var(--kendo-font-size-md);
+  font-weight: var(--kendo-font-weight-medium);
+  line-height: var(--ux4-line-height-sm);
+  /* Figma 직접 값 −2.5% (shadcn tracking-tight) */
+  letter-spacing: -0.025em;
+}
+.ux-alert .ux-alert-description {
+  margin: 0;
+  color: var(--_ux-al-desc);
+  font-size: var(--kendo-font-size-md);
+  font-weight: var(--kendo-font-weight-normal);
+  line-height: var(--ux4-line-height-sm);
+}

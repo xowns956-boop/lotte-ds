@@ -1,0 +1,18 @@
+<!-- Lotte Kendo DS · TextArea
+     여러 줄 입력칸. 기본 높이 64, 글자가 길면 줄바꿈되고 넘치면 안에서 스크롤된다. 손잡이로 세로만 늘릴 수 있다.
+     항상 label과 연결한다(for ↔ id). 폭·높이를 더 늘릴 때는 놓이는 자리에서 정한다. -->
+
+<!-- 기본: Kendo 2021.3 구조 -->
+<label for="remark" class="text-control-medium">특이사항</label>
+<textarea id="remark" class="k-textarea" placeholder="내용을 입력하세요"></textarea>
+
+<!-- 같은 모양, 최신 Kendo 구조 -->
+<span class="k-textarea k-input">
+  <textarea id="memo" class="k-input-inner" placeholder="내용을 입력하세요" aria-label="비고"></textarea>
+</span>
+
+<!-- 오류: aria-invalid (오류 문구는 Form / Item 부품이 붙인다) -->
+<textarea id="reason" class="k-textarea" aria-invalid="true" aria-label="사유"></textarea>
+
+<!-- 비활성 -->
+<textarea id="note" class="k-textarea" aria-label="메모" disabled>내용</textarea>

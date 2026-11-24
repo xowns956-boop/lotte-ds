@@ -1,0 +1,70 @@
+/* Lotte Kendo DS · Badge
+   variant: default · secondary · destructive · outline / Show Icon(아이콘 12, 글자 앞)
+   글자 = text-caption/medium (PC 12 · Tablet 14), 모서리 = ux4-border-radius-control
+
+   클래스 (Kendo 이름)
+   default      .k-badge-solid-primary   (옛 이름 .k-badge-solid.k-badge-primary · 아무것도 안 붙인 .k-badge도 이 모양)
+   secondary    .k-badge-solid-secondary (옛 .k-badge-solid.k-badge-secondary)
+   destructive  .k-badge-solid-error     (옛 .k-badge-solid.k-badge-error)
+   outline      .k-badge-outline-base    (옛 .k-badge-outline)
+
+   <span class="k-badge k-badge-md k-badge-solid-primary">배지</span>
+   <span class="k-badge k-badge-md k-badge-outline-base"><svg class="k-svg-icon" aria-hidden="true">…</svg>배지</span>
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+/* ── 1. 변수: 기본 = default(primary) ──────────────────────── */
+.k-badge {
+  --_k-bd-bg: var(--kendo-color-primary);
+  --_k-bd-fg: var(--kendo-color-on-primary);
+  --_k-bd-line: var(--kendo-color-opacity-transparent);
+  --_k-bd-bw: var(--kendo-spacing-0);
+}
+.k-badge:is(.k-badge-solid-secondary, .k-badge-solid.k-badge-secondary) {
+  --_k-bd-bg: var(--kendo-color-secondary);
+  --_k-bd-fg: var(--kendo-color-on-secondary);
+}
+.k-badge:is(.k-badge-solid-error, .k-badge-solid.k-badge-error) {
+  --_k-bd-bg: var(--ux4-alpha-destructive-solid);
+  --_k-bd-fg: var(--kendo-color-on-error);
+}
+.k-badge:is(.k-badge-outline-base, .k-badge-outline) {
+  --_k-bd-bg: var(--kendo-color-opacity-transparent);
+  --_k-bd-fg: var(--kendo-color-on-app-surface);
+  --_k-bd-line: var(--kendo-color-border);
+  --_k-bd-bw: var(--kendo-spacing-1px);
+}
+
+/* ── 2. 모양 (Kendo 원본 0,2,0 → 0,4,0) ───────────────────── */
+.k-badge.k-badge.k-badge.k-badge {
+  box-sizing: content-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--kendo-spacing-1);
+  min-width: 0;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: var(--kendo-spacing-0-5) var(--kendo-spacing-2);
+  border: var(--_k-bd-bw) solid var(--_k-bd-line);
+  border-radius: var(--ux4-border-radius-control);
+  background: var(--_k-bd-bg);
+  color: var(--_k-bd-fg);
+  box-shadow: none;
+  font-family: var(--kendo-font-family);
+  font-size: var(--kendo-device-caption-font-size);
+  font-weight: var(--kendo-font-weight-medium);
+  line-height: var(--kendo-device-caption-line-height);
+  letter-spacing: var(--kendo-letter-spacing);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.k-badge.k-badge :is(.k-svg-icon, .k-icon) {
+  flex: none;
+  width: var(--kendo-spacing-3);
+  height: var(--kendo-spacing-3);
+  font-size: var(--kendo-spacing-3);
+  color: inherit;
+  stroke-width: calc(var(--kendo-icon-stroke) * 2);
+}

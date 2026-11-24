@@ -1,0 +1,102 @@
+/* Lotte Kendo DS · Form Table (이름 + 값 입력 표 · 조합 패턴)
+   모달(Dialog 내용 칸)이나 화면 본문에서 쓰는 이름·값 표.
+   줄마다 칸(Field) 1~2개, 칸 = 이름(128, base-subtle 바탕, text-data/medium) + 값
+   값: 읽기 글자(text-data/regular, 높이 control-height, 안쪽 8) · 입력 부품(안쪽 8, 폭 채움, 두 개면 세로로 간격 8)
+   바깥 테두리 1 + 안쪽 1(border 색) · 줄 사이 선 1 · 모서리 md. 기기 모드(PC / Tablet)를 따른다.
+   Kendo에는 이 부품이 없어서 .ux-* 이름을 쓴다.
+
+   <div class="ux-form-table">
+     <table>
+       <tbody>
+         <tr>
+           <th scope="row">LOT NO</th><td>L20261124-01</td>
+           <th scope="row"><span class="k-required" aria-hidden="true"></span>투입량</th>
+           <td class="ux-form-table-control"><input class="k-textbox k-input k-input-md" aria-label="투입량"></td>
+         </tr>
+         <tr><th scope="row">비고</th><td colspan="3">…</td></tr>   ← 칸 하나가 줄 전체
+         입력 부품 두 개: <td class="ux-form-table-control"><div class="ux-form-table-stack">부품 · 부품</div></td>
+       </tbody>
+     </table>
+   </div>
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+.ux-form-table {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: var(--kendo-spacing-1px);
+  border: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  border-radius: var(--kendo-border-radius-md);
+  background: var(--kendo-color-border);
+  overflow: hidden;
+  font-family: var(--kendo-font-family);
+}
+.ux-form-table > table {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+  background: var(--kendo-color-surface);
+}
+.ux-form-table > table > tbody > tr + tr > :is(th, td) {
+  border-top: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+}
+
+/* 이름 칸 */
+.ux-form-table > table > tbody > tr > th {
+  box-sizing: border-box;
+  width: var(--kendo-spacing-26);
+  padding: 0 var(--kendo-spacing-2);
+  border: 0;
+  background: var(--kendo-color-base-subtle);
+  color: var(--kendo-color-on-app-surface);
+  font-size: var(--kendo-device-data-font-size);
+  font-weight: var(--kendo-font-weight-medium);
+  line-height: var(--kendo-device-data-line-height);
+  text-align: left;
+  vertical-align: middle;
+}
+/* 필수 칸: 이름 앞 빨간 점 6, 간격 6 (Grid 머리칸과 같음) */
+.ux-form-table th .k-required {
+  display: inline-block;
+  width: var(--kendo-spacing-1-5);
+  height: var(--kendo-spacing-1-5);
+  margin-right: var(--kendo-spacing-1-5);
+  border-radius: var(--kendo-border-radius-full);
+  background: var(--kendo-color-error);
+  vertical-align: middle;
+}
+
+/* 값 칸: 읽기 글자 */
+.ux-form-table > table > tbody > tr > td {
+  /* 칸 높이 control-height(PC 36 · Tablet 48) + 줄 사이 선 1: 안쪽 높이로 잡아 선이 칸을 줄이지 않게 */
+  box-sizing: content-box;
+  height: calc(var(--kendo-device-control-height) - var(--kendo-spacing-2) * 2);
+  padding: var(--kendo-spacing-2);
+  border: 0;
+  background: var(--kendo-color-surface);
+  color: var(--kendo-color-on-app-surface);
+  font-size: var(--kendo-device-data-font-size);
+  font-weight: var(--kendo-font-weight-normal);
+  line-height: var(--kendo-device-data-line-height);
+  text-align: left;
+  vertical-align: middle;
+  overflow-wrap: anywhere;
+}
+/* 값 칸: 입력 부품(폭 채움). 두 개면 .ux-form-table-stack으로 감싸 세로로 쌓고 간격 8 */
+.ux-form-table td.ux-form-table-control {
+  vertical-align: top;
+}
+.ux-form-table td.ux-form-table-control > *,
+.ux-form-table .ux-form-table-stack > * {
+  box-sizing: border-box;
+  width: 100%;
+}
+.ux-form-table .ux-form-table-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kendo-spacing-2);
+}

@@ -1,0 +1,44 @@
+/* Lotte Kendo DS · Label
+   state: default · disabled / Required: 필수 표시(라벨 앞 빨간 점 6)
+   글자 = text-control/medium
+
+   <label class="k-label" for="lot-no">LOT NO</label>
+   <label class="k-label" for="qty"><span class="k-required" aria-hidden="true"></span>수량</label>   ← 필수 (입력칸에 required)
+   비활성: .k-label.k-state-disabled (또는 aria-disabled="true")
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+.k-label.k-label.k-label.k-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kendo-spacing-1-5);
+  margin: 0;
+  padding: 0;
+  width: auto;
+  color: var(--kendo-color-on-app-surface);
+  font-family: var(--kendo-font-family);
+  font-size: var(--kendo-device-control-font-size);
+  font-weight: var(--kendo-font-weight-medium);
+  line-height: var(--kendo-device-control-line-height);
+  letter-spacing: var(--kendo-letter-spacing);
+  transform: none;
+}
+.k-label.k-label.k-label.k-label:is(.k-state-disabled, [aria-disabled="true"]) {
+  color: var(--kendo-color-on-disabled);
+}
+
+/* 필수 점: 지름 6 */
+.k-label.k-label > .k-required {
+  flex: none;
+  display: inline-block;
+  width: var(--kendo-spacing-1-5);
+  height: var(--kendo-spacing-1-5);
+  margin: 0;
+  padding: 0;
+  border-radius: var(--kendo-border-radius-full);
+  background: var(--kendo-color-error);
+  font-size: 0;
+}
+.k-label.k-label:is(.k-state-disabled, [aria-disabled="true"]) > .k-required {
+  background: var(--kendo-color-on-disabled);
+}

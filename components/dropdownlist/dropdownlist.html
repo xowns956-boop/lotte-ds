@@ -1,0 +1,22 @@
+<!-- Lotte Kendo DS · DropDownList
+     목록에서 하나 고르기. 라벨과 잇기: 라벨 id를 aria-labelledby로.
+     크기: k-picker-md(기본) · k-picker-sm / 오류: button에 aria-invalid="true" / 비활성: button에 disabled
+     동작(열기·고르기·키보드)은 lotte-ds.js. 고르면 상자에서 change 이벤트(detail.value · detail.text) -->
+
+<label class="k-label" id="line-label">라인</label>
+<div class="k-dropdownlist k-picker k-picker-md">
+  <button type="button" class="k-input-inner" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="line-list" aria-labelledby="line-label line-value">
+    <span class="k-input-value-text" id="line-value" data-placeholder>선택하세요</span>
+    <span class="k-input-button" aria-hidden="true">
+      <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+    </span>
+  </button>
+  <div class="k-popup k-list-container" hidden>
+    <ul class="k-list-ul" role="listbox" id="line-list" aria-labelledby="line-label">
+      <li class="k-list-item" role="option" aria-selected="false" data-value="A1"><span class="k-list-item-text">조립 1라인</span></li>
+      <li class="k-list-item" role="option" aria-selected="false" data-value="A2"><span class="k-list-item-text">조립 2라인</span></li>
+      <li class="k-list-item" role="option" aria-selected="false" aria-disabled="true" data-value="P1"><span class="k-list-item-text">도장 라인</span></li>
+    </ul>
+  </div>
+  <input type="hidden" name="line">
+</div>

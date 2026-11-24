@@ -1,0 +1,90 @@
+/* Lotte Kendo DS · Switch
+   checked: false · true / state: default · focus · disabled
+   트랙 = kendo-device-switch-width × switch-height (PC 32×18 · Tablet 52×26), 안쪽 여백 1
+   손잡이 = kendo-device-check-size (16 · 24), 켜지면 오른쪽
+
+   <button type="button" class="k-switch k-switch-md k-switch-off" role="switch" aria-checked="false" aria-label="알림">
+     <span class="k-switch-track"></span>
+     <span class="k-switch-thumb-wrap"><span class="k-switch-thumb"></span></span>
+   </button>
+   켜짐: aria-checked="true" + .k-switch-on (동작은 lotte-ds.js)
+   Kendo 2021.3 구조(.k-switch > .k-switch-container > .k-switch-handle)도 같은 모양
+   상태  :focus-visible .k-state-focused · :disabled .k-state-disabled [aria-disabled="true"]
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+/* ── 1. 변수 ────────────────────────────────────────────────── */
+.k-switch {
+  --_k-sw-bg: var(--ux4-alpha-switch-off);
+  --_k-sw-box: var(--kendo-elevation-1);
+  --_k-sw-ring: calc(var(--kendo-spacing-1) - var(--kendo-spacing-1px));
+}
+.k-switch:is(.k-switch-on, [aria-checked="true"]) {
+  --_k-sw-bg: var(--kendo-color-primary);
+}
+
+/* ── 2. 상태 (focus → disabled) ─────────────────────────────── */
+.k-switch:is(:focus-visible, .k-state-focused) {
+  --_k-sw-box: 0 0 0 var(--_k-sw-ring) var(--kendo-color-primary-opacity-opacity-focus);
+}
+.k-switch:is(:disabled, .k-state-disabled, [aria-disabled="true"]) {
+  --_k-sw-bg: var(--kendo-color-disabled);
+  --_k-sw-box: var(--kendo-elevation-1);
+}
+
+/* ── 3. 트랙 = 스위치 상자 (Kendo 원본 최대 0,3,0 → 0,4,0) ── */
+.k-switch.k-switch.k-switch.k-switch {
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex: none;
+  width: var(--kendo-device-switch-width);
+  min-width: 0;
+  height: var(--kendo-device-switch-height);
+  margin: 0;
+  padding: var(--kendo-spacing-1px);
+  border: 0;
+  border-radius: var(--kendo-border-radius-full);
+  background: var(--_k-sw-bg);
+  box-shadow: var(--_k-sw-box);
+  font-size: 0;
+  vertical-align: middle;
+  cursor: pointer;
+  outline: none;
+  overflow: visible;
+}
+.k-switch.k-switch.k-switch.k-switch:is(.k-switch-on, [aria-checked="true"]) {
+  justify-content: flex-end;
+}
+.k-switch.k-switch.k-switch.k-switch:is(:disabled, .k-state-disabled, [aria-disabled="true"]) {
+  cursor: default;
+}
+
+/* 안쪽 틀은 모양 없이 손잡이만 남긴다 (최신 구조 track · thumb-wrap, 2021.3 container) */
+.k-switch.k-switch :is(.k-switch-track, .k-switch-thumb-wrap, .k-switch-container) {
+  display: contents;
+}
+.k-switch.k-switch :is(.k-switch-label-on, .k-switch-label-off) {
+  display: none;
+}
+
+/* 손잡이 */
+.k-switch.k-switch.k-switch.k-switch :is(.k-switch-thumb, .k-switch-handle) {
+  box-sizing: border-box;
+  position: static;
+  display: block;
+  flex: none;
+  width: var(--kendo-device-check-size);
+  height: var(--kendo-device-check-size);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--kendo-border-radius-full);
+  background: var(--kendo-color-app-surface);
+  box-shadow: none;
+  transform: none;
+}

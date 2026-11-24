@@ -1,0 +1,26 @@
+/* Lotte Kendo DS · Separator
+   orientation: horizontal(부모 폭을 채움) · vertical(부모 높이를 채움), 두께 1, 색 kendo-color/border
+
+   <hr class="k-separator k-separator-horizontal">
+   <span class="k-separator k-separator-vertical" role="separator" aria-orientation="vertical"></span>
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+.k-separator.k-separator.k-separator.k-separator {
+  box-sizing: border-box;
+  flex: none;
+  align-self: stretch;
+  display: block;
+  width: 100%;
+  height: var(--kendo-spacing-1px);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--kendo-color-border);
+}
+.k-separator.k-separator.k-separator.k-separator-vertical {
+  display: inline-block;
+  width: var(--kendo-spacing-1px);
+  height: auto;
+}
+/* 세로 선은 가로 flex 줄 안에서 줄 높이를 채운다(align-self: stretch) */

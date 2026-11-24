@@ -1,0 +1,189 @@
+/* AI로 설치하기 페이지 전용. 값은 전부 lotte-tokens.css 변수 */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+.ins-body {
+  margin: 0;
+  font-family: var(--kendo-font-family);
+  background: var(--ux4-color-page-bg);
+  color: var(--kendo-color-on-app-surface);
+  word-break: keep-all;
+}
+.ins-body p, .ins-body h1, .ins-body h2, .ins-body h3, .ins-body ul, .ins-body ol { margin: 0; }
+
+/* 본문 폭 768 = 96 × 8 */
+.ins-main {
+  width: 100%;
+  max-width: calc(var(--kendo-spacing-24) * 8);
+  margin-inline: auto;
+  padding: var(--kendo-spacing-10) var(--kendo-spacing-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--kendo-spacing-12);
+}
+
+.ins-nav { display: flex; align-items: center; justify-content: space-between; gap: var(--kendo-spacing-4); }
+.ins-row { display: flex; flex-wrap: wrap; gap: var(--kendo-device-action-gap); }
+.ins-muted { color: var(--kendo-color-subtle); }
+.ins-strong { font-weight: var(--kendo-font-weight-semibold); color: var(--kendo-color-on-app-surface); }
+
+/* 테마 버튼 아이콘: 라이트=해, 다크=달 */
+.ins-icon-moon { display: none; }
+[data-theme="dark"] .ins-icon-sun { display: none; }
+[data-theme="dark"] .ins-icon-moon { display: inline; }
+
+/* 첫 화면 */
+.ins-hero { display: flex; flex-direction: column; align-items: flex-start; gap: var(--kendo-spacing-4); }
+.ins-tag {
+  padding: var(--kendo-spacing-0-5) var(--kendo-spacing-2);
+  border: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  border-radius: var(--kendo-border-radius-lg);
+  color: var(--kendo-color-on-app-surface);
+}
+.ins-hero__title { color: var(--kendo-color-on-app-surface); }
+.ins-hero__desc { color: var(--kendo-color-subtle); }
+.ins-error { color: var(--kendo-color-error-on-surface); }
+.ins-manual { display: flex; flex-direction: column; gap: var(--kendo-spacing-2); width: 100%; }
+.ins-manual[hidden] { display: none; }
+.ins-manual__text {
+  width: 100%;
+  padding: var(--kendo-spacing-3);
+  background: var(--kendo-color-base-subtle);
+  border: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  border-radius: var(--kendo-border-radius-xl);
+  color: var(--kendo-color-on-app-surface);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: var(--kendo-font-size-sm);
+  line-height: var(--ux4-line-height-xs);
+  resize: vertical;
+}
+.ins-manual__text:focus-visible { outline: var(--kendo-spacing-0-5) solid var(--ux4-color-border-focus); }
+
+/* 구역 */
+.ins-section { display: flex; flex-direction: column; gap: var(--kendo-spacing-4); }
+.ins-section__head { display: flex; flex-direction: column; gap: var(--kendo-spacing-1); }
+
+/* 3단계 */
+.ins-steps {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--kendo-spacing-4);
+}
+.ins-step, .ins-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kendo-spacing-2);
+  padding: var(--kendo-spacing-6);
+  background: var(--kendo-color-surface);
+  border: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  border-radius: var(--kendo-border-radius-xxxl);
+  box-shadow: var(--kendo-elevation-1);
+}
+.ins-step__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--kendo-spacing-8);
+  height: var(--kendo-spacing-8);
+  border-radius: var(--kendo-border-radius-full);
+  background: var(--kendo-color-primary);
+  color: var(--kendo-color-on-primary);
+}
+.ins-step__body { color: var(--kendo-color-subtle); }
+
+/* 안내 상자 */
+.ins-note {
+  display: flex;
+  gap: var(--kendo-spacing-3);
+  padding: var(--kendo-spacing-4);
+  background: var(--kendo-color-surface);
+  border: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  border-radius: var(--kendo-border-radius-xxl);
+  color: var(--kendo-color-subtle);
+}
+.ins-note > .k-svg-icon { flex: none; width: var(--kendo-icon-size); height: var(--kendo-icon-size); margin-top: var(--kendo-spacing-0-5); color: var(--kendo-color-on-app-surface); }
+.ins-note__title { color: var(--kendo-color-on-app-surface); }
+
+/* 예시 문장 */
+.ins-examples { list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--kendo-spacing-2); }
+.ins-example {
+  display: flex;
+  align-items: center;
+  gap: var(--kendo-spacing-3);
+  padding: var(--kendo-spacing-2) var(--kendo-spacing-2) var(--kendo-spacing-2) var(--kendo-spacing-4);
+  background: var(--kendo-color-surface);
+  border: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  border-radius: var(--kendo-border-radius-xl);
+}
+.ins-example__text { flex: 1; min-width: 0; }
+
+/* 자주 막히는 곳 */
+.ins-faq { border-top: var(--kendo-spacing-1px) solid var(--kendo-color-border); }
+.ins-faq details { border-bottom: var(--kendo-spacing-1px) solid var(--kendo-color-border); }
+.ins-faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--kendo-spacing-4);
+  padding: var(--kendo-spacing-4) 0;
+  cursor: pointer;
+  list-style: none;
+}
+.ins-faq summary::-webkit-details-marker { display: none; }
+.ins-faq summary:focus-visible { outline: var(--kendo-spacing-0-5) solid var(--ux4-color-border-focus); outline-offset: var(--kendo-spacing-0-5); border-radius: var(--kendo-border-radius-md); }
+.ins-faq summary .k-svg-icon { flex: none; width: var(--kendo-icon-size); height: var(--kendo-icon-size); color: var(--kendo-color-subtle); }
+.ins-faq details[open] summary .k-svg-icon { transform: rotate(180deg); }
+.ins-faq__a { padding-bottom: var(--kendo-spacing-4); color: var(--kendo-color-subtle); }
+
+/* 들어 있는 부품 */
+.ins-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--kendo-spacing-4); }
+.ins-chips { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: var(--kendo-spacing-1-5); }
+.ins-chip {
+  padding: var(--kendo-spacing-0-5) var(--kendo-spacing-2);
+  border-radius: var(--kendo-border-radius-lg);
+  background: var(--kendo-color-secondary-subtle-hover);
+  color: var(--kendo-color-secondary-on-subtle);
+}
+
+/* 직접 설치 */
+.ins-cases { list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--kendo-spacing-3); margin-top: var(--kendo-spacing-2); }
+.ins-case { display: flex; gap: var(--kendo-spacing-2); }
+.ins-case > .k-svg-icon { flex: none; width: var(--kendo-icon-size); height: var(--kendo-icon-size); margin-top: var(--kendo-spacing-0-5); color: var(--kendo-color-primary-on-surface); }
+.ins-case__title { display: block; color: var(--kendo-color-on-app-surface); }
+.ins-case__body { display: block; color: var(--kendo-color-subtle); }
+
+.ins-code { display: flex; align-items: flex-start; gap: var(--kendo-spacing-2); }
+.ins-code pre {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  padding: var(--kendo-spacing-4);
+  overflow-x: auto;
+  background: var(--kendo-color-base-subtle);
+  border: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  border-radius: var(--kendo-border-radius-xl);
+  color: var(--kendo-color-on-app-surface);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: var(--kendo-font-size-sm);
+  line-height: var(--ux4-line-height-xs);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.ins-notes { display: flex; flex-direction: column; gap: var(--kendo-spacing-1); padding-left: var(--kendo-spacing-5); color: var(--kendo-color-subtle); }
+.ins-notes code { color: var(--kendo-color-on-app-surface); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
+
+.ins-sr-only {
+  position: absolute;
+  width: var(--kendo-spacing-1px);
+  height: var(--kendo-spacing-1px);
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .ins-main { padding: var(--kendo-spacing-6) var(--kendo-spacing-4); gap: var(--kendo-spacing-10); }
+  .ins-steps, .ins-groups { grid-template-columns: minmax(0, 1fr); }
+}

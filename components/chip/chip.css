@@ -1,0 +1,87 @@
+/* Lotte Kendo DS · Chip (적용된 조회 조건)
+   "조건명 · 값" + 오른쪽 X로 조건 해제(Show Remove, 기본 켬)
+   바탕 primary-subtle · 테두리 파랑 30% · 글자 text-caption/medium · 모서리 control
+
+   최신 Kendo 구조
+     <span class="k-chip k-chip-md">
+       <span class="k-chip-content"><span class="k-chip-label">품목 · 냉동면</span></span>
+       <span class="k-chip-actions">
+         <button type="button" class="k-chip-action k-chip-remove-action" aria-label="품목 조건 해제">…x…</button>
+       </span>
+     </span>
+   Kendo 2021.3 구조(.k-chip > .k-chip-content > .k-chip-label + .k-remove-icon)도 같은 모양
+   X를 눌렀을 때 조건을 지우는 일은 화면이 한다(버튼 click을 받아서).
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+/* ── 1. 모양 (Kendo 원본 최대 0,4,0 → 0,4,0 뒤에서) ─────────── */
+.k-chip.k-chip.k-chip.k-chip {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kendo-spacing-1-5);
+  min-width: 0;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: var(--kendo-spacing-1) var(--kendo-spacing-2) var(--kendo-spacing-1) var(--kendo-spacing-2-5);
+  border: var(--kendo-spacing-1px) solid var(--ux4-alpha-primary-30);
+  border-radius: var(--ux4-border-radius-control);
+  background: var(--kendo-color-primary-subtle);
+  color: var(--kendo-color-primary-on-subtle);
+  box-shadow: none;
+  font-family: var(--kendo-font-family);
+  font-size: var(--kendo-device-caption-font-size);
+  font-weight: var(--kendo-font-weight-medium);
+  line-height: var(--kendo-device-caption-line-height);
+  letter-spacing: var(--kendo-letter-spacing);
+  white-space: nowrap;
+  vertical-align: middle;
+  outline: none;
+}
+
+/* 안쪽 틀은 모양 없이 */
+.k-chip.k-chip :is(.k-chip-content, .k-chip-actions) {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+}
+.k-chip.k-chip .k-chip-label {
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+/* ── 2. 해제 X: 아이콘 12, 선 primary-on-subtle ─────────────── */
+.k-chip.k-chip.k-chip.k-chip :is(.k-chip-remove-action, .k-remove-icon) {
+  box-sizing: border-box;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--kendo-spacing-3);
+  height: var(--kendo-spacing-3);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  font-size: var(--kendo-spacing-3);
+  opacity: 1;
+  cursor: pointer;
+}
+.k-chip.k-chip :is(.k-chip-remove-action, .k-remove-icon) .k-svg-icon {
+  width: var(--kendo-spacing-3);
+  height: var(--kendo-spacing-3);
+  stroke-width: calc(var(--kendo-icon-stroke) * 2);
+}
+.k-chip.k-chip.k-chip.k-chip :is(.k-chip-remove-action, .k-remove-icon):focus-visible {
+  outline: var(--kendo-spacing-0-5) solid var(--ux4-color-border-focus);
+  outline-offset: var(--kendo-spacing-1px);
+}

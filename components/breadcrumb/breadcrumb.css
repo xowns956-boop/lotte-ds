@@ -1,0 +1,105 @@
+/* Lotte Kendo DS · Breadcrumb
+
+   Breadcrumb (.k-breadcrumb — 지금 화면이 어디 아래에 있는지 보여 주는 경로 줄)
+     항목 간격 10 · 글자 text-sm/regular · 상위 링크는 흐림(subtle), 마우스 올리면 진하게
+     현재 화면(aria-current="page")은 진한 글자, 링크 아님
+     구분 화살표 14 흐림 / 생략(…)은 36 상자 안 아이콘 16, 중간 단계를 줄일 때만
+     <nav class="k-breadcrumb" aria-label="현재 위치">
+       <ol class="k-breadcrumb-container">
+         <li class="k-breadcrumb-item"><a class="k-breadcrumb-link" href="…">생산관리</a></li>
+         <li class="ux-breadcrumb-separator" aria-hidden="true"><svg class="k-svg-icon">…chevron-right…</svg></li>
+         <li class="k-breadcrumb-item"><span class="ux-breadcrumb-ellipsis" aria-hidden="true"><svg class="k-svg-icon">…ellipsis…</svg></span></li>   ← 선택
+         <li class="ux-breadcrumb-separator" aria-hidden="true">…</li>
+         <li class="k-breadcrumb-item"><span class="k-breadcrumb-link" aria-current="page">작업 지시</span></li>
+       </ol>
+     </nav>
+   Kendo 2021.3 kendoBreadcrumb(.k-breadcrumb-item 안 .k-breadcrumb-delimiter-icon)도 같은 모양
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+/* ── 1. 줄 ──────────────────────────────────────────────────── */
+.k-breadcrumb.k-breadcrumb.k-breadcrumb.k-breadcrumb {
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--kendo-color-subtle);
+  font-family: var(--kendo-font-family);
+  font-size: var(--kendo-font-size-md);
+  font-weight: var(--kendo-font-weight-normal);
+  line-height: var(--ux4-line-height-sm);
+  letter-spacing: var(--kendo-letter-spacing);
+  overflow: visible;
+}
+.k-breadcrumb.k-breadcrumb.k-breadcrumb .k-breadcrumb-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--kendo-spacing-2-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: visible;
+}
+.k-breadcrumb.k-breadcrumb.k-breadcrumb :is(.k-breadcrumb-item, .ux-breadcrumb-separator) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kendo-spacing-2-5);
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+/* ── 2. 상위 링크 · 현재 화면 ────────────────────────────────── */
+.k-breadcrumb.k-breadcrumb.k-breadcrumb .k-breadcrumb-link {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--kendo-border-radius-sm);
+  background: none;
+  box-shadow: none;
+  color: var(--kendo-color-subtle);
+  font: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.k-breadcrumb.k-breadcrumb.k-breadcrumb a.k-breadcrumb-link:is(:hover, .k-state-hover) {
+  color: var(--kendo-color-on-app-surface);
+}
+/* 키보드로 왔을 때만 테두리(Figma에 없음 · 접근성용) */
+.k-breadcrumb.k-breadcrumb.k-breadcrumb a.k-breadcrumb-link:focus-visible {
+  outline: var(--kendo-spacing-0-5) solid var(--kendo-color-primary);
+  outline-offset: var(--kendo-spacing-0-5);
+}
+.k-breadcrumb.k-breadcrumb.k-breadcrumb .k-breadcrumb-link[aria-current="page"],
+.k-breadcrumb.k-breadcrumb.k-breadcrumb .k-breadcrumb-item:last-child > .k-breadcrumb-link:not(a) {
+  color: var(--kendo-color-on-app-surface);
+  cursor: default;
+}
+
+/* ── 3. 구분 화살표 · 생략 ───────────────────────────────────── */
+.k-breadcrumb.k-breadcrumb.k-breadcrumb :is(.ux-breadcrumb-separator > :is(.k-svg-icon, .k-icon), .k-breadcrumb-delimiter-icon) {
+  flex: none;
+  width: var(--kendo-spacing-3-5);
+  height: var(--kendo-spacing-3-5);
+  margin: 0;
+  color: var(--kendo-color-subtle);
+  font-size: var(--kendo-spacing-3-5);
+}
+.k-breadcrumb.k-breadcrumb.k-breadcrumb .ux-breadcrumb-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--kendo-spacing-9);
+  height: var(--kendo-spacing-9);
+  color: var(--kendo-color-subtle);
+}
+.k-breadcrumb.k-breadcrumb.k-breadcrumb .ux-breadcrumb-ellipsis > :is(.k-svg-icon, .k-icon) {
+  width: var(--kendo-spacing-4);
+  height: var(--kendo-spacing-4);
+  font-size: var(--kendo-spacing-4);
+}

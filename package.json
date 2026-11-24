@@ -1,0 +1,11 @@
+{
+  "name": "lotte-ds",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "tokens": "node scripts/build-tokens.mjs",
+    "build": "node scripts/build.mjs",
+    "llms": "node scripts/build-llms.mjs"
+  }
+}

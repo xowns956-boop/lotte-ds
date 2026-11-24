@@ -1,0 +1,16 @@
+/* 업데이트 현황 페이지 전용 (설치 페이지 install.css 위에 얹음). 값은 전부 lotte-tokens.css 변수 */
+
+.cl-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--kendo-spacing-6); }
+.cl-list > li > .k-card { width: 100%; }
+.cl-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--kendo-spacing-2); width: 100%; }
+.cl-head__title { display: flex; flex-wrap: wrap; align-items: center; gap: var(--kendo-spacing-2); }
+.cl-body { display: flex; flex-direction: column; gap: var(--kendo-spacing-5); }
+.cl-group { display: flex; flex-direction: column; gap: var(--kendo-spacing-2); }
+.cl-group__title { color: var(--kendo-color-on-app-surface); }
+.cl-group__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kendo-spacing-1-5);
+  padding-left: var(--kendo-spacing-5);
+  color: var(--kendo-color-subtle);
+}

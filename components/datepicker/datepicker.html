@@ -1,0 +1,15 @@
+<!-- Lotte Kendo DS · DatePicker
+     칸을 누르면 달력이 뜨고, 날짜를 고르면 칸에 YYYY-MM-DD로 들어가고 닫힌다.
+     값은 숨은 input(name)에 들어가고, 상자에 change 이벤트(detail.value).
+     처음 값을 넣으려면 안쪽 .k-calendar에 data-value. -->
+
+<div class="ux-datepicker" data-ux-datepicker>
+  <button type="button" class="k-button k-button-md k-button-outline-base ux-datepicker-trigger" aria-haspopup="dialog" aria-expanded="false">
+    <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+    <span class="ux-datepicker-value">날짜 선택</span>
+  </button>
+  <input type="hidden" name="workDate">
+  <div class="k-calendar-container k-popup" role="dialog" aria-label="날짜 선택" hidden>
+    <div class="k-calendar" data-ux-calendar></div>
+  </div>
+</div>

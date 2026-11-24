@@ -1,0 +1,179 @@
+/* Lotte Kendo DS · Stepper · Stepper / Step · Stepper / Connector
+
+   Stepper (.k-stepper — 여러 단계로 나뉜 등록·설정 흐름에서 지금 어느 단계인지 보여 줌, 누를 수 없음)
+     orientation: horizontal(.k-step-list-horizontal — 가로로 나열, 이름은 동그라미 아래)
+                  vertical(.k-step-list-vertical — 세로로 나열, 이름은 동그라미 오른쪽)
+   Stepper / Step (.k-step): 동그라미 28 + 이름 text-sm/medium(현재는 semibold) + 보조 문구 text-xs(선택)
+     state: done(.k-step-done, 체크) · current(.k-step-current, 둘레 링 4) · upcoming(아무것도 안 붙임)
+            · invalid(.k-step-error, X) · disabled(.k-step-disabled)
+     동그라미와 이름 간격: horizontal 8 · vertical 12
+   Stepper / Connector (.ux-step-connector — 단계 사이 선 2): 지나온 구간 .ux-step-connector-done(primary) · 남은 구간 border
+     horizontal: 남는 폭을 채움 / vertical: 높이 24
+
+     <div class="k-stepper">
+       <ol class="k-step-list k-step-list-horizontal" aria-label="등록 단계">
+         <li class="k-step k-step-done"><span class="k-step-indicator"><svg class="k-svg-icon" aria-hidden="true">…check…</svg></span><span class="k-step-label"><span class="k-step-text">기본 정보</span></span></li>
+         <li class="ux-step-connector ux-step-connector-done" aria-hidden="true"></li>
+         <li class="k-step k-step-current" aria-current="step"><span class="k-step-indicator">2</span><span class="k-step-label"><span class="k-step-text">상세 입력</span></span></li>
+         <li class="ux-step-connector" aria-hidden="true"></li>
+         <li class="k-step"><span class="k-step-indicator">3</span><span class="k-step-label"><span class="k-step-text">확인</span><span class="ux-step-optional">(선택)</span></span></li>
+       </ol>
+     </div>
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+/* ── 1. 묶음 ────────────────────────────────────────────────── */
+.k-stepper.k-stepper.k-stepper {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-family: var(--kendo-font-family);
+}
+.k-stepper.k-stepper .k-step-list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.k-stepper.k-stepper .k-step-list-horizontal { flex-direction: row; align-items: flex-start; }
+.k-stepper.k-stepper .k-step-list-vertical { flex-direction: column; align-items: flex-start; }
+
+/* ── 2. 단계 ────────────────────────────────────────────────── */
+.k-stepper .k-step {
+  --_k-st-bg: var(--kendo-color-surface);
+  --_k-st-fg: var(--kendo-color-subtle);
+  --_k-st-bd: var(--kendo-color-border);
+  --_k-st-ring: var(--kendo-color-opacity-transparent);
+  --_k-st-label: var(--kendo-color-subtle);
+  --_k-st-weight: var(--kendo-font-weight-medium);
+  --_k-st-sub: var(--kendo-color-subtle);
+}
+.k-stepper .k-step.k-step-done {
+  --_k-st-bg: var(--kendo-color-primary);
+  --_k-st-fg: var(--kendo-color-on-primary);
+  --_k-st-bd: var(--kendo-color-opacity-transparent);
+  --_k-st-label: var(--kendo-color-on-app-surface);
+}
+.k-stepper .k-step.k-step-current {
+  --_k-st-bg: var(--kendo-color-primary);
+  --_k-st-fg: var(--kendo-color-on-primary);
+  --_k-st-bd: var(--kendo-color-opacity-transparent);
+  --_k-st-ring: var(--kendo-color-primary-opacity-opacity-focus);
+  --_k-st-label: var(--kendo-color-on-app-surface);
+  --_k-st-weight: var(--kendo-font-weight-semibold);
+}
+.k-stepper .k-step:is(.k-step-error, .k-step-invalid) {
+  --_k-st-bg: var(--ux4-alpha-destructive-solid);
+  --_k-st-fg: var(--kendo-color-on-error);
+  --_k-st-bd: var(--kendo-color-opacity-transparent);
+  --_k-st-label: var(--kendo-color-error-on-surface);
+}
+.k-stepper .k-step:is(.k-step-disabled, .k-disabled, [aria-disabled="true"]) {
+  --_k-st-bg: var(--kendo-color-disabled);
+  --_k-st-fg: var(--kendo-color-on-disabled);
+  --_k-st-bd: var(--kendo-color-opacity-transparent);
+  --_k-st-label: var(--kendo-color-on-disabled);
+  --_k-st-sub: var(--kendo-color-on-disabled);
+}
+.k-stepper.k-stepper .k-step {
+  display: flex;
+  flex: none;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  opacity: 1;
+}
+.k-stepper.k-stepper .k-step-list-horizontal > .k-step {
+  flex-direction: column;
+  gap: var(--kendo-spacing-2);
+  text-align: center;
+}
+.k-stepper.k-stepper .k-step-list-vertical > .k-step {
+  flex-direction: row;
+  gap: var(--kendo-spacing-3);
+  text-align: left;
+}
+/* Kendo 2021.3은 동그라미·이름을 a.k-step-link로 감쌈 → 같은 배치 */
+.k-stepper.k-stepper .k-step > .k-step-link {
+  display: contents;
+}
+.k-stepper.k-stepper.k-stepper .k-step-indicator {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--kendo-spacing-7);
+  height: var(--kendo-spacing-7);
+  margin: 0;
+  border: var(--kendo-spacing-1px) solid var(--_k-st-bd);
+  border-radius: var(--kendo-border-radius-full);
+  background: var(--_k-st-bg);
+  color: var(--_k-st-fg);
+  box-shadow: 0 0 0 var(--kendo-spacing-1) var(--_k-st-ring);
+  font-size: var(--kendo-font-size-sm);
+  font-weight: var(--kendo-font-weight-semibold);
+  line-height: var(--ux4-line-height-xs);
+}
+.k-stepper .k-step-indicator :is(.k-svg-icon, .k-icon) {
+  width: var(--kendo-spacing-4);
+  height: var(--kendo-spacing-4);
+  font-size: var(--kendo-spacing-4);
+  color: inherit;
+}
+.k-stepper.k-stepper .k-step-label {
+  display: flex;
+  flex-direction: column;
+  max-width: none;
+  margin: 0;
+}
+.k-stepper.k-stepper .k-step-list-horizontal .k-step-label { align-items: center; }
+.k-stepper.k-stepper .k-step-text {
+  max-width: none;
+  color: var(--_k-st-label);
+  font-size: var(--kendo-font-size-md);
+  font-weight: var(--_k-st-weight);
+  line-height: var(--ux4-line-height-sm);
+  white-space: nowrap;
+}
+.k-stepper .ux-step-optional {
+  color: var(--_k-st-sub);
+  font-size: var(--kendo-font-size-sm);
+  font-weight: var(--kendo-font-weight-normal);
+  line-height: var(--ux4-line-height-xs);
+}
+
+/* ── 3. 연결선 ──────────────────────────────────────────────── */
+.k-stepper .ux-step-connector {
+  --_k-st-line: var(--kendo-color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.k-stepper .ux-step-connector.ux-step-connector-done { --_k-st-line: var(--kendo-color-primary); }
+.k-stepper .ux-step-connector::before {
+  content: "";
+  display: block;
+  background: var(--_k-st-line);
+}
+.k-stepper .k-step-list-horizontal > .ux-step-connector {
+  flex: 1;
+  min-width: var(--kendo-spacing-6);
+  height: var(--kendo-spacing-7);
+}
+.k-stepper .k-step-list-horizontal > .ux-step-connector::before {
+  width: 100%;
+  height: var(--kendo-spacing-0-5);
+}
+.k-stepper .k-step-list-vertical > .ux-step-connector {
+  width: var(--kendo-spacing-7);
+  height: var(--kendo-spacing-6);
+}
+.k-stepper .k-step-list-vertical > .ux-step-connector::before {
+  width: var(--kendo-spacing-0-5);
+  height: 100%;
+}

@@ -1,0 +1,38 @@
+<!-- Lotte Kendo DS · AppBar (화면 맨 위 머리줄)
+     화면 맨 위, 폭 전체. 왼쪽 = 메뉴 토글 · 경로 줄, 오른쪽 = 검색 · 사용자.
+     안에 든 것은 전부 기존 부품(Drawer / Toggle · Separator · Breadcrumb · Input(InputGroup) · Kbd · Drawer / User).
+     빼도 되는 칸: 토글+구분선 · 홈 아이콘 · 경로 2단계 · 검색 · 아이콘 버튼(ghost, 기본 숨김) · 사용자 -->
+
+<header class="k-appbar ux-appbar">
+  <div class="k-appbar-section">
+    <button type="button" class="k-button k-button-flat-base k-icon-button ux-drawer-toggle" data-drawer-toggle="app-drawer" aria-expanded="true" aria-controls="app-drawer" aria-label="메뉴 펼치기·접기">
+      <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
+    </button>
+    <span class="k-separator k-separator-vertical" role="separator" aria-orientation="vertical"></span>
+    <nav class="k-breadcrumb" aria-label="현재 위치">
+      <ol class="k-breadcrumb-container">
+        <li class="k-breadcrumb-item"><a class="k-breadcrumb-link ux-appbar-home" href="#" aria-label="홈"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></a></li>
+        <li class="ux-breadcrumb-separator" aria-hidden="true"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="m9 18 6-6-6-6"/></svg></li>
+        <li class="k-breadcrumb-item"><a class="k-breadcrumb-link" href="#">생산관리</a></li>
+        <li class="ux-breadcrumb-separator" aria-hidden="true"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="m9 18 6-6-6-6"/></svg></li>
+        <li class="k-breadcrumb-item"><span class="k-breadcrumb-link" aria-current="page">작업 지시</span></li>
+      </ol>
+    </nav>
+  </div>
+  <span class="k-appbar-spacer"></span>
+  <div class="k-appbar-section">
+    <span class="k-textbox ux-appbar-search">
+      <span class="k-input-prefix"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg></span>
+      <input class="k-input-inner" type="search" placeholder="메뉴 · 화면 검색" aria-label="메뉴 · 화면 검색">
+      <span class="k-input-suffix"><kbd class="ux-kbd-group"><kbd class="ux-kbd">⌘</kbd><kbd class="ux-kbd">K</kbd></kbd></span>
+    </span>
+    <div class="ux-drawer-user">
+      <span class="k-avatar k-avatar-circle" aria-hidden="true"><span class="k-avatar-text">관</span></span>
+      <div class="ux-drawer-user-text">
+        <p class="ux-drawer-user-name">사용자 이름</p>
+        <p class="ux-drawer-user-email">시스템 관리자</p>
+      </div>
+      <svg class="k-svg-icon ux-drawer-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+    </div>
+  </div>
+</header>

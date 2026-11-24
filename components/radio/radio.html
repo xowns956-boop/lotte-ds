@@ -1,0 +1,12 @@
+<!-- Lotte Kendo DS · RadioButton
+     input 바로 뒤에 label(for). 같은 name으로 묶고, 묶음은 fieldset + legend(또는 role="radiogroup" + aria-label).
+     묶음 안 배치(가로·세로 간격)는 놓이는 자리에서 정한다.
+     오류: aria-invalid="true" / 비활성: disabled -->
+
+<fieldset>
+  <legend class="k-label">근무조</legend>
+  <input type="radio" class="k-radio k-radio-md" name="shift" id="shift-day" checked>
+  <label class="k-radio-label" for="shift-day">주간</label>
+  <input type="radio" class="k-radio k-radio-md" name="shift" id="shift-night">
+  <label class="k-radio-label" for="shift-night">야간</label>
+</fieldset>

@@ -1,0 +1,52 @@
+<!-- Lotte Kendo DS · Card · Card / Stat
+     Card: 머리(.k-card-header) · 내용(.k-card-body) · 아래 버튼(.k-card-footer). 필요 없는 줄은 뺀다.
+     오른쪽 위 실행은 .ux-card-action(선택). 폭은 놓이는 자리에서 정한다.
+     Card / Stat: .k-card.ux-card-stat, 핵심 지표 강조는 + .ux-card-stat-emphasis
+     증감 방향(trend)은 아이콘만 바꾼다: 오름 trending-up · 내림 trending-down -->
+
+<!-- Card -->
+<article class="k-card" aria-labelledby="card-title">
+  <div class="k-card-header">
+    <h3 class="k-card-title" id="card-title">카드 제목</h3>
+    <p class="k-card-subtitle">카드 설명</p>
+    <button type="button" class="k-button k-button-sm k-button-link-primary ux-card-action"><span class="k-button-text">보기</span></button>
+  </div>
+  <div class="k-card-body">…내용…</div>
+  <div class="k-card-footer">
+    <button type="button" class="k-button k-button-md k-button-solid-primary"><span class="k-button-text">저장</span></button>
+  </div>
+</article>
+
+<!-- Card / Stat (trend=up, tone=default) -->
+<article class="k-card ux-card-stat">
+  <div class="k-card-header">
+    <p class="k-card-subtitle">오늘 생산량</p>
+    <p class="k-card-title">1,250</p>
+    <span class="k-badge k-badge-md k-badge-outline-base ux-card-action">
+      <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg>+12.5%
+    </span>
+  </div>
+  <div class="k-card-footer">
+    <p class="ux-card-stat-summary">지난주 대비 증가
+      <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg>
+    </p>
+    <p class="ux-card-stat-detail">최근 6개월 기준</p>
+  </div>
+</article>
+
+<!-- Card / Stat (trend=down, tone=emphasis) -->
+<article class="k-card ux-card-stat ux-card-stat-emphasis">
+  <div class="k-card-header">
+    <p class="k-card-subtitle">불량률</p>
+    <p class="k-card-title">0.8%</p>
+    <span class="k-badge k-badge-md k-badge-outline-base ux-card-action">
+      <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 17h6v-6"/><path d="m22 17-8.5-8.5-5 5L2 7"/></svg>-20%
+    </span>
+  </div>
+  <div class="k-card-footer">
+    <p class="ux-card-stat-summary">지난주 대비 감소
+      <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 17h6v-6"/><path d="m22 17-8.5-8.5-5 5L2 7"/></svg>
+    </p>
+    <p class="ux-card-stat-detail">최근 6개월 기준</p>
+  </div>
+</article>

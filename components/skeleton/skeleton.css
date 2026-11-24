@@ -1,0 +1,29 @@
+/* Lotte Kendo DS · Skeleton (불러오는 동안의 자리)
+   바탕 kendo-color-base/subtle-hover · 높이 16 · 모서리 control · 폭과 높이는 쓰는 곳에서 정함
+   2초 주기로 흐려졌다 진해짐. 움직임 줄이기 설정을 켠 사람에게는 멈춘다.
+
+   <span class="k-skeleton k-skeleton-rect" aria-hidden="true"></span>
+   (불러오는 영역에는 aria-busy="true"를 붙이고, 다 불러오면 지운다)
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
+
+.k-skeleton.k-skeleton.k-skeleton.k-skeleton {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: var(--kendo-spacing-4);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ux4-border-radius-control);
+  background: var(--kendo-color-base-subtle-hover);
+  animation: k-lotte-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes k-lotte-pulse {
+  50% { opacity: 0.5; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .k-skeleton.k-skeleton.k-skeleton.k-skeleton { animation: none; }
+}

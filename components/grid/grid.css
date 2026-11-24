@@ -1,0 +1,215 @@
+/* Lotte Kendo DS · Grid (표)
+   표 상자: 테두리 1 · 모서리 control · 바탕 surface
+   머리줄: 바탕 kendo-color-base · 아래 선 · 높이 header-row-height(PC 40 · Tablet 48) · 글자 text-data/medium
+   줄: 아래 선 · 높이 row-height(PC 36 · Tablet 56) · 글자 text-data/regular · state: default · hover · selected
+   칸 종류: 글자 · 흐린 글자(k-color-subtle) · 체크박스(k-checkbox-column) · 가운데 체크(k-text-center) · 줄 메뉴(k-command-cell)
+   머리칸 종류: 글자 · 정렬(k-link 버튼) · 체크박스 · 빈 칸 / 필수 점(k-required)
+   2단 머리글 묶음 칸(colspan) · 빈 줄(k-grid-norecords)
+
+   이 DS의 구조
+     <div class="k-grid">
+       <table class="k-grid-table">
+         <thead class="k-grid-header"><tr><th class="k-header" scope="col">품목</th>…</tr></thead>
+         <tbody><tr class="k-master-row"><td>…</td>…</tr></tbody>
+       </table>
+     </div>
+   Kendo 2021.3 kendoGrid 구조(.k-grid > .k-grid-header … th.k-header · .k-grid-content … td, .k-alt, .k-state-selected)와
+   SmartUX 고른 줄(.ux-datagrid-state-selected)도 같은 모양.
+   툴바·아래 줄(선택 건수·이전/다음)은 부품이 아니라 Input·Button·글자로 화면에서 조립한다(규칙서 참고).
+
+   이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. Kendo·SmartUX 원본 표 선택자보다 세게(0,4,x) 쓴다. */
+
+/* ── 1. 표 상자 ─────────────────────────────────────────────── */
+.k-grid.k-grid.k-grid.k-grid {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  border-radius: var(--ux4-border-radius-control);
+  background: var(--kendo-color-surface);
+  color: var(--kendo-color-on-app-surface);
+  box-shadow: none;
+  font-family: var(--kendo-font-family);
+  overflow: hidden;
+}
+.k-grid.k-grid.k-grid.k-grid table {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: auto;
+}
+/* 2021.3: 머리글·본문 감싸개는 모양 없이 */
+.k-grid.k-grid.k-grid.k-grid :is(.k-grid-header, .k-grid-header-wrap, .k-grid-content) {
+  margin: 0;
+  border: 0;
+  background: none;
+}
+/* 2021.3 머리글 감싸개: Kendo가 스크롤바 폭만큼 오른쪽 여백(인라인)을 넣으므로, 그 자리도 머리줄 바탕·아래 선으로 채운다 */
+.k-grid.k-grid.k-grid.k-grid div.k-grid-header {
+  background: var(--kendo-color-base);
+  box-shadow: inset 0 calc(-1 * var(--kendo-spacing-1px)) 0 var(--kendo-color-border);
+}
+
+/* ── 2. 머리줄 · 머리칸 ─────────────────────────────────────── */
+.k-grid.k-grid.k-grid.k-grid thead > tr {
+  background: var(--kendo-color-base);
+}
+.k-grid.k-grid.k-grid.k-grid th.k-header {
+  box-sizing: border-box;
+  height: var(--kendo-device-header-row-height);
+  padding: 0 var(--kendo-spacing-2);
+  border: 0;
+  border-bottom: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  background: none;
+  color: var(--kendo-color-on-app-surface);
+  font-size: var(--kendo-device-data-font-size);
+  font-weight: var(--kendo-font-weight-medium);
+  line-height: var(--kendo-device-data-line-height);
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* 필수 열: 이름 앞 빨간 점 6, 간격 6 */
+.k-grid.k-grid th.k-header .k-required {
+  display: inline-block;
+  width: var(--kendo-spacing-1-5);
+  height: var(--kendo-spacing-1-5);
+  margin-right: var(--kendo-spacing-1-5);
+  border-radius: var(--kendo-border-radius-full);
+  background: var(--kendo-color-error);
+  vertical-align: middle;
+}
+
+/* 정렬 머리칸: 왼쪽 여백 0, 안에 버튼(글자 + arrow-up-down 16) — Button ghost 모양 */
+.k-grid.k-grid.k-grid.k-grid th.k-header:has(> .k-link) { padding-left: 0; }
+.k-grid.k-grid.k-grid.k-grid th.k-header > .k-link {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kendo-spacing-2);
+  max-width: 100%;
+  margin: 0;
+  padding: var(--kendo-spacing-2) var(--kendo-spacing-3);
+  border: 0;
+  border-radius: var(--ux4-border-radius-control);
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+}
+.k-grid.k-grid.k-grid.k-grid th.k-header > .k-link:hover {
+  background: var(--kendo-color-primary-subtle);
+  color: var(--kendo-color-primary-on-subtle);
+}
+.k-grid.k-grid.k-grid.k-grid th.k-header > .k-link:focus-visible {
+  box-shadow: 0 0 0 var(--kendo-spacing-0-5) var(--kendo-color-primary);
+}
+.k-grid.k-grid th.k-header > .k-link :is(.k-svg-icon, .k-icon) {
+  flex: none;
+  width: var(--kendo-icon-size);
+  height: var(--kendo-icon-size);
+  font-size: var(--kendo-icon-size);
+}
+
+/* 2단 머리글의 묶음 칸: 높이 36 · 가운데 · 오른쪽 선 · 글자 text-sm/medium */
+.k-grid.k-grid.k-grid.k-grid th.k-header[colspan]:not([colspan="1"]) {
+  height: var(--kendo-spacing-9);
+  border-right: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  font-size: var(--kendo-font-size-md);
+  line-height: var(--ux4-line-height-sm);
+  text-align: center;
+}
+
+/* ── 3. 줄 · 칸 ─────────────────────────────────────────────── */
+.k-grid.k-grid.k-grid.k-grid tbody > tr {
+  --_k-gr-bg: var(--kendo-color-opacity-transparent);
+  background: var(--_k-gr-bg);
+}
+.k-grid.k-grid.k-grid.k-grid tbody > tr:is(:hover, .k-state-hover, .k-hover) {
+  --_k-gr-bg: var(--ux4-alpha-muted-50);
+}
+.k-grid.k-grid.k-grid.k-grid tbody > tr:is(.k-state-selected, .k-selected, [aria-selected="true"], .ux-datagrid-state-selected) {
+  --_k-gr-bg: var(--kendo-color-primary-subtle);
+}
+.k-grid.k-grid.k-grid.k-grid tbody > tr > td {
+  box-sizing: border-box;
+  /* 칸 높이 row-height + 아래 선 1 (Figma 줄 = 칸 36 + 선 1 = 37 · Tablet 56 + 1) */
+  height: calc(var(--kendo-device-row-height) + var(--kendo-spacing-1px));
+  padding: var(--kendo-spacing-2);
+  border: 0;
+  border-bottom: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  background: none;
+  color: var(--kendo-color-on-app-surface);
+  font-size: var(--kendo-device-data-font-size);
+  font-weight: var(--kendo-font-weight-normal);
+  line-height: var(--kendo-device-data-line-height);
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 칸 종류 */
+.k-grid.k-grid.k-grid.k-grid tbody > tr > td.k-color-subtle { color: var(--kendo-color-subtle); }
+.k-grid.k-grid.k-grid.k-grid :is(th, td).k-text-right { text-align: right; }
+.k-grid.k-grid.k-grid.k-grid :is(th, td).k-text-center { text-align: center; }
+/* 체크박스 열: 폭 40 고정(PC·Tablet 같음), 가운데 */
+.k-grid.k-grid.k-grid.k-grid :is(th, td).k-checkbox-column {
+  width: var(--kendo-spacing-10);
+  padding-left: var(--kendo-spacing-2);
+  padding-right: var(--kendo-spacing-2);
+  text-align: center;
+}
+.k-grid.k-grid :is(th, td) > .k-checkbox { vertical-align: middle; }
+/* 줄 메뉴 열: 폭 48, 위아래 2, 안의 버튼 32×32(아이콘 가운데) */
+.k-grid.k-grid.k-grid.k-grid :is(th, td).k-command-cell {
+  width: var(--kendo-spacing-12);
+  padding: var(--kendo-spacing-0-5) var(--kendo-spacing-2);
+}
+.k-grid.k-grid td.k-command-cell > .k-button.k-icon-button {
+  --_k-btn-h: var(--kendo-spacing-8);
+  --_k-btn-px: 0;
+  --_k-btn-py: 0;
+}
+
+/* 빈 줄: 높이 96 · 가운데 · 글자 text-sm/regular */
+.k-grid.k-grid.k-grid.k-grid tbody > tr.k-grid-norecords > td,
+.k-grid.k-grid.k-grid.k-grid .k-grid-norecords:not(tr) {
+  height: var(--kendo-spacing-24);
+  padding: 0 var(--kendo-spacing-2);
+  border-bottom: var(--kendo-spacing-1px) solid var(--kendo-color-border);
+  color: var(--kendo-color-on-app-surface);
+  font-size: var(--kendo-font-size-md);
+  line-height: var(--ux4-line-height-sm);
+  text-align: center;
+  white-space: normal;
+}
+.k-grid.k-grid.k-grid.k-grid .k-grid-norecords:not(tr) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.k-grid.k-grid.k-grid.k-grid tbody > tr.k-grid-norecords { background: none; }
+
+/* 화면에는 안 보이고 화면 읽기 프로그램만 읽는 글자 (빈 머리칸 이름 등) */
+.k-grid .k-sr-only {
+  position: absolute;
+  width: var(--kendo-spacing-1px);
+  height: var(--kendo-spacing-1px);
+  margin: calc(-1 * var(--kendo-spacing-1px));
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

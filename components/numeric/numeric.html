@@ -1,0 +1,19 @@
+<!-- Lotte Kendo DS · Numeric
+     숫자 입력 + 오른쪽 증감 칸. PC 화면용. 태블릿은 Numeric Stepper를 쓴다.
+     단계·최소·최대: 입력칸의 data-increment · data-min · data-max (동작은 lotte-ds.js)
+     항상 label과 연결한다. 폭은 놓이는 자리에서 정한다. -->
+
+<label for="qty" class="text-control-medium">수량</label>
+<span class="k-numerictextbox k-input k-input-md">
+  <input id="qty" type="text" class="k-input-inner" inputmode="decimal" placeholder="0" data-increment="1" data-min="0">
+  <span class="k-input-spinner">
+    <button type="button" class="k-spinner-increase" tabindex="-1" aria-label="값 올리기">
+      <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m18 15-6-6-6 6"/></svg>
+    </button>
+    <button type="button" class="k-spinner-decrease" tabindex="-1" aria-label="값 내리기">
+      <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+  </span>
+</span>
+
+<!-- 오류: 안쪽 input에 aria-invalid="true" / 비활성: 안쪽 input에 disabled -->
