@@ -1,11 +1,11 @@
-// tokens/figma/*.txt → dist/lotte-tokens.css
+// tokens/source/*.txt → dist/lotte-tokens.css
 // 실행: node scripts/build-tokens.mjs
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const src = (f) => readFileSync(join(root, 'tokens/figma', f), 'utf8');
+const src = (f) => readFileSync(join(root, 'tokens/source', f), 'utf8');
 
 // "이름=값|값  ;종류" 줄 읽기. ## 줄은 구역 이름
 function parse(text) {
@@ -21,9 +21,8 @@ function parse(text) {
   return rows;
 }
 
-// Figma 이름 → CSS 변수 이름. / 와 , 는 - 로.
+// 토큰 원본 이름 → CSS 변수 이름. / 와 , 는 - 로.
 // kendo-color-primary/primary → kendo-color-primary, kendo-color-primary/on-primary → kendo-color-on-primary
-// (Figma code syntax에 지정된 28개와 같은 규칙)
 function cssName(name) {
   const parts = name.split('/');
   let out = name;

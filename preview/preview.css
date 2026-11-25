@@ -133,13 +133,13 @@
 .pv-btn-row { display: flex; flex-wrap: wrap; gap: var(--kendo-spacing-3); align-items: center; }
 .pv-pair { display: inline-flex; align-items: center; }
 .pv-input-table .k-dropdownlist { width: var(--kendo-spacing-30); }
-/* 목록 상자 예시: Figma 예시 폭 226 ≈ 미리보기용 */
+/* 목록 상자 예시: 예시 폭 226 ≈ 미리보기용 */
 .pv-popup-demo { width: var(--kendo-spacing-30); }
 /* 말풍선 모양 예시는 화면에 고정해서 보여 줌 */
 .pv-tip-demo .k-tooltip.k-tooltip.k-tooltip.k-tooltip { position: static; }
 .pv-tip-row { padding: var(--kendo-spacing-10) var(--kendo-spacing-20); }
 .pv-toast-demo { display: flex; flex-direction: column; gap: var(--kendo-spacing-3-5); }
-/* Inline 예시 폭: Figma 예시 448 = 64 × 7 */
+/* Inline 예시 폭: 예시 448 = 64 × 7 */
 .pv-inline-demo { display: flex; flex-direction: column; gap: var(--kendo-spacing-3); max-width: calc(var(--kendo-spacing-16) * 7); }
 .pv-dialog-demo { display: flex; flex-wrap: wrap; gap: var(--kendo-spacing-6); align-items: flex-start; }
 /* 모양 예시는 화면 흐름 안에 펼쳐 둠(실제 팝업은 브라우저가 가운데에 띄움) */
@@ -156,7 +156,7 @@
 .pv-input-table .k-textbox,
 .pv-input-table .k-textarea,
 .pv-input-table .k-numerictextbox { width: var(--kendo-spacing-30); }
-/* Stepper 칸: Figma 예시 폭 320 = 64 × 5 */
+/* Stepper 칸: 예시 폭 320 = 64 × 5 */
 .pv-stepper { width: calc(var(--kendo-spacing-16) * 5); max-width: 100%; }
 .pv-input-table td { padding-block: var(--kendo-spacing-3); }
 
@@ -201,16 +201,16 @@
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; }
 }
-/* Form 예시 폭: Figma 예시 320 = 64 × 5 */
+/* Form 예시 폭: 예시 320 = 64 × 5 */
 .pv-form-demo.k-form.k-form.k-form.k-form { max-width: calc(var(--kendo-spacing-16) * 5); }
 .pv-form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(calc(var(--kendo-spacing-16) * 5), 1fr)); gap: var(--kendo-spacing-8) var(--kendo-spacing-6); align-items: start; }
 .pv-form-cell { display: flex; flex-direction: column; gap: var(--kendo-spacing-2); min-width: 0; }
 .pv-form-cap { margin: 0; color: var(--kendo-color-subtle); }
-/* Card 예시 폭: Figma Card 384 = 64 × 6, Card / Stat 348 = 4 × 87 */
+/* Card 예시 폭: Card 384 = 64 × 6, Card / Stat 348 = 4 × 87 */
 .pv-card-row { display: flex; flex-wrap: wrap; gap: var(--kendo-spacing-6); align-items: flex-start; }
 .pv-card-demo.k-card.k-card.k-card.k-card { width: calc(var(--kendo-spacing-16) * 6); max-width: 100%; }
 .pv-stat-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(calc(var(--kendo-spacing-1) * 87), 1fr)); gap: var(--kendo-spacing-4); }
-/* Card 내용 자리 표시(Figma .Slot 높이 80) — 미리보기 전용 */
+/* Card 내용 자리 표시(높이 80) — 미리보기 전용 */
 .pv-slot { display: flex; align-items: center; justify-content: center; height: var(--kendo-spacing-20); border: var(--kendo-spacing-1px) dashed var(--kendo-color-border); border-radius: var(--ux4-border-radius-control); color: var(--kendo-color-subtle); }
 /* Drawer 예시: 화면 높이 대신 512(64 × 8) 상자 안에 둠 */
 .pv-drawer-row { display: flex; gap: var(--kendo-spacing-6); align-items: stretch; height: calc(var(--kendo-spacing-16) * 8); }
@@ -226,25 +226,25 @@
 /* DatePicker 미리보기: 열린 달력이 아래 내용 위로 뜨도록 자리 확보 */
 .pv-date-row { align-items: flex-start; align-content: flex-start; min-height: calc(var(--kendo-spacing-16) * 6); }
 
-/* Menu 미리보기: 펼쳐 둔 상자는 Figma처럼 항목 폭 216, 써 보기 줄은 열린 상자 자리 확보 */
+/* Menu 미리보기: 펼쳐 둔 상자는 항목 폭 216, 써 보기 줄은 열린 상자 자리 확보 */
 .pv-menu-static { align-items: flex-start; }
 .pv-menu-static .k-menu-popup.k-menu-popup.k-menu-popup.k-menu-popup { width: calc(var(--kendo-spacing-1) * 54 + 2 * (var(--kendo-spacing-1) + var(--kendo-spacing-1px))); }
 .pv-menu-live { align-items: flex-start; min-height: calc(var(--kendo-spacing-16) * 5); }
 
-/* TreeView 미리보기: Figma 예시 폭 256 */
+/* TreeView 미리보기: 예시 폭 256 */
 .pv-tree-row { align-items: flex-start; }
 .pv-tree { width: calc(var(--kendo-spacing-16) * 4); }
 .pv-tree-row .pv-tree + .pv-tree { width: calc(var(--kendo-spacing-16) * 5); }
 
-/* Stepper 미리보기: Figma 예시 폭 560 · 상태 표 간격 */
+/* Stepper 미리보기: 예시 폭 560 · 상태 표 간격 */
 .pv-stepper-h { max-width: calc(var(--kendo-spacing-1) * 140); }
 .pv-step-states { align-items: flex-start; gap: var(--kendo-spacing-12); }
 .pv-step-gap { width: var(--kendo-spacing-6); height: var(--kendo-spacing-3); list-style: none; }
 
-/* ProgressBar 미리보기: Figma 예시 폭 320 */
+/* ProgressBar 미리보기: 예시 폭 320 */
 .pv-progress { display: flex; flex-direction: column; gap: var(--kendo-spacing-4); width: calc(var(--kendo-spacing-16) * 5); }
 
-/* ExpansionPanel 미리보기: Figma 예시 폭 480 */
+/* ExpansionPanel 미리보기: 예시 폭 480 */
 .pv-expander { display: flex; flex-direction: column; gap: var(--kendo-spacing-4); width: calc(var(--kendo-spacing-16) * 7.5); }
 
 /* PageTab 미리보기: 두 줄 사이 간격, hover 상태 고정 표시 */
@@ -254,7 +254,7 @@
 /* AppBar 미리보기: 두 줄 사이 간격 */
 .pv-appbar + .pv-appbar { margin-top: var(--kendo-spacing-4); }
 
-/* InputGroup 미리보기: Figma 예시 폭 320 */
+/* InputGroup 미리보기: 예시 폭 320 */
 .k-textbox.pv-input-group { width: calc(var(--kendo-spacing-16) * 5); }
 
 /* PageHeading 미리보기: 두 줄 사이 간격 */
@@ -263,12 +263,12 @@
 /* Form Action 미리보기: 화면 아래에 붙지 않고 제자리에 */
 .pv-form-action .ux-toolbar-form-action { position: static; }
 
-/* Form Table 미리보기: Figma 예시 폭 552 */
+/* Form Table 미리보기: 예시 폭 552 */
 .pv-form-table { width: calc(var(--kendo-spacing-26) * 4 + var(--kendo-spacing-10)); max-width: 100%; }
 .pv-form-table + .pv-form-table { margin-top: var(--kendo-spacing-4); }
 
-/* Dialog Content 미리보기: Figma 예시 폭 550 */
+/* Dialog Content 미리보기: 예시 폭 550 */
 .pv-dialog-content { width: calc(var(--kendo-spacing-1) * 137 + var(--kendo-spacing-0-5)); max-width: 100%; }
 
-/* Menu Tile 미리보기: Figma 예시 폭 324 두 칸, 간격 16 */
+/* Menu Tile 미리보기: 예시 폭 324 두 칸, 간격 16 */
 .pv-menu-tiles { display: grid; grid-template-columns: repeat(2, calc(var(--kendo-spacing-1) * 81)); gap: var(--kendo-spacing-4); max-width: 100%; }
