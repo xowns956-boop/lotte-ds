@@ -778,10 +778,19 @@
     var nav = el('nav', 'k-pager');
     nav.setAttribute('aria-label', '페이지' + (opts.label ? ' ' + opts.label : ''));
     var icon16 = function (pth) { return smallIcon(pth).replace('stroke-linecap', 'stroke-width="2" stroke-linecap'); };
-    var prev = el('a', 'k-link k-pager-nav'); prev.innerHTML = icon16(CHEV_L) + '이전';
+    var prev, next;
+    if (opts.iconNav) {
+      prev = el('a', 'k-link k-pager-nav k-pager-prev'); prev.innerHTML = icon16(CHEV_L);
+      prev.setAttribute('aria-label', '이전 페이지'); prev.setAttribute('data-tooltip', '이전 페이지');
+      next = el('a', 'k-link k-pager-nav k-pager-next'); next.innerHTML = icon16(CHEV_R);
+      next.setAttribute('aria-label', '다음 페이지'); next.setAttribute('data-tooltip', '다음 페이지');
+    } else {
+      prev = el('a', 'k-link k-pager-nav'); prev.innerHTML = icon16(CHEV_L) + '이전';
+      next = el('a', 'k-link k-pager-nav'); next.innerHTML = '다음' + icon16(CHEV_R);
+    }
     if (current === 1) prev.setAttribute('aria-disabled', 'true'); else prev.href = '#pager';
-    var next = el('a', 'k-link k-pager-nav'); next.innerHTML = '다음' + icon16(CHEV_R);
     if (current === total) next.setAttribute('aria-disabled', 'true'); else next.href = '#pager';
+    if (opts.hoverPrev) prev.classList.add('k-state-hover');
     var ul = el('ul', 'k-pager-numbers');
     [1, 2, 3, 'ellipsis', total].forEach(function (n) {
       var li = el('li');
@@ -823,6 +832,10 @@
     host.appendChild(pagerEl(1, 10, { label: '예시 4', edges: true, hoverEdge: 'last' }));
     host.appendChild(el('h3', 'pv-group-title text-sm-semibold', '처음 · 마지막 버튼 — 끝 페이지(마지막 = 흰 바탕) · 마우스 올림: 처음'));
     host.appendChild(pagerEl(10, 10, { label: '예시 5', edges: true, hoverEdge: 'first' }));
+    host.appendChild(el('h3', 'pv-group-title text-sm-semibold', '이전 · 다음 아이콘만 — 첫 페이지(< = 흰 바탕) · 마우스 올림: >'));
+    host.appendChild(pagerEl(1, 10, { label: '예시 6', iconNav: true, hoverNav: true }));
+    host.appendChild(el('h3', 'pv-group-title text-sm-semibold', '이전 · 다음 아이콘만 — 끝 페이지(> = 흰 바탕) · 마우스 올림: < · 처음 · 마지막과 같이'));
+    host.appendChild(pagerEl(10, 10, { label: '예시 7', iconNav: true, hoverPrev: true, edges: true }));
   }
 
   // Dialog
