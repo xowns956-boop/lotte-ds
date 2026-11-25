@@ -32,7 +32,7 @@
 .k-button.k-button.k-button.k-button.ux-datepicker-trigger {
   --_k-btn-px: var(--kendo-spacing-3);
   width: 100%;
-  /* 테두리 포함 높이 = control-height (Figma 테두리가 안쪽) */
+  /* 테두리 포함 높이 = control-height (테두리가 안쪽) */
   min-height: 0;
   height: var(--_k-btn-h);
   padding-block: 0;

@@ -70,7 +70,7 @@
 .k-breadcrumb.k-breadcrumb.k-breadcrumb a.k-breadcrumb-link:is(:hover, .k-state-hover) {
   color: var(--kendo-color-on-app-surface);
 }
-/* 키보드로 왔을 때만 테두리(Figma에 없음 · 접근성용) */
+/* 키보드로 왔을 때만 테두리(접근성용) */
 .k-breadcrumb.k-breadcrumb.k-breadcrumb a.k-breadcrumb-link:focus-visible {
   outline: var(--kendo-spacing-0-5) solid var(--kendo-color-primary);
   outline-offset: var(--kendo-spacing-0-5);

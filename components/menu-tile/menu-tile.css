@@ -39,7 +39,7 @@
 .ux-menu-tile:is(:active, .k-state-active, [aria-pressed="true"]) {
   --_k-mt-bg: var(--kendo-color-secondary-active);
 }
-/* 키보드 포커스: Button과 같은 바깥 링(Figma에는 없음 — 접근성) */
+/* 키보드 포커스: Button과 같은 바깥 링(접근성) */
 .ux-menu-tile:focus-visible {
   outline: none;
   box-shadow: var(--kendo-elevation-1), 0 0 0 var(--kendo-spacing-0-5) var(--kendo-color-app-surface), 0 0 0 var(--kendo-spacing-1) var(--kendo-color-primary);

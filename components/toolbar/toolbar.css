@@ -10,7 +10,7 @@
        <span class="k-separator k-separator-vertical" role="separator" aria-orientation="vertical"></span>
        <button type="button" class="k-button k-button-sm k-button-flat-base">엑셀</button>
      </div>
-     자리가 모자라면 다음 줄로 넘어간다(Figma에는 한 줄만 있음).
+     자리가 모자라면 다음 줄로 넘어간다.
    Kendo 2021.3 kendoToolBar(.k-toolbar > .k-button · .k-separator)도 같은 모양
 
    이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */

@@ -252,7 +252,7 @@
 .k-list-container.k-list-container.k-list-container :is(.k-list-item, .k-item):is([aria-selected="true"], .k-selected, .k-state-selected)::after {
   visibility: visible;
 }
-/* 고른 줄이 비활성이어도 체크는 기본 글자색 (Figma 그대로) */
+/* 고른 줄이 비활성이어도 체크는 기본 글자색 */
 .k-list-container.k-list-container.k-list-container :is(.k-list-item, .k-item):is([aria-selected="true"], .k-selected, .k-state-selected):is(.k-disabled, .k-state-disabled, [aria-disabled="true"])::after {
   background: var(--ux4-color-on-surface-alt);
 }

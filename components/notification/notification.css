@@ -119,7 +119,7 @@
   outline: var(--kendo-spacing-0-5) solid var(--kendo-color-primary);
   outline-offset: var(--kendo-spacing-0-5);
 }
-/* Kendo 2021.3 닫기 ×(Figma에 없음) — 흐리게 작게 */
+/* Kendo 2021.3 닫기 × — 흐리게 작게 */
 .k-notification.k-notification .k-notification-wrap > .k-i-close {
   flex: none;
   color: var(--kendo-color-subtle);
@@ -187,7 +187,7 @@
   font-size: var(--kendo-font-size-md);
   font-weight: var(--kendo-font-weight-medium);
   line-height: var(--ux4-line-height-sm);
-  /* Figma 직접 값 −2.5% (shadcn tracking-tight) */
+  /* 글자 간격 −2.5% */
   letter-spacing: -0.025em;
 }
 .ux-alert .ux-alert-description {

@@ -142,7 +142,7 @@
 }
 .k-grid.k-grid.k-grid.k-grid tbody > tr > td {
   box-sizing: border-box;
-  /* 칸 높이 row-height + 아래 선 1 (Figma 줄 = 칸 36 + 선 1 = 37 · Tablet 56 + 1) */
+  /* 칸 높이 row-height + 아래 선 1 (줄 = 칸 36 + 선 1 = 37 · Tablet 56 + 1) */
   height: calc(var(--kendo-device-row-height) + var(--kendo-spacing-1px));
   padding: var(--kendo-spacing-2);
   border: 0;

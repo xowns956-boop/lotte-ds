@@ -127,7 +127,7 @@
 .k-toggle-button.k-toggle-button:is([disabled], .k-disabled, .k-state-disabled, [aria-disabled="true"]) {
   cursor: default;
 }
-/* 키보드로 왔을 때만 링(Figma에 없음 · Button ghost와 같게) */
+/* 키보드로 왔을 때만 링(Button ghost와 같게) */
 .k-toggle-button.k-toggle-button.k-toggle-button.ux-toggle-outline:focus-visible {
   box-shadow: var(--kendo-elevation-1), 0 0 0 var(--kendo-spacing-0-5) var(--kendo-color-primary);
 }

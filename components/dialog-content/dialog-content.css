@@ -24,7 +24,7 @@
 .k-grid.k-grid.k-grid.k-grid.ux-dialog-table :is(th.k-header, tbody > tr > td) {
   text-align: center;
 }
-/* 머리줄 = 칸 header-row-height + 아래 선 1 (Figma 41) */
+/* 머리줄 = 칸 header-row-height + 아래 선 1 (41) */
 .k-grid.k-grid.k-grid.k-grid.ux-dialog-table th.k-header {
   height: calc(var(--kendo-device-header-row-height) + var(--kendo-spacing-1px));
 }
@@ -115,7 +115,7 @@
   overflow: hidden;
 }
 .ux-dialog-options > .ux-dialog-option {
-  /* 줄 높이 row-height 안에 아래 선 포함(Figma 3줄 = 110) */
+  /* 줄 높이 row-height 안에 아래 선 포함(3줄 = 110) */
   box-sizing: border-box;
   display: flex;
   align-items: center;
