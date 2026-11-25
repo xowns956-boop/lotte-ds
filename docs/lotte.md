@@ -400,7 +400,7 @@ UI를 만드는 것은 **디자이너의 일**이다. AI는 롯데 DS 부품으�
 - 줄 높이·머리줄 높이는 기기 모드를 따른다(PC 37 · 40 / Tablet 57 · 48). 표 글자는 PC·Tablet 모두 14 — 버튼 글자보다 크게 하지 않는다.
 - 칸 글자는 한 줄로 두고 넘치면 말줄임(…)된다.
 - 표 위 툴바와 아래 줄은 부품이 아니라 조립한다: **툴바** = 위아래 16 여백, 왼쪽 검색 Input · 오른쪽 Button(양끝 정렬). **아래 줄** = 위아래 16 여백, 왼쪽 "N건 중 N건 선택"(`text-sm-regular`, 흐린 글자) · 오른쪽 이전/다음 Button(outline · sm), 간격 8.
-- 한 페이지 10줄이 기본이다. 페이지 번호로 넘기려면 아래 줄 오른쪽에 Pager를 둔다. 칸 안에서 고칠 수 있는 건 숫자 입력 · 글자 입력 · 목록 고르기 칸이다(입력칸 높이 PC 32 · Tablet 40, 줄 높이는 그대로 37 · 57, 상태는 Input · DropDownList와 같음). 값 채우기·저장 검사는 화면 스크립트가 한다. 열 메뉴(⋮)·날짜 고르기 칸·줄 묶기는 아직 없다 → "디자인 필요".
+- 한 페이지 10줄이 기본이다. 페이지 번호로 넘기려면 아래 줄 오른쪽에 Pager를 둔다. 칸 안에서 고칠 수 있는 건 숫자 입력 · 글자 입력 · 목록 고르기 칸이다(입력칸 높이 PC 32 · Tablet 40, 줄 높이는 그대로 37 · 57. 기본 테두리는 표 안에서 조금 옅고, 포커스 · 오류 · 꺼짐은 Input · DropDownList와 같음). 값 채우기·저장 검사는 화면 스크립트가 한다. 열 메뉴(⋮)·날짜 고르기 칸·줄 묶기는 아직 없다 → "디자인 필요".
 
 ### Tabs
 
@@ -475,7 +475,7 @@ UI를 만드는 것은 **디자이너의 일**이다. AI는 롯데 DS 부품으�
 
 - 브라우저 `<dialog>`를 쓴다. 여는 버튼 `data-dialog-open="ID"`, 닫는 버튼 `data-dialog-close`(값은 `returnValue`로). 포커스 가두기·Esc·닫은 뒤 포커스 되돌리기는 브라우저가 한다.
 - 폭 512, 화면이 좁으면 양옆 16을 남기고 줄어든다. 아래 버튼은 오른쪽 정렬, 주 버튼(오른쪽 끝)은 하나.
-- 큰 팝업: `dialog`에 `ux-dialog-lg`를 더하면 폭 960(표 2개를 좌우로 놓는 팝업 등). 좁은 화면에서는 기본과 같이 양옆 16을 남기고 줄어든다. 내용이 512에 들어가면 쓰지 않는다.
+- 큰 팝업: `dialog`에 `ux-dialog-lg`를 더하면 폭 1080(표 2개를 좌우로 놓는 팝업 등). 좁은 화면에서는 기본과 같이 양옆 16을 남기고 줄어든다. 내용이 512에 들어가면 쓰지 않는다.
 - 제목줄 버튼은 닫기 × 하나뿐이다. 최소화(−)·최대화 버튼은 쓰지 않는다.
 - **Alert**(되돌릴 수 없는 동작 확인)는 `k-alert` + `role="alertdialog"`, 닫기 × 없음, 뒤 가림을 눌러도 안 닫힌다. 위험 동작이면 주 버튼을 `k-button-solid-error`로.
 - 내용 칸에는 다른 부품(입력칸·표 등)을 넣는다. 팝업 안 내용 틀(표 · 정보 · LOT 입력 · 여러 줄 입력 · 선택 목록 · 선택 버튼)은 아직 없다 → 비슷한 부품을 조합하고, 안 되면 "디자인 필요".
@@ -851,18 +851,18 @@ LotteDS.toast({ title: '삭제했습니다', action: '실행 취소', onAction: 
 <div class="k-splitter k-splitter-vertical">
   <div class="k-pane" id="list-pane">…위 칸(예: 목록 Card)…</div>
   <div class="k-splitbar k-splitbar-vertical" role="separator" tabindex="0" aria-orientation="horizontal"
-       aria-controls="list-pane" aria-label="위아래 크기 조절" data-splitter-size="50" data-splitter-min="20">
-    <span class="k-resize-handle" aria-hidden="true"><svg class="k-svg-icon" …grip-horizontal…></svg></span>
+       aria-controls="list-pane" aria-label="위아래 크기 조절" data-splitter-size="50">
+    <span class="k-resize-handle" aria-hidden="true"></span>
   </div>
   <div class="k-pane">…아래 칸(예: Tabs)…</div>
 </div>
 ```
 
-- 위 칸과 아래 칸 사이 가로 막대를 끌면 위 칸 높이가 바뀐다. 막대에 포커스를 두고 ↑ ↓는 5%씩, Home · End는 위 칸 최소 · 최대.
-- `.k-splitter` 높이는 놓이는 자리에서 정한다(부모 높이를 채운다). 높이가 정해진 상자 안에 둔다.
-- 처음 위 칸 높이 `data-splitter-size`(%, 기본 50), 양쪽 최소 높이 `data-splitter-min`(%, 기본 20). 막대에 둔다.
-- 막대 모양: 선 1 · 가운데 손잡이. 마우스 올림·끄는 중이면 primary, 키보드 포커스는 링 2.
-- 바뀌면 막대에 `change` 이벤트(`detail.size` = 위 칸 %). 높이를 기억하는 일은 화면 스크립트가 한다.
+- 위 칸과 아래 칸 사이 막대를 끌면 위 칸 높이가 바뀐다. 막대에 포커스를 두고 ↑ ↓는 16씩, Shift + ↑ ↓는 64씩, Home · End는 위 칸 최소 · 최대.
+- 막대 높이 PC 12 · Tablet 24, 가운데 잡는 표시 32 × 4. 마우스 올림 = 회색 바탕, 끄는 중 = 연한 파랑 바탕 + 파란 표시, 키보드 포커스 = 안쪽 파란 테두리.
+- `.k-splitter` 높이는 놓이는 자리에서 정한다(부모 높이를 채운다). 위 · 아래 칸은 최소 160이라 상자 높이는 그보다 커야 한다.
+- 처음 위 칸 높이 `data-splitter-size`(%, 기본 50). 막대에 둔다.
+- 바뀌면 막대에 `change` 이벤트(`detail.size` = 위 칸 높이). 높이를 기억하는 일은 화면 스크립트가 한다.
 - 칸 안 내용이 넘치면 칸 안에서 스크롤된다. 좌우 칸 나누기는 아직 없다 → "디자인 필요".
 
 ### Toolbar (도구 모음)

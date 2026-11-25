@@ -273,9 +273,9 @@
 /* Menu Tile 미리보기: 예시 폭 324 두 칸, 간격 16 */
 .pv-menu-tiles { display: grid; grid-template-columns: repeat(2, calc(var(--kendo-spacing-1) * 81)); gap: var(--kendo-spacing-4); max-width: 100%; }
 
-/* Splitter 예시: 높이가 정해진 상자 안에 둔다 */
+/* Splitter 예시: 높이가 정해진 상자 안에 둔다(위 · 아래 칸 최소 160 + 막대) */
 .pv-splitter-box {
-  height: calc(var(--kendo-spacing-16) * 4);
+  height: calc(var(--kendo-spacing-16) * 7);
   border: var(--kendo-spacing-1px) solid var(--kendo-color-border);
   border-radius: var(--ux4-border-radius-control);
   overflow: hidden;
@@ -288,6 +288,10 @@
   font-size: var(--kendo-font-size-md);
 }
 .pv-splitter-state {
-  height: var(--kendo-spacing-10);
+  display: grid;
+  grid-template-columns: calc(var(--kendo-spacing-16) * 2) 1fr;
+  align-items: center;
+  gap: var(--kendo-spacing-4);
   margin-bottom: var(--kendo-spacing-2);
 }
+.pv-splitter-state__label { color: var(--kendo-color-subtle); }

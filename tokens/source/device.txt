@@ -29,3 +29,4 @@ kendo-device/control-icon-size=@kendo-spacing-4|@kendo-spacing-4,5
 kendo-device/title-icon-size=@kendo-spacing-6|@kendo-spacing-7
 kendo-device/tile-icon-size=32|40
 kendo-device/cell-input-padding-y=@kendo-spacing-0,5|@kendo-spacing-2
+kendo-device/splitter-size=@kendo-spacing-3|@kendo-spacing-6

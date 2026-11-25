@@ -1,19 +1,22 @@
 /* Lotte Kendo DS · Splitter (위아래 칸 크기 조절)
-   위 칸과 아래 칸 사이 가로 막대를 끌거나 키보드 ↑ ↓로 위 칸 높이를 바꾼다.
-   막대: 선 1(border) · 잡는 범위 위아래 8 · 가운데 손잡이 16 × 12(테두리 · 바탕 border, 모서리 xs) + 점 아이콘 10
-   state: default · hover · dragging(끄는 중) · focus(키보드)
-     hover · 끄는 중: 선과 손잡이가 primary
-     focus: 막대 둘레 링 2 primary (Button 포커스와 같음)
+   위 칸과 아래 칸 사이 막대를 끌거나 키보드 ↑ ↓로 위 칸 높이를 바꾼다.
+   막대: 높이 kendo-device-splitter-size(PC 12 · Tablet 24) · 폭 100% · 가운데 잡는 표시 32 × 4(모서리 full)
+   state
+     default  바탕 없음 · 잡는 표시 border
+     hover    바탕 base · 잡는 표시 subtle · 모서리 control
+     dragging 바탕 primary-subtle · 잡는 표시 primary · 모서리 control
+     focus    잡는 표시 subtle · 안쪽 테두리 primary 2 · 모서리 control (키보드로 왔을 때)
+   위 · 아래 칸 최소 높이 160(kendo-spacing-28)
    이 DS의 구조
      <div class="k-splitter k-splitter-vertical">            ← 높이는 놓이는 자리에서 정한다(부모 높이를 채움)
        <div class="k-pane" id="pane-top">위 칸</div>
        <div class="k-splitbar k-splitbar-vertical" role="separator" tabindex="0"
             aria-orientation="horizontal" aria-controls="pane-top" aria-label="위아래 크기 조절">
-         <span class="k-resize-handle" aria-hidden="true">…grip-vertical…</span>
+         <span class="k-resize-handle" aria-hidden="true"></span>
        </div>
        <div class="k-pane">아래 칸</div>
      </div>
-   처음 높이·최소 높이: 막대에 data-splitter-size(위 칸 %, 기본 50) · data-splitter-min(양쪽 최소 %, 기본 20)
+   처음 위 칸 높이: 막대에 data-splitter-size(%, 기본 50)
    Kendo 2021.3 kendoSplitter(.k-splitter > .k-pane · .k-splitbar-vertical)도 같은 막대 모양 (끄는 동작은 Kendo가 함)
 
    이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
@@ -33,67 +36,65 @@
 }
 .k-splitter.k-splitter-vertical > .k-pane {
   box-sizing: border-box;
-  min-height: 0;
+  min-height: var(--kendo-spacing-28);
   overflow: auto;
 }
 .k-splitter.k-splitter-vertical > .k-pane:first-child { flex: 0 0 var(--_k-sp-size); }
 .k-splitter.k-splitter-vertical > .k-pane:last-child { flex: 1 1 0; }
 
-/* 막대: 보이는 선 1, 잡는 범위는 위아래로 넓힌다 */
+/* 막대 */
 .k-splitbar.k-splitbar.k-splitbar-vertical {
-  --_k-sp-line: var(--kendo-color-border);
-  position: relative;
+  --_k-sp-bg: var(--kendo-color-opacity-transparent);
+  --_k-sp-grip: var(--kendo-color-border);
+  --_k-sp-radius: 0;
+  --_k-sp-ring: none;
+  box-sizing: border-box;
   display: flex;
   flex: none;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: var(--kendo-spacing-1px);
+  height: var(--kendo-device-splitter-size);
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: 0;
-  background: var(--_k-sp-line);
+  border-radius: var(--_k-sp-radius);
+  background: var(--_k-sp-bg);
+  box-shadow: var(--_k-sp-ring);
   cursor: row-resize;
   outline: none;
   touch-action: none;
   user-select: none;
 }
-.k-splitbar.k-splitbar-vertical::after {
-  content: "";
-  position: absolute;
-  inset: calc(-1 * var(--kendo-spacing-2)) 0;
+.k-splitbar.k-splitbar-vertical:is(:hover, .k-hover, .k-state-hover) {
+  --_k-sp-bg: var(--kendo-color-base);
+  --_k-sp-grip: var(--kendo-color-subtle);
+  --_k-sp-radius: var(--ux4-border-radius-control);
 }
-.k-splitbar.k-splitbar-vertical:is(:hover, .k-hover, .k-state-hover, [data-dragging]) {
-  --_k-sp-line: var(--kendo-color-primary);
+.k-splitbar.k-splitbar-vertical:is(:focus-visible, .k-focus, .k-state-focused) {
+  --_k-sp-grip: var(--kendo-color-subtle);
+  --_k-sp-radius: var(--ux4-border-radius-control);
+  --_k-sp-ring: inset 0 0 0 var(--kendo-spacing-0-5) var(--kendo-color-primary);
 }
-.k-splitbar.k-splitbar.k-splitbar-vertical:focus-visible {
-  box-shadow: 0 0 0 var(--kendo-spacing-0-5) var(--kendo-color-primary);
+.k-splitbar.k-splitbar-vertical:is([data-dragging], .k-splitbar-draggable-vertical:active) {
+  --_k-sp-bg: var(--kendo-color-primary-subtle);
+  --_k-sp-grip: var(--kendo-color-primary);
+  --_k-sp-radius: var(--ux4-border-radius-control);
+  --_k-sp-ring: none;
 }
 
-/* 가운데 손잡이: 가로로 눕힌 16 × 12 상자 + 점 아이콘 */
+/* 가운데 잡는 표시 32 × 4 */
 .k-splitbar.k-splitbar-vertical > .k-resize-handle {
-  position: relative;
-  z-index: 1;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--kendo-spacing-4);
-  height: var(--kendo-spacing-3);
+  display: block;
+  flex: none;
+  width: var(--kendo-spacing-8);
+  height: var(--kendo-spacing-1);
   margin: 0;
-  border: var(--kendo-spacing-1px) solid var(--_k-sp-line);
-  border-radius: var(--kendo-border-radius-xs);
-  background: var(--_k-sp-line);
-  color: var(--kendo-color-on-app-surface);
+  border: 0;
+  border-radius: var(--kendo-border-radius-full);
+  background: var(--_k-sp-grip);
 }
-.k-splitbar.k-splitbar-vertical:is(:hover, .k-hover, .k-state-hover, [data-dragging]) > .k-resize-handle {
-  color: var(--kendo-color-on-primary);
-}
-.k-splitbar.k-splitbar-vertical > .k-resize-handle :is(.k-svg-icon, .k-icon) {
-  width: var(--kendo-spacing-2-5);
-  height: var(--kendo-spacing-2-5);
-  font-size: var(--kendo-spacing-2-5);
-}
+.k-splitbar.k-splitbar-vertical > .k-resize-handle > * { display: none; }
+
 /* 끄는 동안 글자가 선택되지 않게 */
 .k-splitter[data-dragging] { user-select: none; cursor: row-resize; }

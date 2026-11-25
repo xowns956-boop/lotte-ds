@@ -934,7 +934,7 @@
     var row = el('div', 'pv-btn-row');
     var b1 = btn('k-button-md k-button-outline-base', 'Dialog 열기'); b1.setAttribute('data-dialog-open', 'pv-dlg-live');
     var b2 = btn('k-button-md k-button-outline-base', 'Alert 열기'); b2.setAttribute('data-dialog-open', 'pv-alert-live');
-    var b3 = btn('k-button-md k-button-outline-base', '큰 팝업(960) 열기'); b3.setAttribute('data-dialog-open', 'pv-dlg-lg');
+    var b3 = btn('k-button-md k-button-outline-base', '큰 팝업(1080) 열기'); b3.setAttribute('data-dialog-open', 'pv-dlg-lg');
     row.append(b1, b2, b3);
     host.appendChild(row);
     host.appendChild(dialogEl('pv-dlg-live', 'dialog'));
@@ -1350,15 +1350,20 @@
     var host = document.getElementById('pv-splitter');
     var box = el('div', 'pv-splitter-box');
     box.innerHTML = '<div class="k-splitter k-splitter-vertical"><div class="k-pane pv-splitter-pane" id="pv-split-top">위 칸 (제품 검사 리스트)</div>' +
-      '<div class="k-splitbar k-splitbar-vertical" role="separator" tabindex="0" aria-orientation="horizontal" aria-controls="pv-split-top" aria-label="위아래 크기 조절" data-splitter-size="50" data-splitter-min="20">' +
-      '<span class="k-resize-handle" aria-hidden="true"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="9" r="1"/><circle cx="19" cy="9" r="1"/><circle cx="5" cy="9" r="1"/><circle cx="12" cy="15" r="1"/><circle cx="19" cy="15" r="1"/><circle cx="5" cy="15" r="1"/></svg></span></div>' +
+      '<div class="k-splitbar k-splitbar-vertical" role="separator" tabindex="0" aria-orientation="horizontal" aria-controls="pv-split-top" aria-label="위아래 크기 조절" data-splitter-size="50">' +
+      '<span class="k-resize-handle" aria-hidden="true"></span></div>' +
       '<div class="k-pane pv-splitter-pane">아래 칸 (검사정보 · 실적)</div></div>';
     host.appendChild(box);
-    host.appendChild(el('h3', 'pv-group-title text-sm-semibold', '막대 상태 (기본 · 마우스 올림 · 끄는 중)'));
-    ['', ' k-hover', ''].forEach(function (cls, i) {
-      var b = el('div', 'pv-splitter-state');
-      b.innerHTML = '<div class="k-splitter k-splitter-vertical"><div class="k-pane"></div><div class="k-splitbar k-splitbar-vertical' + cls + '" aria-hidden="true"' + (i === 2 ? ' data-dragging' : '') + '><span class="k-resize-handle"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="9" r="1"/><circle cx="19" cy="9" r="1"/><circle cx="5" cy="9" r="1"/><circle cx="12" cy="15" r="1"/><circle cx="19" cy="15" r="1"/><circle cx="5" cy="15" r="1"/></svg></span></div><div class="k-pane"></div></div>';
-      host.appendChild(b);
+    host.appendChild(el('h3', 'pv-group-title text-sm-semibold', '막대 상태 (기본 · 마우스 올림 · 끄는 중 · 포커스)'));
+    [['기본', ''], ['마우스 올림', ' k-hover'], ['끄는 중', ' pv-drag'], ['포커스', ' k-focus']].forEach(function (st) {
+      var row = el('div', 'pv-splitter-state');
+      row.appendChild(el('span', 'pv-splitter-state__label text-sm-regular', st[0]));
+      var bar = el('div', 'k-splitbar k-splitbar-vertical' + st[1].replace(' pv-drag', ''));
+      if (st[1] === ' pv-drag') bar.setAttribute('data-dragging', '');
+      bar.setAttribute('aria-hidden', 'true');
+      bar.innerHTML = '<span class="k-resize-handle"></span>';
+      row.appendChild(bar);
+      host.appendChild(row);
     });
     if (window.LotteDS && LotteDS.initSplitter) LotteDS.initSplitter(host);
   }
