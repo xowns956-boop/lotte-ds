@@ -1,7 +1,7 @@
 /* Lotte Kendo DS · AppBar (화면 맨 위 머리줄 · 조합 패턴)
    바탕 app-surface · 아래 1 선 · 안쪽 위아래 8 / 좌우 16 · 폭은 화면 전체
    왼쪽(간격 10): 메뉴 펼치기·접기(Drawer / Toggle) · 세로 구분선 16 · Breadcrumb(첫 칸 = 홈 아이콘)
-   오른쪽(간격 12): 검색 InputGroup 240(⌘K) · 아이콘 버튼 ghost(선택) · 사용자(Drawer / User + chevron)
+   오른쪽(간격 12): 검색 InputGroup 240(⌘K) · 아이콘 버튼 ghost(선택, 예: 즐겨찾기 목록 = list-checks) · 사용자(Drawer / User + chevron)
    각 칸은 다른 부품을 그대로 쓴다. 이 파일은 줄 배치만 정한다.
 
    <header class="k-appbar ux-appbar">
