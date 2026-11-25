@@ -1,14 +1,13 @@
 /* Lotte Kendo DS · Tooltip (도움말 말풍선)
-   side: top · right · bottom · left (대상 기준 위치, 화살표는 반대편)
+   side: top · right · bottom · left (대상 기준 위치)
    바탕 kendo-color/on-app-surface · 글자 kendo-color/app-surface · text-xs/regular(12/16, 기기 모드와 상관없음)
-   안쪽 위아래 6 · 좌우 12 · 모서리 control · 화살표 10×5
+   안쪽 위아래 6 · 좌우 12 · 모서리 control · 대상과 간격 4(삼각형 없음)
 
    쓰는 법: 대상에 data-tooltip="문구" (+ data-tooltip-side="bottom" 등, 기본 top)
    마우스를 올리거나 키보드로 가면 보이고, 벗어나거나 Esc를 누르면 사라진다(lotte-ds.js).
    lotte-ds.js가 만드는 구조 (Kendo 이름)
      <div class="k-tooltip k-tooltip-top" role="tooltip">
        <div class="k-tooltip-content">문구</div>
-       <div class="k-callout k-callout-s"></div>
      </div>
 
    이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
@@ -35,10 +34,6 @@
   letter-spacing: var(--kendo-letter-spacing);
   pointer-events: none;
 }
-.k-tooltip.k-tooltip.k-tooltip-right,
-.k-tooltip.k-tooltip.k-tooltip-left { flex-direction: row; }
-.k-tooltip.k-tooltip.k-tooltip-bottom { flex-direction: column-reverse; }
-.k-tooltip.k-tooltip.k-tooltip-right { flex-direction: row-reverse; }
 .k-tooltip.k-tooltip.k-tooltip.k-tooltip[hidden] { display: none; }
 
 .k-tooltip.k-tooltip .k-tooltip-content {
@@ -50,23 +45,8 @@
   overflow: visible;
 }
 
-/* 화살표 10×5 (삼각형) */
-.k-tooltip.k-tooltip .k-callout {
-  position: static;
-  flex: none;
-  width: var(--kendo-spacing-2-5);
-  height: calc(var(--kendo-spacing-2-5) / 2);
-  margin: 0;
-  border: 0;
-  background: var(--kendo-color-on-app-surface);
-  transform: none;
-}
-.k-tooltip.k-tooltip .k-callout-s { clip-path: polygon(0 0, 100% 0, 50% 100%); }
-.k-tooltip.k-tooltip .k-callout-n { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-.k-tooltip.k-tooltip :is(.k-callout-e, .k-callout-w) {
-  width: calc(var(--kendo-spacing-2-5) / 2);
-  height: var(--kendo-spacing-2-5);
-}
-/* w = 왼쪽 가장자리에 붙어 왼쪽을 가리킴(side=right) · e = 오른쪽 가장자리에 붙어 오른쪽을 가리킴(side=left) */
-.k-tooltip.k-tooltip .k-callout-w { clip-path: polygon(100% 0, 100% 100%, 0 50%); }
-.k-tooltip.k-tooltip .k-callout-e { clip-path: polygon(0 0, 100% 50%, 0 100%); }
+/* 대상 쪽 바깥 여백 4(투명) = 대상과 말풍선 사이 간격 (위 틀 규칙과 같은 세기로 뒤에서 덮음) */
+.k-tooltip.k-tooltip.k-tooltip.k-tooltip-top { padding-bottom: var(--kendo-spacing-1); }
+.k-tooltip.k-tooltip.k-tooltip.k-tooltip-bottom { padding-top: var(--kendo-spacing-1); }
+.k-tooltip.k-tooltip.k-tooltip.k-tooltip-right { padding-left: var(--kendo-spacing-1); }
+.k-tooltip.k-tooltip.k-tooltip.k-tooltip-left { padding-right: var(--kendo-spacing-1); }

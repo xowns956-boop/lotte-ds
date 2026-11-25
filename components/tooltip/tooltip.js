@@ -1,12 +1,12 @@
 /* Lotte Kendo DS · Tooltip 동작
    [data-tooltip] 대상에 마우스를 올리거나 키보드 포커스가 가면 말풍선을 보이고,
    벗어나거나 포커스가 빠지거나 Esc를 누르면 숨긴다.
-   위치: data-tooltip-side = top(기본) · right · bottom · left. 화살표 끝이 대상 가장자리에 닿는다.
+   위치: data-tooltip-side = top(기본) · right · bottom · left. 대상과 kendo-spacing-1(4)만큼 떨어진다(말풍선 바깥 여백).
    화면 밖으로 넘치면 화면 안으로만 밀어 넣는다(방향은 바꾸지 않음). */
 (function () {
   'use strict';
 
-  var CALLOUT = { top: 's', bottom: 'n', right: 'w', left: 'e' };
+  var SIDES = { top: 1, right: 1, bottom: 1, left: 1 };
   var tip = null;
   var current = null;
 
@@ -16,7 +16,7 @@
     tip.id = 'k-lotte-tooltip';
     tip.setAttribute('role', 'tooltip');
     tip.hidden = true;
-    tip.innerHTML = '<div class="k-tooltip-content"></div><div class="k-callout"></div>';
+    tip.innerHTML = '<div class="k-tooltip-content"></div>';
     document.body.appendChild(tip);
     return tip;
   }
@@ -25,18 +25,18 @@
     var text = target.getAttribute('data-tooltip');
     if (!text) return;
     var side = target.getAttribute('data-tooltip-side') || 'top';
-    if (!CALLOUT[side]) side = 'top';
+    if (!SIDES[side]) side = 'top';
     var t = ensure();
     t.className = 'k-tooltip k-tooltip-' + side;
     t.querySelector('.k-tooltip-content').textContent = text;
-    t.querySelector('.k-callout').className = 'k-callout k-callout-' + CALLOUT[side];
     t.hidden = false;
     current = target;
     var prev = target.getAttribute('aria-describedby') || '';
     if (prev.split(' ').indexOf(t.id) < 0) target.setAttribute('aria-describedby', (prev + ' ' + t.id).trim());
 
     var r = target.getBoundingClientRect();
-    var w = t.offsetWidth, h = t.offsetHeight;
+    var box = t.getBoundingClientRect(); // 소수점까지 재야 왼쪽·위 간격도 정확히 4
+    var w = box.width, h = box.height;
     var x, y;
     if (side === 'top') { x = r.left + r.width / 2 - w / 2; y = r.top - h; }
     else if (side === 'bottom') { x = r.left + r.width / 2 - w / 2; y = r.bottom; }

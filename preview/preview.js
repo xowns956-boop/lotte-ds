@@ -614,9 +614,9 @@
     host.appendChild(row);
     host.appendChild(el('h3', 'pv-group-title text-sm-semibold', '모양 (side별)'));
     var demo = el('div', 'pv-btn-row pv-tip-demo');
-    [['top', 's'], ['right', 'w'], ['bottom', 'n'], ['left', 'e']].forEach(function (c) {
-      var t = el('div', 'k-tooltip k-tooltip-' + c[0]);
-      t.innerHTML = '<div class="k-tooltip-content">툴팁</div><div class="k-callout k-callout-' + c[1] + '"></div>';
+    ['top', 'right', 'bottom', 'left'].forEach(function (side) {
+      var t = el('div', 'k-tooltip k-tooltip-' + side);
+      t.innerHTML = '<div class="k-tooltip-content">툴팁</div>';
       demo.appendChild(t);
     });
     host.appendChild(demo);
