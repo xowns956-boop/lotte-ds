@@ -4,7 +4,7 @@
 
 - 순수 HTML·CSS·JS 전용이에요. React·Vue·Tailwind CSS·jQuery UI 같은 프레임워크나 UI 라이브러리는 쓰지 않아요.
 - 라이트·다크 두 모드, PC·Tablet 두 기기 크기를 지원해요.
-- 부품 38종과 화면 패턴 8종이 들어 있어요.
+- 부품 39종과 화면 패턴 8종이 들어 있어요.
 
 ## 바로 가기
 
@@ -70,7 +70,7 @@
 | 버튼 | Button · Toggle · ButtonGroup · Toolbar |
 | 입력 | Input · TextArea · Numeric · Numeric Stepper · Label · Calendar · DatePicker |
 | 선택 | CheckBox · RadioButton · Switch · DropDownList |
-| 표시 | Badge · Chip · Separator · Tooltip · Loader · Skeleton · Toast · Inline · Card · Avatar · ProgressBar · ExpansionPanel · Kbd |
+| 표시 | Badge · Chip · Separator · Tooltip · Loader · Skeleton · Toast · Inline · Card · Avatar · ProgressBar · ExpansionPanel · Splitter · Kbd |
 | 표 | Grid |
 | 이동 | Tabs · Pager |
 | 팝업 | Dialog |

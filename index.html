@@ -40,6 +40,7 @@
   <link rel="stylesheet" href="components/stepper/stepper.css">
   <link rel="stylesheet" href="components/progressbar/progressbar.css">
   <link rel="stylesheet" href="components/expansionpanel/expansionpanel.css">
+  <link rel="stylesheet" href="components/splitter/splitter.css">
   <link rel="stylesheet" href="components/toolbar/toolbar.css">
   <link rel="stylesheet" href="components/kbd/kbd.css">
   <link rel="stylesheet" href="components/pagetab/pagetab.css">
@@ -284,6 +285,12 @@
         <div id="pv-expansionpanel"></div>
       </section>
 
+      <section class="pv-section" id="splitter" aria-labelledby="splitter-title">
+        <h2 class="pv-section__title text-xl-semibold" id="splitter-title">Splitter</h2>
+        <p class="pv-section__desc text-sm-regular">위아래 칸 사이 막대를 끌거나, 막대에 포커스를 두고 ↑ ↓ · Home · End로 위 칸 높이를 바꾼다.</p>
+        <div id="pv-splitter"></div>
+      </section>
+
       <section class="pv-section" id="toolbar" aria-labelledby="toolbar-title">
         <h2 class="pv-section__title text-xl-semibold" id="toolbar-title">Toolbar</h2>
         <p class="pv-section__desc text-sm-regular">버튼·구분선을 한 줄로 묶는 도구 모음. 안의 버튼은 sm, 주 동작 1개만 primary.</p>
@@ -403,6 +410,7 @@
   <script src="components/menu/menu.js" defer></script>
   <script src="components/treeview/treeview.js" defer></script>
   <script src="components/expansionpanel/expansionpanel.js" defer></script>
+  <script src="components/splitter/splitter.js" defer></script>
   <script src="components/pagetab/pagetab.js" defer></script>
   <script src="preview/preview.js"></script>
 </body>

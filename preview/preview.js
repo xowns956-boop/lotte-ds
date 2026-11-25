@@ -710,8 +710,42 @@
     host.appendChild(gridTableEl(rows.slice(0, 2), { group: true }));
     host.appendChild(el('h3', 'pv-group-title text-sm-semibold', '숫자 입력 칸 (기본 · 포커스 · 오류 · 꺼짐 · 고른 줄)'));
     host.appendChild(gridInputEl());
+    host.appendChild(el('h3', 'pv-group-title text-sm-semibold', '글자 입력 칸 · 목록 고르기 칸 (기본 · 오류 · 꺼짐) — 목록을 눌러 보기'));
+    host.appendChild(gridEditEl());
     host.appendChild(el('h3', 'pv-group-title text-sm-semibold', '빈 표 (state=empty)'));
     host.appendChild(gridTableEl([]));
+  }
+  function gridEditEl() {
+    var CHEV = '<svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>';
+    var OPTS = ['적합', '한계', '부적합'];
+    var rows = [
+      { item: '수분', val: '적합', note: '이상 없음' },
+      { item: '염도', val: '', note: '', invalid: true },
+      { item: '이물', val: '', note: '', off: true }
+    ];
+    function dd(r, i) {
+      var id = 'pv-gdd-' + i;
+      var list = OPTS.map(function (o, k) {
+        return '<li class="k-list-item" role="option" aria-selected="' + (o === r.val) + '" data-value="' + k + '"><span class="k-list-item-text">' + o + '</span></li>';
+      }).join('');
+      return '<div class="k-dropdownlist k-picker k-picker-sm"><button type="button" class="k-input-inner" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="' + id + '" aria-label="' + r.item + ' 판정"' +
+        (r.invalid ? ' aria-invalid="true"' : '') + (r.off ? ' disabled' : '') + '><span class="k-input-value-text"' + (r.val ? '' : ' data-placeholder') + '>' + (r.val || '선택') + '</span><span class="k-input-button" aria-hidden="true">' + CHEV + '</span></button>' +
+        '<div class="k-popup k-list-container" hidden><ul class="k-list-ul" role="listbox" id="' + id + '">' + list + '</ul></div><input type="hidden"></div>';
+    }
+    var wrap = el('div', 'k-grid');
+    var t = el('table', 'k-grid-table');
+    t.innerHTML = '<thead class="k-grid-header"><tr><th class="k-header" scope="col">검사항목</th><th class="k-header" scope="col">판정</th><th class="k-header" scope="col">특이사항</th></tr></thead>';
+    var body = el('tbody');
+    rows.forEach(function (r, i) {
+      var tr = el('tr', 'k-master-row');
+      tr.setAttribute('aria-selected', 'false');
+      tr.innerHTML = '<td>' + r.item + '</td><td>' + dd(r, i) + '</td>' +
+        '<td><input type="text" class="k-textbox" value="' + r.note + '" aria-label="' + r.item + ' 특이사항"' + (r.invalid ? ' aria-invalid="true"' : '') + (r.off ? ' disabled' : '') + '></td>';
+      body.appendChild(tr);
+    });
+    t.appendChild(body);
+    wrap.appendChild(t);
+    return wrap;
   }
   function gridInputEl() {
     var rows = [
@@ -900,9 +934,13 @@
     var row = el('div', 'pv-btn-row');
     var b1 = btn('k-button-md k-button-outline-base', 'Dialog 열기'); b1.setAttribute('data-dialog-open', 'pv-dlg-live');
     var b2 = btn('k-button-md k-button-outline-base', 'Alert 열기'); b2.setAttribute('data-dialog-open', 'pv-alert-live');
-    row.append(b1, b2);
+    var b3 = btn('k-button-md k-button-outline-base', '큰 팝업(960) 열기'); b3.setAttribute('data-dialog-open', 'pv-dlg-lg');
+    row.append(b1, b2, b3);
     host.appendChild(row);
     host.appendChild(dialogEl('pv-dlg-live', 'dialog'));
+    var lg = dialogEl('pv-dlg-lg', 'dialog');
+    lg.classList.add('ux-dialog-lg');
+    host.appendChild(lg);
     host.appendChild(dialogEl('pv-alert-live', 'alert'));
     host.appendChild(el('h3', 'pv-group-title text-sm-semibold', '모양 (Dialog · Alert)'));
     var demo = el('div', 'pv-dialog-demo');
@@ -1308,6 +1346,22 @@
       '<span class="k-separator k-separator-vertical" role="separator" aria-orientation="vertical"></span>' + b('k-button-flat-base', '엑셀') + b('k-button-flat-base', '설정') + '</div>';
     host.appendChild(row);
   }
+  function renderSplitter() {
+    var host = document.getElementById('pv-splitter');
+    var box = el('div', 'pv-splitter-box');
+    box.innerHTML = '<div class="k-splitter k-splitter-vertical"><div class="k-pane pv-splitter-pane" id="pv-split-top">위 칸 (제품 검사 리스트)</div>' +
+      '<div class="k-splitbar k-splitbar-vertical" role="separator" tabindex="0" aria-orientation="horizontal" aria-controls="pv-split-top" aria-label="위아래 크기 조절" data-splitter-size="50" data-splitter-min="20">' +
+      '<span class="k-resize-handle" aria-hidden="true"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="9" r="1"/><circle cx="19" cy="9" r="1"/><circle cx="5" cy="9" r="1"/><circle cx="12" cy="15" r="1"/><circle cx="19" cy="15" r="1"/><circle cx="5" cy="15" r="1"/></svg></span></div>' +
+      '<div class="k-pane pv-splitter-pane">아래 칸 (검사정보 · 실적)</div></div>';
+    host.appendChild(box);
+    host.appendChild(el('h3', 'pv-group-title text-sm-semibold', '막대 상태 (기본 · 마우스 올림 · 끄는 중)'));
+    ['', ' k-hover', ''].forEach(function (cls, i) {
+      var b = el('div', 'pv-splitter-state');
+      b.innerHTML = '<div class="k-splitter k-splitter-vertical"><div class="k-pane"></div><div class="k-splitbar k-splitbar-vertical' + cls + '" aria-hidden="true"' + (i === 2 ? ' data-dragging' : '') + '><span class="k-resize-handle"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="9" r="1"/><circle cx="19" cy="9" r="1"/><circle cx="5" cy="9" r="1"/><circle cx="12" cy="15" r="1"/><circle cx="19" cy="15" r="1"/><circle cx="5" cy="15" r="1"/></svg></span></div><div class="k-pane"></div></div>';
+      host.appendChild(b);
+    });
+    if (window.LotteDS && LotteDS.initSplitter) LotteDS.initSplitter(host);
+  }
   function renderKbd() {
     var host = document.getElementById('pv-kbd');
     var row = el('div', 'pv-btn-row');
@@ -1478,6 +1532,7 @@
       renderProgressBar();
       renderExpansionPanel();
       renderToolbar();
+      renderSplitter();
       renderKbd();
       renderPageTab();
       renderAppBar();

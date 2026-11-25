@@ -1,5 +1,5 @@
 /* Lotte Kendo DS · Dialog · Dialog / Alert · Dialog / Overlay
-   상자: 폭 512 · 안쪽 24 · 간격 16 · 바탕 app-surface · 테두리 · 모서리 12(xxl) · 그림자 4
+   상자: 폭 512(큰 팝업 ux-dialog-lg = 960) · 안쪽 24 · 간격 16 · 바탕 app-surface · 테두리 · 모서리 12(xxl) · 그림자 4
    머리: 제목 text-lg/semibold + 설명 text-sm/regular(흐린 글자), 간격 8
    아래 버튼: 오른쪽 정렬, 간격 kendo-device-action-gap(PC 8 · Tablet 16)
    닫기 ×: 오른쪽 위 48×48, 아이콘 16 (Alert에는 없음)
@@ -42,6 +42,10 @@
   color: var(--kendo-color-on-app-surface);
   box-shadow: var(--kendo-elevation-4);
   font-family: var(--kendo-font-family);
+}
+/* 큰 팝업: 폭 960 = 64 × 15 (표 2개를 좌우로 놓는 팝업 등). 좁은 화면에서는 기본과 같이 양옆 16을 남기고 줄어든다 */
+.k-window.k-window.k-window.k-window.ux-dialog-lg {
+  width: calc(var(--kendo-spacing-16) * 15);
 }
 /* 브라우저 <dialog>: 닫혀 있을 때는 숨김 */
 dialog.k-window.k-window.k-window.k-window:not([open]) { display: none; }

@@ -1,0 +1,13 @@
+<!-- Lotte Kendo DS · Splitter (위아래 칸 크기 조절)
+     막대를 끌거나 막대에 포커스를 두고 ↑ ↓(5%씩) · Home · End로 위 칸 높이를 바꾼다.
+     .k-splitter 높이는 놓이는 자리에서 정한다(부모 높이를 채움). 위 칸 처음 높이 data-splitter-size(%) · 양쪽 최소 data-splitter-min(%)
+     아이콘은 grip-horizontal(점 6개). -->
+
+<div class="k-splitter k-splitter-vertical">
+  <div class="k-pane" id="qc-list-pane">제품 검사 리스트</div>
+  <div class="k-splitbar k-splitbar-vertical" role="separator" tabindex="0" aria-orientation="horizontal"
+       aria-controls="qc-list-pane" aria-label="위아래 크기 조절" data-splitter-size="50" data-splitter-min="20">
+    <span class="k-resize-handle" aria-hidden="true"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="9" r="1"/><circle cx="19" cy="9" r="1"/><circle cx="5" cy="9" r="1"/><circle cx="12" cy="15" r="1"/><circle cx="19" cy="15" r="1"/><circle cx="5" cy="15" r="1"/></svg></span>
+  </div>
+  <div class="k-pane">검사정보 · 실적</div>
+</div>

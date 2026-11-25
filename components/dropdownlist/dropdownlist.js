@@ -5,6 +5,7 @@
    - 고르면: 값 글자 바꿈 · aria-selected · 숨은 input 값 · 상자에 change 이벤트(detail = { value, text })
    - 목록 최대 높이: 열 때 화면에 남은 높이(끝 여백 = 칸과 목록 사이 간격과 같음)까지. 넘치면 목록 안에서 세로로 넘김
      아래 자리가 목록보다 모자라고 위가 더 넓으면 위로 연다
+   - 표(Grid) 칸 안 목록: 화면 기준으로 띄우고, 화면이나 표가 스크롤되면 닫는다
    Kendo 위젯(.k-dropdown · .k-combobox)은 Kendo가 동작시키므로 건드리지 않는다. */
 (function () {
   'use strict';
@@ -40,11 +41,20 @@
   }
   // 최대 높이 = 열리는 쪽에 남은 화면 높이 (CSS 변수 --_k-dd-max로 넘김)
   // 아래 자리가 목록보다 모자라고 위가 더 넓으면 위로 연다(data-side="top")
+  // 표(Grid) 칸 안 목록은 표가 넘침을 잘라서, 화면 기준(position: fixed)으로 칸 바로 아래·위에 띄운다
   function fit(popup) {
     popup.style.removeProperty('--_k-dd-max');
     popup.removeAttribute('data-side');
-    var gap = parseFloat(getComputedStyle(popup).marginTop) || 0;
     var field = popup.parentElement.getBoundingClientRect();
+    var fixed = !!popup.parentElement.closest('.k-grid');
+    popup.toggleAttribute('data-fixed', fixed);
+    if (fixed) {
+      popup.style.setProperty('--_k-dd-x', field.left + 'px');
+      popup.style.setProperty('--_k-dd-w', field.width + 'px');
+      popup.style.setProperty('--_k-dd-top', field.bottom + 'px');
+      popup.style.setProperty('--_k-dd-bottom', (window.innerHeight - field.top) + 'px');
+    }
+    var gap = parseFloat(getComputedStyle(popup).marginTop) || 0;
     var need = popup.getBoundingClientRect().height;
     var below = window.innerHeight - popup.getBoundingClientRect().top - gap;
     var above = field.top - 2 * gap;
@@ -94,6 +104,16 @@
     setActive(box, next);
   }
 
+  // 화면 기준으로 띄운 목록은 스크롤하면 칸과 떨어지므로 닫는다(목록 안 스크롤은 제외)
+  document.addEventListener('scroll', function (e) {
+    if (!open) return;
+    var p = parts(open);
+    if (!p.popup.hasAttribute('data-fixed') || p.popup.contains(e.target)) return;
+    hide(open);
+  }, true);
+  window.addEventListener('resize', function () {
+    if (open && parts(open).popup.hasAttribute('data-fixed')) hide(open);
+  });
   document.addEventListener('click', function (e) {
     var item = e.target.closest('.k-dropdownlist .k-list-item');
     if (item) { choose(item.closest('.k-dropdownlist'), item); return; }

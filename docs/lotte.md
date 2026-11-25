@@ -117,7 +117,7 @@ UI를 만드는 것은 **디자이너의 일**이다. AI는 롯데 DS 부품으�
 
 ## 3. 부품
 
-이 버전에 들어 있는 부품은 아래가 전부다(Button · Input · TextArea · Numeric · Numeric Stepper · CheckBox · RadioButton · Switch · Label · Badge · Chip · Separator · DropDownList · Tooltip · Loader · Skeleton · Grid · Tabs · Pager · Dialog · Toast · Inline · Form · Card · Card / Stat · Avatar · Drawer · Breadcrumb · Calendar · DatePicker · Toggle · ButtonGroup · Menu · TreeView · Stepper · ProgressBar · ExpansionPanel · Toolbar · Kbd · PageTab · AppBar · PageHeading · Toolbar / Filter · Toolbar / Form Action · Form Table · Dialog Content 6종 · Menu Tile · SectionCards). 여기 없는 부품(머리줄 등)은 아직 없다 → 1장 "없는 UI".
+이 버전에 들어 있는 부품은 아래가 전부다(Button · Input · TextArea · Numeric · Numeric Stepper · CheckBox · RadioButton · Switch · Label · Badge · Chip · Separator · DropDownList · Tooltip · Loader · Skeleton · Grid · Tabs · Pager · Dialog · Toast · Inline · Form · Card · Card / Stat · Avatar · Drawer · Breadcrumb · Calendar · DatePicker · Toggle · ButtonGroup · Menu · TreeView · Stepper · ProgressBar · ExpansionPanel · Splitter · Toolbar · Kbd · PageTab · AppBar · PageHeading · Toolbar / Filter · Toolbar / Form Action · Form Table · Dialog Content 6종 · Menu Tile · SectionCards). 여기 없는 부품(머리줄 등)은 아직 없다 → 1장 "없는 UI".
 
 ### Button
 
@@ -181,6 +181,7 @@ UI를 만드는 것은 **디자이너의 일**이다. AI는 롯데 DS 부품으�
 - 기본 높이 64. 글자가 길면 줄바꿈되고 넘치면 칸 안에서 스크롤된다. 더 높게 쓸 때만 놓이는 자리에서 `height`를 정한다(변수로).
 - 쓰는 사람이 오른쪽 아래 손잡이로 **세로만** 늘릴 수 있다. 가로 폭은 놓이는 자리를 따른다. `resize`를 화면에서 바꾸지 않는다.
 - 라벨 연결·폭 규칙은 Input과 같다.
+- 서식 있는 글 편집기(굵게·목록·표 등 도구줄)는 없다. 결재 요청 내용처럼 긴 글도 TextArea로 받는다.
 
 ### Numeric (PC 숫자 입력)
 
@@ -386,16 +387,20 @@ UI를 만드는 것은 **디자이너의 일**이다. AI는 롯데 DS 부품으�
 | 예/아니오 체크 열 | `k-text-center` + 체크박스 |
 | 줄 메뉴 | `k-command-cell` + Button(flat · icon · sm) |
 | 숫자 입력 칸 | `td.k-text-right` 안에 `<input class="k-textbox" inputmode="numeric">` (머리칸도 `k-text-right`). 증감 버튼 없음. 꺼짐 = `disabled`, 오류 = `aria-invalid="true"` |
+| 글자 입력 칸 | `td` 안에 `<input type="text" class="k-textbox">` (글자는 왼쪽). 꺼짐·오류는 숫자 입력 칸과 같음 |
+| 목록 고르기 칸 | `td` 안에 DropDownList(`k-dropdownlist k-picker k-picker-sm`, DropDownList 절 구조 그대로). 꺼짐 = button `disabled`, 오류 = button `aria-invalid="true"`. 목록은 표 밖으로 나오게 화면 기준으로 뜨고, 화면이 스크롤되면 닫힌다 |
 | 필수 열 | 머리칸 이름 앞 `k-required` |
 | 정렬 열 | 머리칸 안 `button.k-link` + `aria-sort` (정렬하는 일은 화면 스크립트) |
 | 2단 머리글 | 묶음 칸에 `colspan` + `scope="colgroup"` |
 | 고른 줄 | `tr`에 `aria-selected="true"` |
 | 빈 표 | `tr.k-grid-norecords > td colspan` "표시할 데이터가 없습니다" |
+| 다른 화면으로 가는 칸 | `td` 안 `button.k-button.k-button-link-primary`(글자 링크). 누르면 화면 스크립트가 그 화면을 PageTab에 추가해 연다(같은 탭 이동 · 브라우저 새 탭 아님) |
+| 파일 다운로드 칸 | `td` 안 Button(flat · icon · sm) + `aria-label`. 누르면 브라우저 기본 다운로드, 진행 표시는 두지 않는다 |
 
 - 줄 높이·머리줄 높이는 기기 모드를 따른다(PC 37 · 40 / Tablet 57 · 48). 표 글자는 PC·Tablet 모두 14 — 버튼 글자보다 크게 하지 않는다.
 - 칸 글자는 한 줄로 두고 넘치면 말줄임(…)된다.
 - 표 위 툴바와 아래 줄은 부품이 아니라 조립한다: **툴바** = 위아래 16 여백, 왼쪽 검색 Input · 오른쪽 Button(양끝 정렬). **아래 줄** = 위아래 16 여백, 왼쪽 "N건 중 N건 선택"(`text-sm-regular`, 흐린 글자) · 오른쪽 이전/다음 Button(outline · sm), 간격 8.
-- 한 페이지 10줄이 기본이다. 페이지 번호로 넘기려면 아래 줄 오른쪽에 Pager를 둔다. 칸 안에서 고칠 수 있는 건 숫자 입력 칸뿐이다(입력칸 높이 PC 32 · Tablet 40, 상태는 Input과 같음). 값 채우기·저장 검사는 화면 스크립트가 한다. 열 메뉴(⋮)·그 밖의 칸 편집(목록·날짜 고르기 등)·줄 묶기는 아직 없다 → "디자인 필요".
+- 한 페이지 10줄이 기본이다. 페이지 번호로 넘기려면 아래 줄 오른쪽에 Pager를 둔다. 칸 안에서 고칠 수 있는 건 숫자 입력 · 글자 입력 · 목록 고르기 칸이다(입력칸 높이 PC 32 · Tablet 40, 줄 높이는 그대로 37 · 57, 상태는 Input · DropDownList와 같음). 값 채우기·저장 검사는 화면 스크립트가 한다. 열 메뉴(⋮)·날짜 고르기 칸·줄 묶기는 아직 없다 → "디자인 필요".
 
 ### Tabs
 
@@ -470,6 +475,8 @@ UI를 만드는 것은 **디자이너의 일**이다. AI는 롯데 DS 부품으�
 
 - 브라우저 `<dialog>`를 쓴다. 여는 버튼 `data-dialog-open="ID"`, 닫는 버튼 `data-dialog-close`(값은 `returnValue`로). 포커스 가두기·Esc·닫은 뒤 포커스 되돌리기는 브라우저가 한다.
 - 폭 512, 화면이 좁으면 양옆 16을 남기고 줄어든다. 아래 버튼은 오른쪽 정렬, 주 버튼(오른쪽 끝)은 하나.
+- 큰 팝업: `dialog`에 `ux-dialog-lg`를 더하면 폭 960(표 2개를 좌우로 놓는 팝업 등). 좁은 화면에서는 기본과 같이 양옆 16을 남기고 줄어든다. 내용이 512에 들어가면 쓰지 않는다.
+- 제목줄 버튼은 닫기 × 하나뿐이다. 최소화(−)·최대화 버튼은 쓰지 않는다.
 - **Alert**(되돌릴 수 없는 동작 확인)는 `k-alert` + `role="alertdialog"`, 닫기 × 없음, 뒤 가림을 눌러도 안 닫힌다. 위험 동작이면 주 버튼을 `k-button-solid-error`로.
 - 내용 칸에는 다른 부품(입력칸·표 등)을 넣는다. 팝업 안 내용 틀(표 · 정보 · LOT 입력 · 여러 줄 입력 · 선택 목록 · 선택 버튼)은 아직 없다 → 비슷한 부품을 조합하고, 안 되면 "디자인 필요".
 - 태블릿에서 입력칸이 있는 팝업은 화면 키보드에 가리지 않게 화면 위쪽에 둔다(`dialog`에 위쪽 여백 지정, 변수로).
@@ -838,6 +845,26 @@ LotteDS.toast({ title: '삭제했습니다', action: '실행 취소', onAction: 
 - 처음 접어 두려면 `k-expanded`와 `aria-expanded="true"`를 빼고 내용에 `hidden`.
 - 누르면 상자에 `change` 이벤트(`detail.expanded`).
 
+### Splitter (위아래 칸 크기 조절)
+
+```html
+<div class="k-splitter k-splitter-vertical">
+  <div class="k-pane" id="list-pane">…위 칸(예: 목록 Card)…</div>
+  <div class="k-splitbar k-splitbar-vertical" role="separator" tabindex="0" aria-orientation="horizontal"
+       aria-controls="list-pane" aria-label="위아래 크기 조절" data-splitter-size="50" data-splitter-min="20">
+    <span class="k-resize-handle" aria-hidden="true"><svg class="k-svg-icon" …grip-horizontal…></svg></span>
+  </div>
+  <div class="k-pane">…아래 칸(예: Tabs)…</div>
+</div>
+```
+
+- 위 칸과 아래 칸 사이 가로 막대를 끌면 위 칸 높이가 바뀐다. 막대에 포커스를 두고 ↑ ↓는 5%씩, Home · End는 위 칸 최소 · 최대.
+- `.k-splitter` 높이는 놓이는 자리에서 정한다(부모 높이를 채운다). 높이가 정해진 상자 안에 둔다.
+- 처음 위 칸 높이 `data-splitter-size`(%, 기본 50), 양쪽 최소 높이 `data-splitter-min`(%, 기본 20). 막대에 둔다.
+- 막대 모양: 선 1 · 가운데 손잡이. 마우스 올림·끄는 중이면 primary, 키보드 포커스는 링 2.
+- 바뀌면 막대에 `change` 이벤트(`detail.size` = 위 칸 %). 높이를 기억하는 일은 화면 스크립트가 한다.
+- 칸 안 내용이 넘치면 칸 안에서 스크롤된다. 좌우 칸 나누기는 아직 없다 → "디자인 필요".
+
 ### Toolbar (도구 모음)
 
 ```html
@@ -880,6 +907,7 @@ LotteDS.toast({ title: '삭제했습니다', action: '실행 취소', onAction: 
 - 화면 맨 아래, 폭 전체에 한 줄. 높이 36(PC·Tablet 같음). 탭이 많으면 줄 안에서 가로로 넘긴다.
 - 고른 탭은 하나(`aria-selected="true"`): 흰 바탕 · 굵은 글자 · 아이콘 primary. Tabs(`.k-tabstrip`)와 섞어 쓰지 않는다 — 화면 안 내용 나누기는 Tabs.
 - X는 빼도 된다. 누르면 탭에 `close` 이벤트만 오고, 탭을 지우고 다른 화면을 고르는 건 쓰는 쪽에서 한다. 탭을 고르면 줄에 `select` 이벤트.
+- 다른 화면으로 가는 링크(표 칸 링크 등)는 브라우저 새 탭으로 열지 않고, 그 화면을 이 줄에 탭으로 추가하고 고른다. 이미 열려 있으면 그 탭을 고른다.
 - 빈 상태: 줄 맨 끝에 `<p class="ux-page-tabs-empty">열린 화면이 없어요</p>`를 둔다. 탭이 있으면 저절로 숨고, 탭이 다 닫히면 같은 줄에 흐린 글자로 보인다.
 
 ### AppBar (화면 맨 위 머리줄 · 패턴)

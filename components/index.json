@@ -175,6 +175,11 @@
     "group": "표시"
   },
   {
+    "name": "Splitter",
+    "dir": "splitter",
+    "group": "표시"
+  },
+  {
     "name": "Toolbar",
     "dir": "toolbar",
     "group": "버튼"

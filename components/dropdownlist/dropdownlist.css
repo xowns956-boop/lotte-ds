@@ -182,6 +182,18 @@
   margin-top: 0;
   margin-bottom: var(--kendo-spacing-1);
 }
+/* 표 칸 안 목록: 표 밖으로 나오게 화면 기준 위치(열 때 칸 자리를 재서 넣음) */
+.k-dropdownlist > .k-popup[data-fixed] {
+  position: fixed;
+  top: var(--_k-dd-top);
+  left: var(--_k-dd-x);
+  min-width: var(--_k-dd-w);
+  z-index: 10;
+}
+.k-dropdownlist > .k-popup[data-fixed][data-side="top"] {
+  top: auto;
+  bottom: var(--_k-dd-bottom);
+}
 .k-popup.k-popup.k-list-container.k-list-container {
   box-sizing: border-box;
   padding: var(--kendo-spacing-1);
