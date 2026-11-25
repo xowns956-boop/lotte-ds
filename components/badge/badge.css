@@ -1,5 +1,6 @@
 /* Lotte Kendo DS · Badge
    variant: default · secondary · destructive · outline / Show Icon(아이콘 12, 글자 앞)
+   상태: info · success · warning · destructive-subtle (연한 바탕 + 진한 글자, 표·목록 판정용)
    글자 = text-caption/medium (PC 12 · Tablet 14), 모서리 = ux4-border-radius-control
 
    클래스 (Kendo 이름)
@@ -7,8 +8,13 @@
    secondary    .k-badge-solid-secondary (옛 .k-badge-solid.k-badge-secondary)
    destructive  .k-badge-solid-error     (옛 .k-badge-solid.k-badge-error)
    outline      .k-badge-outline-base    (옛 .k-badge-outline)
+   info         .k-badge-solid-info      (옛 .k-badge-solid.k-badge-info)
+   success      .k-badge-solid-success   (옛 .k-badge-solid.k-badge-success)
+   warning      .k-badge-solid-warning   (옛 .k-badge-solid.k-badge-warning)
+   destructive-subtle  .k-badge-solid-error.ux-badge-subtle
 
    <span class="k-badge k-badge-md k-badge-solid-primary">배지</span>
+   <span class="k-badge k-badge-md k-badge-solid-success">적합</span>
    <span class="k-badge k-badge-md k-badge-outline-base"><svg class="k-svg-icon" aria-hidden="true">…</svg>배지</span>
 
    이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. */
@@ -33,6 +39,24 @@
   --_k-bd-fg: var(--kendo-color-on-app-surface);
   --_k-bd-line: var(--kendo-color-border);
   --_k-bd-bw: var(--kendo-spacing-1px);
+}
+
+/* 상태: 연한 바탕 + 진한 글자 (진한 바탕 상태 배지는 없다 → 강하게는 destructive만) */
+.k-badge:is(.k-badge-solid-info, .k-badge-solid.k-badge-info) {
+  --_k-bd-bg: var(--kendo-color-info-subtle);
+  --_k-bd-fg: var(--kendo-color-info-on-subtle);
+}
+.k-badge:is(.k-badge-solid-success, .k-badge-solid.k-badge-success) {
+  --_k-bd-bg: var(--kendo-color-success-subtle);
+  --_k-bd-fg: var(--kendo-color-success-on-subtle);
+}
+.k-badge:is(.k-badge-solid-warning, .k-badge-solid.k-badge-warning) {
+  --_k-bd-bg: var(--kendo-color-warning-subtle);
+  --_k-bd-fg: var(--kendo-color-warning-on-subtle);
+}
+.k-badge.ux-badge-subtle:is(.k-badge-solid-error, .k-badge-solid.k-badge-error) {
+  --_k-bd-bg: var(--kendo-color-error-subtle);
+  --_k-bd-fg: var(--kendo-color-error-on-subtle);
 }
 
 /* ── 2. 모양 (Kendo 원본 0,2,0 → 0,4,0) ───────────────────── */

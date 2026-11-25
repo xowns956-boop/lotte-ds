@@ -272,8 +272,33 @@ UI를 만드는 것은 **디자이너의 일**이다. AI는 롯데 DS 부품으�
 | secondary | `k-badge-solid-secondary` |
 | destructive | `k-badge-solid-error` |
 | outline | `k-badge-outline-base` |
+| info | `k-badge-solid-info` |
+| success | `k-badge-solid-success` |
+| warning | `k-badge-solid-warning` |
+| destructive-subtle | `k-badge-solid-error ux-badge-subtle` |
 
 - 상태·종류를 짧게 표시한다(누르는 용도가 아니다). 아이콘은 글자 앞에 12 크기, `aria-hidden`.
+- info·success·warning·destructive-subtle은 연한 바탕 + 진한 글자다(상태 표시). Kendo 기본처럼 진한 초록·노랑 바탕이 아니다.
+
+#### 배지 variant 고르기
+
+배지 색은 **뜻**으로 고른다.
+
+| variant | 쓰는 때 | 예 |
+|---|---|---|
+| default | 상태가 없는 기본 이름표, 화면 주 색과 같은 계열 | 구분·분류 이름표, 진행 |
+| secondary | default보다 약한 보조 이름표 | 부가 정보·개수 |
+| outline | 디자인에 테두리 배지가 정해져 있을 때만 | — |
+| info | 안내·진행 중·현재 상태(좋고 나쁨 판정 없음) | 진행 중, 검사중 |
+| success | 긍정 결과 | 적합, 합격, 승인, 완료 |
+| warning | 확인·검토가 필요하지만 아직 실패는 아닌 것 | 한계, 주의, 기준 근접 |
+| destructive-subtle | 실패·오류·불량. **실패 표시는 기본이 이것** | 부적합, 불량, 오류 |
+| destructive | destructive-subtle과 뜻이 같고 진한 바탕. 즉시 조치가 필요한 것 하나만 도드라지게 할 때만, 표·목록에 반복되는 배지에는 쓰지 않는다 | 긴급 정지 |
+
+- **강도:** 진한 바탕(default·destructive)은 강조, 연한 바탕(상태 4개)은 표시다. 표·목록처럼 같은 배지가 여러 번 나오면 연한 바탕을 쓴다.
+- **판정 3단계(적합·한계·부적합):** 적합 = success, 한계 = warning, 부적합 = destructive-subtle.
+- **한 화면 안에서 같은 뜻 = 같은 variant.** 같은 상태에 다른 색을 섞지 않는다.
+- **색만으로 구분하지 않는다:** 배지에는 항상 상태 글자를 쓴다.
 - 설비 상태(가동·정지·대기 등) 전용 배지 모양은 아직 없다 → "디자인 필요".
 
 ### Chip (적용된 조회 조건)

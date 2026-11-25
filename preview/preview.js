@@ -514,7 +514,7 @@
   var X_ICON = '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>';
   function renderBadge() {
     var host = document.getElementById('pv-badge');
-    var variants = [['default', 'k-badge-solid-primary'], ['secondary', 'k-badge-solid-secondary'], ['destructive', 'k-badge-solid-error'], ['outline', 'k-badge-outline-base']];
+    var variants = [['default', 'k-badge-solid-primary'], ['secondary', 'k-badge-solid-secondary'], ['destructive', 'k-badge-solid-error'], ['outline', 'k-badge-outline-base'], ['info', 'k-badge-solid-info'], ['success', 'k-badge-solid-success'], ['warning', 'k-badge-solid-warning'], ['destructive-subtle', 'k-badge-solid-error ux-badge-subtle']];
     gridTable(host, 'variant × 아이콘', 'Show Icon', [false, true], variants.map(function (v) { return v[0]; }), function (withIcon, name) {
       var cls = variants.filter(function (v) { return v[0] === name; })[0][1];
       var b = el('span', 'k-badge k-badge-md ' + cls);
