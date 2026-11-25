@@ -2,17 +2,11 @@
    왼쪽: 제목 text-2xl/semibold + 설명 text-sm 흐림(빼도 됨), 간격 4
    오른쪽: 버튼 최대 2개(보조 outline · 주요 solid-primary), 간격 8
    줄 높이 60 · 두 칸 사이 16 · 세로 가운데. 폭은 본문 영역을 채운다.
-   이 화면 즐겨찾기(☆, 빼도 됨): 제목 바로 옆(간격 4). Toggle(기본 · sm) + star 아이콘, 정사각 control-height-sm(PC 32 · Tablet 40)
-     꺼짐 = 빈 별 · 켜짐 = 채운 별(선·안 kendo-color-warning-on-surface, 바탕 없음)
-     마우스 올림 = Toggle과 같은 바탕(base) · 포커스 = Toggle과 같은 링(primary 2)
    Kendo에는 이 부품이 없어서 .ux-* 이름을 쓴다.
 
    <div class="ux-page-heading">
      <div class="ux-page-heading-titles">
-       <div class="ux-page-heading-title-row">
-         <h1 class="ux-page-heading-title">작업 지시</h1>
-         <button type="button" class="k-toggle-button ux-toggle-sm ux-page-heading-favorite" aria-pressed="false" aria-label="작업 지시 즐겨찾기">…star…</button>
-       </div>
+       <h1 class="ux-page-heading-title">작업 지시</h1>
        <p class="ux-page-heading-desc">오늘 생산할 작업을 확인합니다.</p>
      </div>
      <div class="ux-page-heading-actions">
@@ -41,12 +35,6 @@
   gap: var(--kendo-spacing-1);
   min-width: 0;
 }
-.ux-page-heading .ux-page-heading-title-row {
-  display: flex;
-  align-items: center;
-  gap: var(--kendo-spacing-1);
-  min-width: 0;
-}
 .ux-page-heading .ux-page-heading-title {
   margin: 0;
   color: var(--kendo-color-on-app-surface);
@@ -68,19 +56,4 @@
   flex: none;
   align-items: flex-start;
   gap: var(--kendo-spacing-2);
-}
-
-/* 이 화면 즐겨찾기 ☆ */
-.k-toggle-button.ux-page-heading-favorite {
-  --_k-tg-bg-on: var(--kendo-color-opacity-transparent);
-  --_k-tg-fg-on: var(--kendo-color-warning-on-surface);
-  --_k-tg-bg-on-hover: var(--kendo-color-base);
-}
-.k-toggle-button.k-toggle-button.k-toggle-button.k-toggle-button.ux-page-heading-favorite {
-  flex: none;
-  min-width: var(--kendo-device-control-height-sm);
-  min-height: var(--kendo-device-control-height-sm);
-}
-.ux-page-heading-favorite:is([aria-pressed="true"], .k-selected, .k-state-selected) :is(.k-svg-icon, svg) {
-  fill: currentColor;
 }

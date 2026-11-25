@@ -1,7 +1,8 @@
 <!-- Lotte Kendo DS · AppBar (화면 맨 위 머리줄)
-     화면 맨 위, 폭 전체. 왼쪽 = 메뉴 토글 · 경로 줄, 오른쪽 = 검색 · 사용자.
+     화면 맨 위, 폭 전체. 왼쪽 = 메뉴 토글 · 이 화면 즐겨찾기 ☆ · 화면 제목(h1) + 작은 경로, 오른쪽 = 검색 · 즐겨찾기 목록 · 사용자.
+     화면 제목은 여기 h1 하나. 본문에 제목(PageHeading)을 또 두지 않는다.
      안에 든 것은 전부 기존 부품(Drawer / Toggle · Separator · Breadcrumb · Input(InputGroup) · Kbd · Drawer / User).
-     빼도 되는 칸: 토글+구분선 · 홈 아이콘 · 경로 2단계 · 검색 · 아이콘 버튼(ghost, 기본 숨김) · 사용자 -->
+     빼도 되는 칸: 토글+구분선 · ☆ · 작은 경로 · 검색 · 아이콘 버튼(ghost) · 사용자. 제목 없이 경로 줄만 두는 예전 구조도 된다(첫 칸 = 홈 아이콘) -->
 
 <header class="k-appbar ux-appbar">
   <div class="k-appbar-section">
@@ -9,15 +10,19 @@
       <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
     </button>
     <span class="k-separator k-separator-vertical" role="separator" aria-orientation="vertical"></span>
-    <nav class="k-breadcrumb" aria-label="현재 위치">
-      <ol class="k-breadcrumb-container">
-        <li class="k-breadcrumb-item"><a class="k-breadcrumb-link ux-appbar-home" href="#" aria-label="홈"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></a></li>
-        <li class="ux-breadcrumb-separator" aria-hidden="true"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="m9 18 6-6-6-6"/></svg></li>
-        <li class="k-breadcrumb-item"><a class="k-breadcrumb-link" href="#">생산관리</a></li>
-        <li class="ux-breadcrumb-separator" aria-hidden="true"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="m9 18 6-6-6-6"/></svg></li>
-        <li class="k-breadcrumb-item"><span class="k-breadcrumb-link" aria-current="page">작업 지시</span></li>
-      </ol>
-    </nav>
+    <button type="button" class="k-toggle-button ux-toggle-sm ux-appbar-favorite" aria-pressed="false" aria-label="작업 지시 즐겨찾기"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></button>
+    <div class="ux-appbar-titles">
+      <h1 class="ux-appbar-title">작업 지시</h1>
+      <nav class="k-breadcrumb ux-appbar-crumb" aria-label="현재 위치">
+        <ol class="k-breadcrumb-container">
+          <li class="k-breadcrumb-item"><a class="k-breadcrumb-link" href="#">MES</a></li>
+          <li class="ux-breadcrumb-separator" aria-hidden="true"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="m9 18 6-6-6-6"/></svg></li>
+          <li class="k-breadcrumb-item"><a class="k-breadcrumb-link" href="#">생산관리</a></li>
+          <li class="ux-breadcrumb-separator" aria-hidden="true"><svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="m9 18 6-6-6-6"/></svg></li>
+          <li class="k-breadcrumb-item"><span class="k-breadcrumb-link" aria-current="page">PP-010</span></li>
+        </ol>
+      </nav>
+    </div>
   </div>
   <span class="k-appbar-spacer"></span>
   <div class="k-appbar-section">

@@ -1,11 +1,15 @@
 /* Lotte Kendo DS · AppBar (화면 맨 위 머리줄 · 조합 패턴)
    바탕 app-surface · 아래 1 선 · 안쪽 위아래 8 / 좌우 16 · 폭은 화면 전체
-   왼쪽(간격 10): 메뉴 펼치기·접기(Drawer / Toggle) · 세로 구분선 16 · Breadcrumb(첫 칸 = 홈 아이콘)
+   왼쪽(간격 10): 메뉴 펼치기·접기(Drawer / Toggle) · 세로 구분선 16 · 이 화면 즐겨찾기 ☆ · 화면 제목 묶음
+     화면 제목 묶음(.ux-appbar-titles): 제목 h1(text-lg semibold) 위 + 작은 경로(Breadcrumb, 글자 12) 아래, 간격 0
+     제목 없이 Breadcrumb만 두는 예전 구조(첫 칸 = 홈 아이콘)도 그대로 된다
+     이 화면 즐겨찾기 ☆(.ux-appbar-favorite): Toggle(기본 · sm) + star, 정사각 control-height-sm(PC 32 · Tablet 40)
+       꺼짐 = 빈 별 · 켜짐 = 채운 별(선·안 kendo-color-warning-on-surface, 바탕 없음) · 마우스 올림 · 포커스는 Toggle과 같음
    오른쪽(간격 12): 검색 InputGroup 240(⌘K) · 아이콘 버튼 ghost(선택, 예: 즐겨찾기 목록 = list-checks) · 사용자(Drawer / User + chevron)
    각 칸은 다른 부품을 그대로 쓴다. 이 파일은 줄 배치만 정한다.
 
    <header class="k-appbar ux-appbar">
-     <div class="k-appbar-section">…토글 · 구분선 · Breadcrumb…</div>
+     <div class="k-appbar-section">…토글 · 구분선 · ☆ · <div class="ux-appbar-titles"><h1 class="ux-appbar-title">…</h1><nav class="k-breadcrumb ux-appbar-crumb">…</nav></div></div>
      <span class="k-appbar-spacer"></span>
      <div class="k-appbar-section">…검색 · 사용자…</div>
    </header>
@@ -62,4 +66,59 @@
 /* 검색 칸 폭 240 */
 .k-appbar.ux-appbar .k-textbox.ux-appbar-search {
   width: calc(var(--kendo-spacing-16) * 3 + var(--kendo-spacing-12) * 1);
+}
+
+/* ── 화면 제목 묶음: 제목 위 · 작은 경로 아래 ─────────────────── */
+.k-appbar.ux-appbar .ux-appbar-titles {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.k-appbar.ux-appbar .ux-appbar-title {
+  margin: 0;
+  overflow: hidden;
+  color: var(--kendo-color-on-app-surface);
+  font-family: var(--kendo-font-family);
+  font-size: var(--kendo-font-size-lg);
+  font-weight: var(--kendo-font-weight-semibold);
+  line-height: var(--ux4-line-height-sm);
+  letter-spacing: var(--kendo-letter-spacing);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* 작은 경로: 글자 12 · 줄 높이 16 · 칸 사이 4 · 구분 화살표 12 */
+.k-breadcrumb.k-breadcrumb.k-breadcrumb.k-breadcrumb.ux-appbar-crumb {
+  font-size: var(--kendo-font-size-sm);
+  line-height: var(--ux4-line-height-xs);
+}
+.k-breadcrumb.k-breadcrumb.k-breadcrumb.ux-appbar-crumb :is(.k-breadcrumb-container, .k-breadcrumb-item) {
+  gap: var(--kendo-spacing-1);
+}
+/* 작은 경로는 한 줄. 넘치면 잘린다(제목 줄 높이를 지킨다) */
+.k-breadcrumb.k-breadcrumb.k-breadcrumb.ux-appbar-crumb { min-width: 0; overflow: hidden; }
+.k-breadcrumb.k-breadcrumb.k-breadcrumb.ux-appbar-crumb .k-breadcrumb-container { flex-wrap: nowrap; white-space: nowrap; }
+.k-breadcrumb.k-breadcrumb.k-breadcrumb.ux-appbar-crumb .k-breadcrumb-link {
+  color: var(--kendo-color-subtle);
+  font-size: inherit;
+  line-height: inherit;
+}
+.k-breadcrumb.k-breadcrumb.k-breadcrumb.k-breadcrumb.ux-appbar-crumb :is(.ux-breadcrumb-separator > :is(.k-svg-icon, .k-icon), .k-breadcrumb-delimiter-icon) {
+  width: var(--kendo-spacing-3);
+  height: var(--kendo-spacing-3);
+  font-size: var(--kendo-spacing-3);
+}
+
+/* ── 이 화면 즐겨찾기 ☆ ─────────────────────────────────────── */
+.k-toggle-button.ux-appbar-favorite {
+  --_k-tg-bg-on: var(--kendo-color-opacity-transparent);
+  --_k-tg-fg-on: var(--kendo-color-warning-on-surface);
+  --_k-tg-bg-on-hover: var(--kendo-color-base);
+}
+.k-toggle-button.k-toggle-button.k-toggle-button.k-toggle-button.ux-appbar-favorite {
+  flex: none;
+  min-width: var(--kendo-device-control-height-sm);
+  min-height: var(--kendo-device-control-height-sm);
+}
+.ux-appbar-favorite:is([aria-pressed="true"], .k-selected, .k-state-selected) :is(.k-svg-icon, svg) {
+  fill: currentColor;
 }

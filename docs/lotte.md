@@ -917,24 +917,34 @@ LotteDS.toast({ title: '삭제했습니다', action: '실행 취소', onAction: 
   <div class="k-appbar-section">
     <button type="button" class="k-button k-button-flat-base k-icon-button ux-drawer-toggle" data-drawer-toggle="app-drawer" aria-expanded="true" aria-controls="app-drawer" aria-label="메뉴 펼치기·접기">…panel-left…</button>
     <span class="k-separator k-separator-vertical" role="separator" aria-orientation="vertical"></span>
-    <nav class="k-breadcrumb" aria-label="현재 위치">
-      <ol class="k-breadcrumb-container">
-        <li class="k-breadcrumb-item"><a class="k-breadcrumb-link ux-appbar-home" href="#" aria-label="홈">…house…</a></li>
-        <li class="ux-breadcrumb-separator" aria-hidden="true">…</li>
-        <li class="k-breadcrumb-item"><span class="k-breadcrumb-link" aria-current="page">작업 지시</span></li>
-      </ol>
-    </nav>
+    <button type="button" class="k-toggle-button ux-toggle-sm ux-appbar-favorite" aria-pressed="false" aria-label="제품검사 결과 등록 즐겨찾기">…star…</button>
+    <div class="ux-appbar-titles">
+      <h1 class="ux-appbar-title">제품검사 결과 등록</h1>
+      <nav class="k-breadcrumb ux-appbar-crumb" aria-label="현재 위치">
+        <ol class="k-breadcrumb-container">
+          <li class="k-breadcrumb-item"><a class="k-breadcrumb-link" href="#">QMS</a></li>
+          <li class="ux-breadcrumb-separator" aria-hidden="true">…chevron-right…</li>
+          <li class="k-breadcrumb-item"><a class="k-breadcrumb-link" href="#">검사 관리</a></li>
+          <li class="ux-breadcrumb-separator" aria-hidden="true">…chevron-right…</li>
+          <li class="k-breadcrumb-item"><span class="k-breadcrumb-link" aria-current="page">QM-020</span></li>
+        </ol>
+      </nav>
+    </div>
   </div>
   <span class="k-appbar-spacer"></span>
   <div class="k-appbar-section">
     <span class="k-textbox ux-appbar-search">…InputGroup(검색 · ⌘K)…</span>
+    <button type="button" class="k-button k-button-flat-base k-icon-button" aria-label="즐겨찾기 목록" data-tooltip="즐겨찾기 목록">…list-checks…</button>
     <div class="ux-drawer-user">…Drawer / User + chevron…</div>
   </div>
 </header>
 ```
 
-- 화면 맨 위, 폭 전체. 안의 칸은 전부 기존 부품(Drawer / Toggle · Separator · Breadcrumb · Input InputGroup · Kbd · Drawer / User)을 그대로 쓴다.
-- 빼도 되는 칸: 토글+구분선 · 홈 아이콘 · 경로 중간 단계 · 검색 · 사용자. 아이콘 버튼은 ghost icon 버튼으로 사용자 앞에 둔다(기본은 없음). **즐겨찾기 목록 열기**는 이 자리의 ghost icon 버튼이고 아이콘은 list-checks(☆ 아님), `aria-label`·`data-tooltip` "즐겨찾기 목록". 누른 뒤 나오는 화면은 아직 없다 → "디자인 필요".
+- 화면 맨 위, 폭 전체. 안의 칸은 전부 기존 부품(Drawer / Toggle · Separator · Toggle · Breadcrumb · Input InputGroup · Kbd · Drawer / User)을 그대로 쓴다.
+- 왼쪽 순서: 메뉴 토글 · 구분선 · **이 화면 즐겨찾기 ☆** · **화면 제목**(`h1.ux-appbar-title`, 글자 16 semibold) 위 + **작은 경로**(`nav.k-breadcrumb.ux-appbar-crumb`, 글자 12 흐림) 아래. 화면 제목은 여기 `h1` 하나뿐이고, 본문에 제목(PageHeading)을 또 두지 않는다.
+- 작은 경로는 상위 메뉴 이름을 차례로 두고, 마지막 칸은 화면 ID(`aria-current="page"`). 빼도 된다.
+- **이 화면 즐겨찾기 ☆**(`.ux-appbar-favorite`): Toggle(sm, 정사각 PC 32 · Tablet 40) + star 아이콘. 꺼짐 = 빈 별, 켜짐(`aria-pressed="true"`) = 채운 주황 별. `aria-label`은 "<화면 이름> 즐겨찾기". 누르면 lotte-ds.js가 켜짐·꺼짐을 바꾸고 `change` 이벤트를 보낸다(저장은 화면 스크립트). 즐겨찾기를 쓰지 않는 화면은 뺀다.
+- 빼도 되는 칸: 토글+구분선 · ☆ · 작은 경로 · 검색 · 사용자. 제목 없이 경로 줄(`nav.k-breadcrumb`, 첫 칸 홈 아이콘, 마지막 칸 = 화면 이름)만 두는 예전 구조도 된다. 아이콘 버튼은 ghost icon 버튼으로 사용자 앞에 둔다(기본은 없음). **즐겨찾기 목록 열기**는 이 자리의 ghost icon 버튼이고 아이콘은 list-checks(☆ 아님), `aria-label`·`data-tooltip` "즐겨찾기 목록". 누른 뒤 나오는 화면은 아직 없다 → "디자인 필요".
 - 오른쪽 주요 버튼 자리는 아직 정해진 모양이 없다 → 1장 "없는 UI".
 - Tablet에서는 검색 칸이 기기 높이(48)를 따라 줄이 65가 된다.
 
@@ -943,10 +953,7 @@ LotteDS.toast({ title: '삭제했습니다', action: '실행 취소', onAction: 
 ```html
 <div class="ux-page-heading">
   <div class="ux-page-heading-titles">
-    <div class="ux-page-heading-title-row">
-      <h1 class="ux-page-heading-title">작업 지시</h1>
-      <button type="button" class="k-toggle-button ux-toggle-sm ux-page-heading-favorite" aria-pressed="false" aria-label="작업 지시 즐겨찾기">…star…</button>
-    </div>
+    <h1 class="ux-page-heading-title">작업 지시</h1>
     <p class="ux-page-heading-desc">오늘 생산할 작업을 확인합니다.</p>
   </div>
   <div class="ux-page-heading-actions">
@@ -958,7 +965,7 @@ LotteDS.toast({ title: '삭제했습니다', action: '실행 취소', onAction: 
 
 - 본문 맨 위에 하나. 화면 제목은 `h1` 하나뿐이다.
 - 설명(`.ux-page-heading-desc`)은 빼도 된다.
-- **이 화면 즐겨찾기 ☆**는 제목 바로 옆에만 둔다(`.ux-page-heading-title-row` 안, 간격 4). Toggle(sm, 정사각 PC 32 · Tablet 40) + star 아이콘. 꺼짐 = 빈 별, 켜짐(`aria-pressed="true"`) = 채운 주황 별. `aria-label`은 "<화면 이름> 즐겨찾기". 즐겨찾기를 쓰지 않는 화면은 버튼을 뺀다(제목 줄 묶음은 그대로 둬도 된다). AppBar에는 이 버튼을 두지 않는다.
+- AppBar에 화면 제목을 둔 화면(기본)에서는 PageHeading을 쓰지 않는다. 제목이 두 번 나오면 안 된다. 이 화면 즐겨찾기 ☆는 AppBar에 둔다.
 - 오른쪽 버튼은 최대 2개: 보조(outline) · 주요(solid-primary). 주요 버튼은 화면 전체에서 하나뿐이다. 버튼이 없으면 `.ux-page-heading-actions`를 통째로 뺀다.
 
 ### Toolbar / Filter (필터바 · 패턴)
