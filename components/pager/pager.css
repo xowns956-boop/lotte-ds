@@ -1,5 +1,5 @@
 /* Lotte Kendo DS · Pager (페이지 넘기기)
-   이전 · 페이지 번호 · … · 다음, 간격 4
+   이전 · 페이지 번호 · … · 다음, 간격 4 · 번호 묶음과 앞뒤 버튼 묶음 사이만 16
    페이지 번호: control-height 정사각(PC 36 · Tablet 48) · 모서리 control · 글자 text-control/medium
      현재 페이지 = 흰 바탕(ux4-alpha/outline) + 테두리 + 그림자 1 / 마우스 올림 = primary-subtle
    이전·다음: Button ghost 모양(위아래 8 · 좌우 10 · 간격 4 · 아이콘 16), 못 누를 때 반투명 0.5
@@ -58,6 +58,16 @@
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+/* 번호 묶음 ↔ 앞뒤 버튼 묶음 사이 = 16 (묶음 안은 4 그대로). 틀 간격 4에 12를 더한다.
+   옆에 버튼이 있는 쪽에만 붙인다(이전·다음이 없거나 줄이 바뀌어 맨 앞·끝이 되면 안 붙음).
+   Kendo 2021.3은 번호가 .k-pager-numbers-wrap 안에 있어 그 바깥 상자에 붙인다. */
+:is(.k-pager.k-pager.k-pager.k-pager, .k-pager-wrap.k-pager-wrap.k-pager-wrap.k-pager-wrap) > :is(.k-pager-numbers, .k-pager-numbers-wrap):not(:first-child) {
+  margin-inline-start: calc(var(--kendo-spacing-4) - var(--kendo-spacing-1));
+}
+:is(.k-pager.k-pager.k-pager.k-pager, .k-pager-wrap.k-pager-wrap.k-pager-wrap.k-pager-wrap) > :is(.k-pager-numbers, .k-pager-numbers-wrap):not(:last-child) {
+  margin-inline-end: calc(var(--kendo-spacing-4) - var(--kendo-spacing-1));
 }
 
 /* ── 2. 누르는 칸 공통 (페이지 번호 · 이전 · 다음) ──────────── */
