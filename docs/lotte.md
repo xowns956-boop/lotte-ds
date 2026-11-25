@@ -625,6 +625,7 @@ LotteDS.toast({ title: '삭제했습니다', action: '실행 취소', onAction: 
 |---|---|
 | `k-drawer` | 화면 왼쪽 사이드바. 폭 256, 높이는 놓이는 자리를 채운다 |
 | `k-drawer-mini` | 아이콘 모드(폭 48). 그룹 제목·하위 메뉴·글자가 숨고, 이름은 마우스를 올리면 말풍선 |
+| `data-drawer-tips="off"` | 아이콘 모드 말풍선 끄기(선택). `k-drawer`나 그 바깥 상자에 붙인다. 꺼도 화면 읽기 프로그램은 메뉴 이름을 읽는다. 화면 도중에 바꾸면 `LotteDS.syncDrawer(drawer)` |
 | `ux-drawer-toggle` + `data-drawer-toggle="Drawer id"` | 펼침 ↔ 아이콘 모드. 보통 머리줄 왼쪽 |
 | `k-drawer-item` | 메뉴 항목. 이동은 `<a>`, 하위 메뉴 여닫기는 `<button aria-expanded aria-controls>` + `ux-drawer-chevron` |
 | `ux-drawer-sub` · `ux-drawer-sub-item` | 하위 메뉴. 최대 2단계 |

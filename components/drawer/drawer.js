@@ -3,6 +3,8 @@
      버튼의 aria-expanded가 따라 바뀌고, Drawer에서 change 이벤트(detail.collapsed)가 난다.
    - 하위 메뉴가 있는 항목(button.k-drawer-item[aria-controls])을 누르면 하위 메뉴를 열고 닫는다(aria-expanded).
    - 아이콘 모드에서는 메뉴 이름을 말풍선(Tooltip, 오른쪽)으로 보여 준다.
+     말풍선이 필요 없는 화면은 Drawer에 data-drawer-tips="off"를 붙이면 붙이지 않는다.
+     (화면 도중에 켜고 끄면 LotteDS.syncDrawer(drawer)를 불러 다시 맞춘다)
    Kendo가 직접 만든 Drawer(data-role)는 건드리지 않는다. */
 (function () {
   'use strict';
@@ -11,8 +13,13 @@
     return d.classList.contains('k-drawer-mini') || !!(d.parentElement && d.parentElement.closest('.k-drawer-mini'));
   }
 
+  function tipsOff(d) {
+    var host = d.closest('[data-drawer-tips]');
+    return !!host && host.getAttribute('data-drawer-tips') === 'off';
+  }
+
   function syncTips(d) {
-    var mini = isMini(d);
+    var mini = isMini(d) && !tipsOff(d);
     d.querySelectorAll('.k-drawer-item').forEach(function (it) {
       var txt = it.querySelector('.k-item-text');
       if (mini && txt) {

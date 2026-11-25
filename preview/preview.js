@@ -1042,6 +1042,11 @@
     var row = el('div', 'pv-drawer-row');
     row.innerHTML = drawerHtml('pv-drawer-a', false, true) + drawerHtml('pv-drawer-b', true, true);
     host.appendChild(row);
+    host.appendChild(el('h3', 'pv-group-title text-sm-semibold', 'Drawer 아이콘 모드 · 말풍선 끔 (data-drawer-tips="off")'));
+    var row2 = el('div', 'pv-drawer-row');
+    row2.innerHTML = drawerHtml('pv-drawer-c', true, true);
+    row2.querySelector('.k-drawer').setAttribute('data-drawer-tips', 'off');
+    host.appendChild(row2);
     if (window.LotteDS && window.LotteDS.syncDrawer) window.LotteDS.syncDrawer();
 
     host.appendChild(el('h3', 'pv-group-title text-sm-semibold', 'Drawer Item · Sub (default · hover · active, 펼침 · 아이콘 모드)'));
