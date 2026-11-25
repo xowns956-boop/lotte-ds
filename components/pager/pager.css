@@ -3,9 +3,13 @@
    페이지 번호: control-height 정사각(PC 36 · Tablet 48) · 모서리 control · 글자 text-control/medium
      현재 페이지 = 흰 바탕(ux4-alpha/outline) + 테두리 + 그림자 1 / 마우스 올림 = primary-subtle
    이전·다음: Button ghost 모양(위아래 8 · 좌우 10 · 간격 4 · 아이콘 16), 못 누를 때 반투명 0.5
+   처음·마지막(.k-pager-first · .k-pager-last, 넣고 싶을 때만): 아이콘만 있는 정사각(페이지 번호와 같은 크기),
+     마우스 올림 = primary-subtle + 말풍선("첫 페이지로 이동" · "마지막 페이지로 이동", Tooltip)
+     이미 첫·끝 페이지 = 현재 페이지 번호와 같은 흰 바탕 + 테두리 + 그림자, 누르면 아무 일도 없음(href 없이 aria-disabled)
 
    이 DS의 구조 (페이지 이동이라 링크)
      <nav class="k-pager" aria-label="페이지">
+       <a class="k-link k-pager-nav k-pager-first" aria-disabled="true" aria-label="첫 페이지" data-tooltip="첫 페이지로 이동">…chevrons-left…</a>
        <a class="k-link k-pager-nav" aria-disabled="true">…chevron-left… 이전</a>
        <ul class="k-pager-numbers">
          <li><a class="k-link" href="?page=1">1</a></li>
@@ -13,8 +17,9 @@
          <li><span class="ux-pager-ellipsis" aria-hidden="true">…ellipsis…</span></li>
        </ul>
        <a class="k-link k-pager-nav" href="?page=3">다음 …chevron-right…</a>
+       <a class="k-link k-pager-nav k-pager-last" href="?page=10" aria-label="마지막 페이지" data-tooltip="마지막 페이지로 이동">…chevrons-right…</a>
      </nav>
-   Kendo 2021.3 구조(.k-pager-wrap > a.k-pager-nav · ul.k-pager-numbers > li > span.k-state-selected · a.k-link)도 같은 모양
+   Kendo 2021.3 구조(.k-pager-wrap > a.k-pager-nav(.k-pager-first · .k-pager-last) · ul.k-pager-numbers > li > span.k-state-selected · a.k-link)도 같은 모양
 
    이 파일은 Kendo 기본 CSS보다 뒤에 불러온다. Kendo 원본 최대 0,4,0 → 뿌리 0,4,0 + 안쪽으로 더 세게. */
 
@@ -113,6 +118,27 @@
   opacity: 0.5;
   cursor: default;
   pointer-events: none;
+}
+
+/* 처음 · 마지막: 아이콘만 있는 정사각 (페이지 번호와 같은 크기 · 모서리) */
+:is(.k-pager.k-pager.k-pager.k-pager, .k-pager-wrap.k-pager-wrap.k-pager-wrap.k-pager-wrap) .k-link.k-pager-nav:is(.k-pager-first, .k-pager-last) {
+  width: var(--kendo-device-control-height);
+  height: var(--kendo-device-control-height);
+  min-height: 0;
+  padding: 0;
+  border-width: var(--kendo-spacing-1px);
+}
+/* 이미 첫·끝 페이지: 현재 페이지 번호와 같은 흰 바탕 + 테두리 + 그림자 (흐리게 하지 않음, 마우스 올림 색·말풍선은 그대로) */
+:is(.k-pager.k-pager.k-pager.k-pager, .k-pager-wrap.k-pager-wrap.k-pager-wrap.k-pager-wrap) .k-link.k-pager-nav:is(.k-pager-first, .k-pager-last):is(.k-state-disabled, .k-disabled, [aria-disabled="true"]) {
+  --_k-pg-bg: var(--ux4-alpha-outline);
+  --_k-pg-bd: var(--kendo-color-border);
+  --_k-pg-box: var(--kendo-elevation-1);
+  opacity: 1;
+  pointer-events: auto;
+}
+:is(.k-pager.k-pager.k-pager.k-pager, .k-pager-wrap.k-pager-wrap.k-pager-wrap.k-pager-wrap) .k-link.k-pager-nav:is(.k-pager-first, .k-pager-last):is(.k-state-disabled, .k-disabled, [aria-disabled="true"]):is(:hover, .k-state-hover) {
+  --_k-pg-bg: var(--kendo-color-primary-subtle);
+  --_k-pg-fg: var(--kendo-color-primary-on-subtle);
 }
 
 /* 아이콘 16 */

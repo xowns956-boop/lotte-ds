@@ -1,5 +1,5 @@
 # main에 올리면 부품 미리보기 + 설치 페이지 + 업데이트 현황 + 설치 파일(/r/<버전>/) + llms.txt를 GitHub Pages로 배포한다.
-# 현재 버전은 package.json의 version.
+# 현재 버전은 package.json의 version. 이미 공개한 옛 주소(/r/0.1.0)는 지우지 않고 현재 내용으로 함께 만든다.
 name: Deploy to GitHub Pages
 
 on:
@@ -27,6 +27,9 @@ jobs:
         with:
           node-version: 22
       - run: npm run tokens
+      # 옛 주소 0.1.0 (이미 공개한 주소라 지우지 않는다. 내용은 현재 버전과 같음)
+      - run: LOTTE_VERSION=0.1.0 npm run build
+      # 현재 버전 — r/meta.json이 현재 버전을 가리키도록 마지막에 만든다
       - run: npm run build
       - run: npm run llms
       # 공개할 파일만 _site로 모은다

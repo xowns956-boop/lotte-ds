@@ -771,6 +771,8 @@
 
   // Pager
   var CHEV_L = '<path d="m15 18-6-6 6-6"/>', CHEV_R = '<path d="m9 18 6-6-6-6"/>';
+  var CHEVS_L = '<path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/>';
+  var CHEVS_R = '<path d="m6 17 5-5-5-5"/><path d="m13 17 5-5-5-5"/>';
   function pagerEl(current, total, opts) {
     opts = opts || {};
     var nav = el('nav', 'k-pager');
@@ -792,7 +794,19 @@
       }
       ul.appendChild(li);
     });
-    nav.append(prev, ul, next);
+    var items = [prev, ul, next];
+    if (opts.edges) {
+      var first = el('a', 'k-link k-pager-nav k-pager-first'); first.innerHTML = icon16(CHEVS_L);
+      first.setAttribute('aria-label', '첫 페이지'); first.setAttribute('data-tooltip', '첫 페이지로 이동');
+      if (current === 1) first.setAttribute('aria-disabled', 'true'); else first.href = '#pager';
+      var last = el('a', 'k-link k-pager-nav k-pager-last'); last.innerHTML = icon16(CHEVS_R);
+      last.setAttribute('aria-label', '마지막 페이지'); last.setAttribute('data-tooltip', '마지막 페이지로 이동');
+      if (current === total) last.setAttribute('aria-disabled', 'true'); else last.href = '#pager';
+      if (opts.hoverEdge === 'first') first.classList.add('k-state-hover');
+      if (opts.hoverEdge === 'last') last.classList.add('k-state-hover');
+      items = [first].concat(items, [last]);
+    }
+    nav.append.apply(nav, items);
     if (opts.hoverNav) next.classList.add('k-state-hover');
     return nav;
   }
@@ -805,6 +819,10 @@
     var cur = host.querySelectorAll('nav')[1].querySelector('[aria-current]'); cur.classList.add('k-state-hover');
     host.appendChild(el('h3', 'pv-group-title text-sm-semibold', '끝 페이지 (다음 못 누름)'));
     host.appendChild(pagerEl(10, 10, { label: '예시 3' }));
+    host.appendChild(el('h3', 'pv-group-title text-sm-semibold', '처음 · 마지막 버튼 — 첫 페이지(처음 = 흰 바탕) · 마우스 올림: 마지막'));
+    host.appendChild(pagerEl(1, 10, { label: '예시 4', edges: true, hoverEdge: 'last' }));
+    host.appendChild(el('h3', 'pv-group-title text-sm-semibold', '처음 · 마지막 버튼 — 끝 페이지(마지막 = 흰 바탕) · 마우스 올림: 처음'));
+    host.appendChild(pagerEl(10, 10, { label: '예시 5', edges: true, hoverEdge: 'first' }));
   }
 
   // Dialog

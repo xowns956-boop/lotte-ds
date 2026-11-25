@@ -1,8 +1,13 @@
 <!-- Lotte Kendo DS · Pager
      페이지 이동이라 링크(a). 현재 페이지는 aria-current="page", 못 가는 이전·다음은 href 없이 aria-disabled="true".
-     … 는 장식(aria-hidden). 묶음에 nav + aria-label. -->
+     … 는 장식(aria-hidden). 묶음에 nav + aria-label.
+     처음·마지막 버튼(.k-pager-first · .k-pager-last)은 넣고 싶을 때만. 아이콘만 있어서 aria-label과 말풍선(data-tooltip)을 단다.
+     이미 첫·끝 페이지면 href 없이 aria-disabled="true" → 흰 바탕(현재 페이지 번호와 같은 모양). -->
 
 <nav class="k-pager" aria-label="페이지">
+  <a class="k-link k-pager-nav k-pager-first" aria-disabled="true" aria-label="첫 페이지" data-tooltip="첫 페이지로 이동">
+    <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/></svg>
+  </a>
   <a class="k-link k-pager-nav" aria-disabled="true">
     <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m15 18-6-6 6-6"/></svg>이전
   </a>
@@ -15,5 +20,8 @@
   </ul>
   <a class="k-link k-pager-nav" href="?page=2">다음
     <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"/></svg>
+  </a>
+  <a class="k-link k-pager-nav k-pager-last" href="?page=10" aria-label="마지막 페이지" data-tooltip="마지막 페이지로 이동">
+    <svg class="k-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 17 5-5-5-5"/><path d="m13 17 5-5-5-5"/></svg>
   </a>
 </nav>
