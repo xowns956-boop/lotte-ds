@@ -850,6 +850,7 @@ LotteDS.toast({ title: '삭제했습니다', action: '실행 취소', onAction: 
 ```
 
 - 안의 버튼은 sm. 주 동작 1개만 solid-primary, 나머지는 outline·ghost.
+- 안쪽 여백 4 · 버튼 사이 간격 4(구분선 양옆도 4).
 - 묶음 사이는 세로 구분선. 자리가 모자라면 다음 줄로 넘어간다.
 
 ### Kbd (키 표시)
