@@ -1,5 +1,18 @@
 [
   {
+    "version": "0.1.2",
+    "date": "2026-11-25",
+    "summary": "Grid 칸 안에 숫자 입력칸을 넣을 수 있어요(td.k-text-right 안 k-textbox, 증감 버튼 없음).",
+    "groups": [
+      {
+        "title": "추가",
+        "items": [
+          "Grid 숫자 입력 칸 (기본 · 포커스 · 오류 · 꺼짐, 입력칸 높이 PC 32 · Tablet 40)"
+        ]
+      }
+    ]
+  },
+  {
     "version": "0.1.1",
     "date": "2026-11-25",
     "summary": "Pager에 처음·마지막 버튼이 생겼어요.",

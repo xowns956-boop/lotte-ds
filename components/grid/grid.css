@@ -2,7 +2,7 @@
    표 상자: 테두리 1 · 모서리 control · 바탕 surface
    머리줄: 바탕 kendo-color-base · 아래 선 · 높이 header-row-height(PC 40 · Tablet 48) · 글자 text-data/medium
    줄: 아래 선 · 높이 row-height(PC 36 · Tablet 56) · 글자 text-data/regular · state: default · hover · selected
-   칸 종류: 글자 · 흐린 글자(k-color-subtle) · 체크박스(k-checkbox-column) · 가운데 체크(k-text-center) · 줄 메뉴(k-command-cell)
+   칸 종류: 글자 · 흐린 글자(k-color-subtle) · 체크박스(k-checkbox-column) · 가운데 체크(k-text-center) · 줄 메뉴(k-command-cell) · 숫자 입력(td 안 .k-textbox)
    머리칸 종류: 글자 · 정렬(k-link 버튼) · 체크박스 · 빈 칸 / 필수 점(k-required)
    2단 머리글 묶음 칸(colspan) · 빈 줄(k-grid-norecords)
 
@@ -180,6 +180,27 @@
   --_k-btn-h: var(--kendo-spacing-8);
   --_k-btn-px: 0;
   --_k-btn-py: 0;
+}
+
+/* 숫자 입력 칸: td.k-text-right 안에 .k-textbox (증감 버튼 없음, PC·Tablet 같음)
+   칸 위아래 cell-input-padding-y(PC 2 · Tablet 8) · 좌우 8, 입력칸 높이 control-height-sm(PC 32 · Tablet 40)
+   상태(포커스 · 오류 · 꺼짐)는 Input과 같다. 포커스·오류 링 3이 칸 밖으로 나가므로 이 칸은 넘침을 자르지 않는다. */
+.k-grid.k-grid.k-grid.k-grid tbody > tr > td:has(> .k-textbox) {
+  padding: var(--kendo-device-cell-input-padding-y) var(--kendo-spacing-2);
+  overflow: visible;
+  text-overflow: clip;
+}
+.k-grid.k-grid td > .k-textbox.k-textbox.k-textbox.k-textbox {
+  width: 100%;
+  height: var(--kendo-device-control-height-sm);
+  text-align: right;
+  vertical-align: middle;
+}
+.k-grid.k-grid td > .k-textbox.k-textbox > .k-input-inner { text-align: right; }
+/* 링이 다음 줄 바탕에 가려지지 않게 위로 올린다 */
+.k-grid.k-grid td > .k-textbox:is(:focus, :focus-within, .k-state-focused, [aria-invalid="true"], .k-invalid, .k-state-invalid) {
+  position: relative;
+  z-index: 1;
 }
 
 /* 빈 줄: 높이 96 · 가운데 · 글자 text-sm/regular */

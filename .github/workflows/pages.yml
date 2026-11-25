@@ -27,8 +27,9 @@ jobs:
         with:
           node-version: 22
       - run: npm run tokens
-      # 옛 주소 0.1.0 (이미 공개한 주소라 지우지 않는다. 내용은 현재 버전과 같음)
+      # 옛 주소 0.1.0 · 0.1.1 (이미 공개한 주소라 지우지 않는다. 내용은 현재 버전과 같음)
       - run: LOTTE_VERSION=0.1.0 npm run build
+      - run: LOTTE_VERSION=0.1.1 npm run build
       # 현재 버전 — r/meta.json이 현재 버전을 가리키도록 마지막에 만든다
       - run: npm run build
       - run: npm run llms

@@ -708,8 +708,42 @@
     host.appendChild(gridTableEl(rows));
     host.appendChild(el('h3', 'pv-group-title text-sm-semibold', '2단 머리글 (묶음 칸)'));
     host.appendChild(gridTableEl(rows.slice(0, 2), { group: true }));
+    host.appendChild(el('h3', 'pv-group-title text-sm-semibold', '숫자 입력 칸 (기본 · 포커스 · 오류 · 꺼짐 · 고른 줄)'));
+    host.appendChild(gridInputEl());
     host.appendChild(el('h3', 'pv-group-title text-sm-semibold', '빈 표 (state=empty)'));
     host.appendChild(gridTableEl([]));
+  }
+  function gridInputEl() {
+    var rows = [
+      { id: 'QI-001', name: '성상', val: '1', on: true },
+      { id: 'QI-002', name: '수분', val: '2', on: true, state: 'focus' },
+      { id: 'QI-003', name: '염도', val: '2', on: true, state: 'invalid' },
+      { id: 'QI-004', name: '이물', val: '', on: false },
+      { id: 'QI-005', name: '중량', val: '3', on: true, selected: true }
+    ];
+    var wrap = el('div', 'k-grid');
+    var t = el('table', 'k-grid-table');
+    var head = el('thead', 'k-grid-header');
+    var h = el('tr');
+    h.innerHTML = '<th class="k-header k-checkbox-column" scope="col"><input type="checkbox" class="k-checkbox" aria-label="전체 선택"></th>' +
+      '<th class="k-header" scope="col">검사항목 ID</th><th class="k-header" scope="col">검사항목명</th>' +
+      '<th class="k-header k-text-right" scope="col">출력순서</th>';
+    head.appendChild(h);
+    t.appendChild(head);
+    var body = el('tbody');
+    rows.forEach(function (r) {
+      var tr = el('tr', 'k-master-row');
+      tr.setAttribute('aria-selected', String(!!r.selected));
+      var cls = 'k-textbox' + (r.state === 'focus' ? ' k-state-focused' : '');
+      tr.innerHTML = '<td class="k-checkbox-column"><input type="checkbox" class="k-checkbox"' + (r.on ? ' checked' : '') + ' aria-label="' + r.id + ' 선택"></td>' +
+        '<td>' + r.id + '</td><td>' + r.name + '</td>' +
+        '<td class="k-text-right"><input type="text" inputmode="numeric" class="' + cls + '" value="' + r.val + '" aria-label="' + r.name + ' 출력순서"' +
+        (r.state === 'invalid' ? ' aria-invalid="true"' : '') + (r.on ? '' : ' disabled') + '></td>';
+      body.appendChild(tr);
+    });
+    t.appendChild(body);
+    wrap.appendChild(t);
+    return wrap;
   }
 
   // Tabs
