@@ -930,7 +930,7 @@ LotteDS.toast({ title: '삭제했습니다', action: '실행 취소', onAction: 
 
 - 본문 맨 위에 하나. 화면 제목은 `h1` 하나뿐이다.
 - 설명(`.ux-page-heading-desc`)은 빼도 된다.
-- **이 화면 즐겨찾기 ☆**는 제목 바로 옆에만 둔다(`.ux-page-heading-title-row` 안, 간격 4). Toggle(sm) + star 아이콘. 꺼짐 = 빈 별, 켜짐(`aria-pressed="true"`) = 채운 주황 별. `aria-label`은 "<화면 이름> 즐겨찾기". 즐겨찾기를 쓰지 않는 화면은 버튼을 뺀다(제목 줄 묶음은 그대로 둬도 된다). AppBar에는 이 버튼을 두지 않는다.
+- **이 화면 즐겨찾기 ☆**는 제목 바로 옆에만 둔다(`.ux-page-heading-title-row` 안, 간격 4). Toggle(sm, 정사각 PC 32 · Tablet 40) + star 아이콘. 꺼짐 = 빈 별, 켜짐(`aria-pressed="true"`) = 채운 주황 별. `aria-label`은 "<화면 이름> 즐겨찾기". 즐겨찾기를 쓰지 않는 화면은 버튼을 뺀다(제목 줄 묶음은 그대로 둬도 된다). AppBar에는 이 버튼을 두지 않는다.
 - 오른쪽 버튼은 최대 2개: 보조(outline) · 주요(solid-primary). 주요 버튼은 화면 전체에서 하나뿐이다. 버튼이 없으면 `.ux-page-heading-actions`를 통째로 뺀다.
 
 ### Toolbar / Filter (필터바 · 패턴)

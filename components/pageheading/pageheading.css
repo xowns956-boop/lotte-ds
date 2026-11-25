@@ -2,7 +2,7 @@
    왼쪽: 제목 text-2xl/semibold + 설명 text-sm 흐림(빼도 됨), 간격 4
    오른쪽: 버튼 최대 2개(보조 outline · 주요 solid-primary), 간격 8
    줄 높이 60 · 두 칸 사이 16 · 세로 가운데. 폭은 본문 영역을 채운다.
-   이 화면 즐겨찾기(☆, 빼도 됨): 제목 바로 옆(간격 4). Toggle(기본 · sm) + star 아이콘, 32×32
+   이 화면 즐겨찾기(☆, 빼도 됨): 제목 바로 옆(간격 4). Toggle(기본 · sm) + star 아이콘, 정사각 control-height-sm(PC 32 · Tablet 40)
      꺼짐 = 빈 별 · 켜짐 = 채운 별(선·안 kendo-color-warning-on-surface, 바탕 없음)
      마우스 올림 = Toggle과 같은 바탕(base) · 포커스 = Toggle과 같은 링(primary 2)
    Kendo에는 이 부품이 없어서 .ux-* 이름을 쓴다.
@@ -78,8 +78,8 @@
 }
 .k-toggle-button.k-toggle-button.k-toggle-button.k-toggle-button.ux-page-heading-favorite {
   flex: none;
-  min-width: var(--kendo-spacing-8);
-  min-height: var(--kendo-spacing-8);
+  min-width: var(--kendo-device-control-height-sm);
+  min-height: var(--kendo-device-control-height-sm);
 }
 .ux-page-heading-favorite:is([aria-pressed="true"], .k-selected, .k-state-selected) :is(.k-svg-icon, svg) {
   fill: currentColor;
