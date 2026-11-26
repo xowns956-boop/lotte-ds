@@ -4,7 +4,7 @@
      화면 제목 묶음(.ux-appbar-titles): 제목 h1(text-lg semibold) 위 + 작은 경로(Breadcrumb, 글자 12) 아래, 간격 0
      제목 없이 Breadcrumb만 두는 예전 구조(첫 칸 = 홈 아이콘)도 그대로 된다
      이 화면 즐겨찾기 ☆(.ux-appbar-favorite): Toggle(기본 · sm) + star, 정사각 control-height-sm(PC 32 · Tablet 40)
-       꺼짐 = 빈 별 · 켜짐 = 채운 별(선·안 kendo-color-warning-on-surface, 바탕 없음) · 마우스 올림 · 포커스는 Toggle과 같음
+       꺼짐 = 빈 별 · 켜짐 = 채운 별(선·안 kendo-color-favorite, 라이트·다크 같은 노랑, 바탕 없음) · 마우스 올림 · 포커스는 Toggle과 같음
    오른쪽(간격 12): 검색 InputGroup 240(⌘K) · 아이콘 버튼 ghost(선택, 예: 즐겨찾기 목록 = list-checks) · 사용자(Drawer / User + chevron)
    각 칸은 다른 부품을 그대로 쓴다. 이 파일은 줄 배치만 정한다.
 
@@ -111,7 +111,7 @@
 /* ── 이 화면 즐겨찾기 ☆ ─────────────────────────────────────── */
 .k-toggle-button.ux-appbar-favorite {
   --_k-tg-bg-on: var(--kendo-color-opacity-transparent);
-  --_k-tg-fg-on: var(--kendo-color-warning-on-surface);
+  --_k-tg-fg-on: var(--kendo-color-favorite);
   --_k-tg-bg-on-hover: var(--kendo-color-base);
 }
 .k-toggle-button.k-toggle-button.k-toggle-button.k-toggle-button.ux-appbar-favorite {

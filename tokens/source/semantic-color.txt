@@ -224,6 +224,7 @@ kendo-color/opacity/transparent=#ffffff00|#ffffff00
 kendo-color/opacity/outline-border=#1c191780|#fafaf980
 kendo-color/opacity/outline-hover-border=#1c1917cc|#fafaf9cc
 kendo-color/opacity/list-item-hover-bg=#1c191714|#fafaf914
+kendo-color/favorite=@Yellow/Light/8|@Yellow/Light/8
 ux4-color/page-bg=@Neutral/Light/1|@Neutral/Dark/1
 ux4-color-ees/maintenance-on-surface=@Lavander Purple/Light/9|@Lavander Purple/Dark/10
 ux4-color-brand/accent=@Lotte/Red|@Lotte/Red
