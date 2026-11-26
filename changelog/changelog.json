@@ -2,7 +2,7 @@
   {
     "version": "0.1.2",
     "date": "2026-11-25",
-    "summary": "Grid 칸 안에 숫자 입력칸을 넣을 수 있어요(td.k-text-right 안 k-textbox, 증감 버튼 없음). Grid 칸 안에 글자 입력칸·목록 고르기를 넣을 수 있어요. 위아래 칸 크기를 조절하는 Splitter와 큰 팝업(폭 1080)이 생겼어요. Badge에 상태 표시 4개(info · success · warning · destructive-subtle, 연한 바탕)가 생겼어요. 표의 적합·한계·부적합 판정에 씁니다.",
+    "summary": "Grid 칸 안에 숫자 입력칸을 넣을 수 있어요(td.k-text-right 안 k-textbox, 증감 버튼 없음). Grid 칸 안에 글자 입력칸·목록 고르기를 넣을 수 있어요. 위아래 칸 크기를 조절하는 Splitter와 큰 팝업(폭 1080)이 생겼어요. Badge에 상태 표시 4개(info · success · warning · destructive-subtle, 연한 바탕)가 생겼어요. 표의 적합·한계·부적합 판정에 씁니다. Drawer 아이콘 모드(k-drawer-mini) 폭이 48에서 64로 넓어졌어요.",
     "groups": [
       {
         "title": "추가",
@@ -12,6 +12,12 @@
           "Splitter (위아래 칸 크기 조절: 막대 끌기 · ↑↓ 키 · 최소 높이)",
           "Dialog 큰 팝업 ux-dialog-lg (폭 1080)",
           "Badge 상태 표시 4개 (info · success · warning · destructive-subtle, 연한 바탕)"
+        ]
+      },
+      {
+        "title": "바뀜",
+        "items": [
+          "Drawer 아이콘 모드(k-drawer-mini) 폭이 48에서 64로 넓어졌어요. 다시 설치하면 접힌 사이드바가 16 넓어져요."
         ]
       }
     ]

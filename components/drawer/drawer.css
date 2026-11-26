@@ -1,7 +1,7 @@
 /* Lotte Kendo DS · Drawer (사이드바)
    Drawer · Drawer Item · Drawer Item / Sub · Drawer / Group Label · Drawer / Toggle · Drawer / Brand · Drawer / User
 
-   펼침 256 · 아이콘 모드(.k-drawer-mini) 48. 높이는 놓이는 자리를 채움.
+   펼침 256 · 아이콘 모드(.k-drawer-mini) 64. 높이는 놓이는 자리를 채움.
    바탕 sidebar/surface · 오른쪽 테두리 sidebar/border
    머리(.ux-drawer-header, 안쪽 8) → 메뉴(.ux-drawer-content, 그룹 사이 8, 넘치면 스크롤) → 아래(.ux-drawer-footer, 안쪽 8, 선택)
    그룹(.ux-drawer-group, 안쪽 8): 그룹 제목(.ux-drawer-group-label, 높이 32, text-xs/medium 70%) + 메뉴(.k-drawer-items, 간격 4)
@@ -62,9 +62,9 @@
   border-right: 0;
   border-left: var(--kendo-spacing-1px) solid var(--ux4-color-sidebar-border);
 }
-/* 아이콘 모드: 48 (Kendo는 .k-drawer-container에 k-drawer-mini) */
+/* 아이콘 모드: 64 (Kendo는 .k-drawer-container에 k-drawer-mini) */
 :is(.k-drawer-mini .k-drawer, .k-drawer.k-drawer-mini).k-drawer.k-drawer.k-drawer {
-  width: var(--kendo-spacing-12);
+  width: var(--kendo-spacing-16);
 }
 .k-drawer.k-drawer.k-drawer .k-drawer-wrapper {
   display: flex;
@@ -218,6 +218,7 @@
 :is(.k-drawer-mini .k-drawer, .k-drawer.k-drawer-mini).k-drawer.k-drawer.k-drawer .k-drawer-item {
   justify-content: center;
   width: var(--kendo-spacing-8);
+  margin-inline: auto;
 }
 /* 글자는 화면에서만 숨김(화면 읽기 프로그램은 이름을 읽음) */
 :is(.k-drawer-mini .k-drawer, .k-drawer.k-drawer-mini).k-drawer.k-drawer.k-drawer .k-drawer-item .k-item-text {
