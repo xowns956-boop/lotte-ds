@@ -3,8 +3,8 @@
 
    펼침 256 · 아이콘 모드(.k-drawer-mini) 64. 높이는 놓이는 자리를 채움.
    바탕 sidebar/surface · 오른쪽 테두리 sidebar/border
-   머리(.ux-drawer-header, 안쪽 8) → 메뉴(.ux-drawer-content, 그룹 사이 8, 넘치면 스크롤) → 아래(.ux-drawer-footer, 안쪽 8, 선택)
-   그룹(.ux-drawer-group, 안쪽 8): 그룹 제목(.ux-drawer-group-label, 높이 32, text-xs/medium 70%) + 메뉴(.k-drawer-items, 간격 4)
+   머리(.ux-drawer-header, 안쪽 8, 간격 8: 펼치기·접기 버튼 → Brand) · 아이콘 모드에서는 가운데 → 메뉴(.ux-drawer-content, 그룹 사이 8, 넘치면 스크롤) → 아래(.ux-drawer-footer, 안쪽 8, 선택)
+   그룹(.ux-drawer-group, 안쪽 8): 그룹 제목(.ux-drawer-group-label, 높이 32, text-xs/medium 70%) + 메뉴(.k-drawer-items, 간격 12)
    메뉴 항목(.k-drawer-item): 높이 32 · 안쪽 8 · 간격 8 · 아이콘 16 · text-sm/regular · 모서리 control
      마우스 올림 = sidebar/accent 바탕 · 현재 메뉴(aria-current="page" 또는 .k-selected) = accent 바탕 + medium
      하위 메뉴가 있으면 오른쪽 chevron(.ux-drawer-chevron), 열리면 90° 돎
@@ -32,7 +32,8 @@
        <div class="ux-drawer-footer"> …Drawer / User… </div>
      </div>
    </aside>
-   펼치기·접기 버튼(Drawer / Toggle, 28×28): <button class="k-button k-button-flat-base k-icon-button ux-drawer-toggle" data-drawer-toggle="app-drawer" aria-expanded="true" aria-label="메뉴 접기">…panel-left…</button>
+   펼치기·접기 버튼(Drawer / Toggle, 28×28)은 머리(.ux-drawer-header) 맨 위에 둔다. AppBar에는 두지 않는다(겹침):
+     <button class="k-button k-button-flat-base k-icon-button ux-drawer-toggle" data-drawer-toggle="app-drawer" aria-expanded="true" aria-label="메뉴 접기">…panel-left…</button>
 
    Drawer / Brand (.ux-drawer-brand): 로고 Avatar 32(sidebar/primary 바탕) + 서비스 이름 text-sm/semibold · Badge(선택) · 부제 text-xs/regular 흐림
    Drawer / User (.ux-drawer-user): Avatar 32 + 이름 text-sm/medium · 메일(역할) text-xs/regular 흐림, 간격 8. 오른쪽 chevron(선택)
@@ -87,6 +88,11 @@
   margin: 0;
   padding: var(--kendo-spacing-2);
 }
+.k-drawer.k-drawer .ux-drawer-header {
+  align-items: flex-start;
+  gap: var(--kendo-spacing-2);
+}
+.k-drawer.k-drawer .ux-drawer-header > .ux-drawer-brand { align-self: stretch; }
 .k-drawer.k-drawer .ux-drawer-content {
   flex: 1;
   min-height: 0;
@@ -131,6 +137,7 @@
   padding: 0;
   list-style: none;
 }
+.k-drawer.k-drawer.k-drawer .k-drawer-items { gap: var(--kendo-spacing-3); }
 /* Kendo는 li 자체가 항목(li.k-drawer-item)이라 그건 빼고 */
 .k-drawer.k-drawer.k-drawer :is(.k-drawer-items, .ux-drawer-sub) > li:not(.k-drawer-item) { margin: 0; padding: 0; }
 
@@ -294,6 +301,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+:is(.k-drawer-mini .k-drawer, .k-drawer.k-drawer-mini).k-drawer.k-drawer .ux-drawer-header { align-items: center; }
 :is(.k-drawer-mini .k-drawer, .k-drawer.k-drawer-mini) .ux-drawer-brand {
   justify-content: center;
   padding-inline: 0;

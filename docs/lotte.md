@@ -620,11 +620,10 @@ LotteDS.toast({ title: '삭제했습니다', action: '실행 취소', onAction: 
 ### Drawer (사이드바)
 
 ```html
-<button type="button" class="k-button k-button-flat-base k-icon-button ux-drawer-toggle" data-drawer-toggle="app-drawer" aria-expanded="true" aria-controls="app-drawer" aria-label="메뉴 펼치기·접기"><svg class="k-svg-icon" aria-hidden="true">…panel-left…</svg></button>
-
 <aside class="k-drawer k-drawer-start" id="app-drawer">
   <div class="k-drawer-wrapper">
     <div class="ux-drawer-header">
+      <button type="button" class="k-button k-button-flat-base k-icon-button ux-drawer-toggle" data-drawer-toggle="app-drawer" aria-expanded="true" aria-controls="app-drawer" aria-label="메뉴 펼치기·접기"><svg class="k-svg-icon" aria-hidden="true">…panel-left…</svg></button>
       <div class="ux-drawer-brand">
         <span class="k-avatar k-avatar-circle" aria-hidden="true"><span class="k-avatar-text">관</span></span>
         <div class="ux-drawer-brand-text">
@@ -662,7 +661,7 @@ LotteDS.toast({ title: '삭제했습니다', action: '실행 취소', onAction: 
 | `k-drawer` | 화면 왼쪽 사이드바. 폭 256, 높이는 놓이는 자리를 채운다 |
 | `k-drawer-mini` | 아이콘 모드(폭 64). 그룹 제목·하위 메뉴·글자가 숨고, 이름은 마우스를 올리면 말풍선 |
 | `data-drawer-tips="off"` | 아이콘 모드 말풍선 끄기(선택). `k-drawer`나 그 바깥 상자에 붙인다. 꺼도 화면 읽기 프로그램은 메뉴 이름을 읽는다. 화면 도중에 바꾸면 `LotteDS.syncDrawer(drawer)` |
-| `ux-drawer-toggle` + `data-drawer-toggle="Drawer id"` | 펼침 ↔ 아이콘 모드. 보통 머리줄 왼쪽 |
+| `ux-drawer-toggle` + `data-drawer-toggle="Drawer id"` | 펼침 ↔ 아이콘 모드. Drawer 머리(`.ux-drawer-header`) 맨 위에 둔다(펼침 = 왼쪽, 아이콘 모드 = 가운데). AppBar에는 두지 않는다 |
 | `k-drawer-item` | 메뉴 항목. 이동은 `<a>`, 하위 메뉴 여닫기는 `<button aria-expanded aria-controls>` + `ux-drawer-chevron` |
 | `ux-drawer-sub` · `ux-drawer-sub-item` | 하위 메뉴. 최대 2단계 |
 | 현재 메뉴 | `aria-current="page"` |
@@ -940,8 +939,6 @@ LotteDS.toast({ title: '삭제했습니다', action: '실행 취소', onAction: 
 ```html
 <header class="k-appbar ux-appbar">
   <div class="k-appbar-section">
-    <button type="button" class="k-button k-button-flat-base k-icon-button ux-drawer-toggle" data-drawer-toggle="app-drawer" aria-expanded="true" aria-controls="app-drawer" aria-label="메뉴 펼치기·접기">…panel-left…</button>
-    <span class="k-separator k-separator-vertical" role="separator" aria-orientation="vertical"></span>
     <button type="button" class="k-toggle-button ux-toggle-sm ux-appbar-favorite" aria-pressed="false" aria-label="제품검사 결과 등록 즐겨찾기">…star…</button>
     <div class="ux-appbar-titles">
       <h1 class="ux-appbar-title">제품검사 결과 등록</h1>
@@ -965,11 +962,12 @@ LotteDS.toast({ title: '삭제했습니다', action: '실행 취소', onAction: 
 </header>
 ```
 
-- 화면 맨 위, 폭 전체. 안의 칸은 전부 기존 부품(Drawer / Toggle · Separator · Toggle · Breadcrumb · Input InputGroup · Kbd · Drawer / User)을 그대로 쓴다.
-- 왼쪽 순서: 메뉴 토글 · 구분선 · **이 화면 즐겨찾기 ☆** · **화면 제목**(`h1.ux-appbar-title`, 글자 16 semibold) 위 + **작은 경로**(`nav.k-breadcrumb.ux-appbar-crumb`, 글자 12 흐림) 아래. 화면 제목은 여기 `h1` 하나뿐이고, 본문에 제목(PageHeading)을 또 두지 않는다.
+- 화면 맨 위, 폭 전체. 안의 칸은 전부 기존 부품(Toggle · Breadcrumb · Input InputGroup · Kbd · Drawer / User)을 그대로 쓴다.
+- 왼쪽 순서: **이 화면 즐겨찾기 ☆** · **화면 제목**(`h1.ux-appbar-title`, 글자 16 semibold) 위 + **작은 경로**(`nav.k-breadcrumb.ux-appbar-crumb`, 글자 12 흐림) 아래. 화면 제목은 여기 `h1` 하나뿐이고, 본문에 제목(PageHeading)을 또 두지 않는다.
 - 작은 경로는 상위 메뉴 이름을 차례로 두고, 마지막 칸은 화면 ID(`aria-current="page"`). 빼도 된다.
 - **이 화면 즐겨찾기 ☆**(`.ux-appbar-favorite`): Toggle(sm, 정사각 PC 32 · Tablet 40) + star 아이콘. 꺼짐 = 빈 별, 켜짐(`aria-pressed="true"`) = 채운 주황 별. `aria-label`은 "<화면 이름> 즐겨찾기". 누르면 lotte-ds.js가 켜짐·꺼짐을 바꾸고 `change` 이벤트를 보낸다(저장은 화면 스크립트). 즐겨찾기를 쓰지 않는 화면은 뺀다.
-- 빼도 되는 칸: 토글+구분선 · ☆ · 작은 경로 · 검색 · 사용자. 제목 없이 경로 줄(`nav.k-breadcrumb`, 첫 칸 홈 아이콘, 마지막 칸 = 화면 이름)만 두는 예전 구조도 된다. 아이콘 버튼은 ghost icon 버튼으로 사용자 앞에 둔다(기본은 없음). **즐겨찾기 목록 열기**는 이 자리의 ghost icon 버튼이고 아이콘은 list-checks(☆ 아님), `aria-label`·`data-tooltip` "즐겨찾기 목록". 누른 뒤 나오는 화면은 아직 없다 → "디자인 필요".
+- 메뉴 펼치기·접기 버튼(`ux-drawer-toggle`)은 AppBar에 두지 않는다. Drawer 머리에 있다(두 곳에 두면 같은 버튼이 겹친다).
+- 빼도 되는 칸: ☆ · 작은 경로 · 검색 · 사용자. 제목 없이 경로 줄(`nav.k-breadcrumb`, 첫 칸 홈 아이콘, 마지막 칸 = 화면 이름)만 두는 예전 구조도 된다. 아이콘 버튼은 ghost icon 버튼으로 사용자 앞에 둔다(기본은 없음). **즐겨찾기 목록 열기**는 이 자리의 ghost icon 버튼이고 아이콘은 list-checks(☆ 아님), `aria-label`·`data-tooltip` "즐겨찾기 목록". 누른 뒤 나오는 화면은 아직 없다 → "디자인 필요".
 - 오른쪽 주요 버튼 자리는 아직 정해진 모양이 없다 → 1장 "없는 UI".
 - Tablet에서는 검색 칸이 기기 높이(48)를 따라 줄이 65가 된다.
 
